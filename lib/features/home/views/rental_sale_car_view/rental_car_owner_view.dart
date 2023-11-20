@@ -1,0 +1,363 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../../core/class/statusrequst.dart';
+
+import '../../../../controllers/dataforownercarsale.dart';
+import '../../../../core/functions/global_function.dart';
+import '../../../../core/rescourcs/app_colors.dart';
+import '../../../../core/widgets/custom_appBar.dart';
+import '../../../../core/widgets/custom_divider.dart';
+import '../../../../core/widgets/custom_image.dart';
+import '../../../../core/widgets/custom_sized_box.dart';
+import '../../../../core/widgets/responsive_text.dart';
+
+class RentalCarOwnerView extends StatelessWidget {
+  final String ownerId;
+  final String phone;
+  final String cartype;
+  final int price;
+  final String date;
+  final String image;
+  final String desc;
+  final String ownername;
+  const RentalCarOwnerView({super.key, required this.ownerId, required this.phone, required this.cartype, required this.price, required this.date, required this.image, required this.desc, required this.ownername});
+
+  @override
+  Widget build(BuildContext context) {
+    Get.put(OwnerCarForSaleController()..getownerdata(ownerId));
+    return GetBuilder<OwnerCarForSaleController>(builder:
+        (controller)=>Scaffold(
+      appBar: customAppBar(context),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: controller.statusRequest==StatusRequest.loading?
+              Center(child: CircularProgressIndicator()):Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircleAvatar(
+                      radius: screenSize(context).width * .15,
+                      child: Image.network(
+                        'http://192.168.1.10:8000/${controller.ownerModel.image}',
+                        width: 50,
+                        height: 60,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    const CustomSizedBox(value: .01),
+                    const ResponsiveText(
+                      scaleFactor: .05,
+                      text: 'مالك السياره',
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ],
+                ),
+              ),
+              const CustomSizedBox(value: .02),
+               ResponsiveText(
+                scaleFactor: .05,
+                text: 'الاسم :${ownername} ',
+                color: AppColors.black,
+                fontWeight: FontWeight.w500,
+              ),
+              const CustomSizedBox(value: .01),
+               ResponsiveText(
+                scaleFactor: .05,
+                text: 'السن : ${controller.ownerModel.age}',
+                color: AppColors.black,
+                fontWeight: FontWeight.w500,
+              ),
+              const CustomSizedBox(value: .01),
+              Row(
+                children: [
+                   FittedBox(
+                    child: ResponsiveText(
+                      scaleFactor: .05,
+                      text: 'رقم الموبيل : $phone ',
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  CustomAssetsImage(
+                      height: screenSize(context).height * .05,
+                      width: screenSize(context).width * .05,
+                      boxFit: BoxFit.fill,
+                      path: 'assets/whatsApp.png'),
+                ],
+              ),
+              const CustomSizedBox(value: .01),
+              FittedBox(
+                child: Row(
+                  children: [
+                    const ResponsiveText(
+                      scaleFactor: .05,
+                      text: "للينك الفيس بوك : http:/forexample.com ",
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    CustomAssetsImage(
+                      height: screenSize(context).height * .05,
+                      width: screenSize(context).width * .05,
+                      boxFit: BoxFit.fill,
+                      path: 'assets/facebook.png',
+                    ),
+                  ],
+                ),
+              ),
+              const CustomSizedBox(value: .01),
+              FittedBox(
+                child: Row(
+                  children: [
+                    const ResponsiveText(
+                      scaleFactor: .05,
+                      text: "للينك  التليجرام  : http:/forexample.com ",
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    CustomAssetsImage(
+                        height: screenSize(context).height * .05,
+                        width: screenSize(context).width * .05,
+                        boxFit: BoxFit.fill,
+                        path: 'assets/telegram.png'),
+                  ],
+                ),
+              ),
+              const CustomSizedBox(value: .02),
+              Container(
+                width: screenSize(context).width,
+                height: screenSize(context).height * .15,
+                decoration: BoxDecoration(
+                  color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding:const  EdgeInsets.all(4.0),
+                        child: FittedBox(
+                          fit: BoxFit.fill,
+                          child:  Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children:  [
+                              FittedBox(
+                                child: ResponsiveText(
+                                  scaleFactor: .04,
+                                  text: "نوع السياره :$cartype",
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              FittedBox(
+                                child: ResponsiveText(
+                                  text: 'السعر : $price جنيه',
+                                  scaleFactor: .04,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              FittedBox(
+                                child: ResponsiveText(
+                                  scaleFactor: .04,
+                                  text: 'تاريخ النشر :$date',
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4, top: 4),
+                      child: Image.network(
+                        'http://192.168.1.10:8000/$image',
+                        width: screenSize(context).width * .5,
+                        height: screenSize(context).height * .2,
+                        fit: BoxFit.fill,
+                      )
+                    ),
+                  ],
+                ),
+              ),
+              const CustomSizedBox(value: .01),
+
+              const CustomDivider(),
+              const CustomSizedBox(value: .01),
+              Row(
+                // mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  CustomAssetsImage(path: 'assets/Inquiry.png'),
+                  const SizedBox(width: 5),
+                  const ResponsiveText(
+                    scaleFactor: .04,
+                    text: "متطلبات الايجار",
+                    color: AppColors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ],
+              ),
+              const CustomSizedBox(value: .01),
+
+              Row(
+                children: [
+                  Row(
+                    // mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      CircleAvatar(
+                        radius: screenSize(context).width * .04,
+                        backgroundColor: Colors.red,
+                        child: const ResponsiveText(
+                          scaleFactor: .04,
+                          text: "1",
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      const ResponsiveText(
+                        scaleFactor: .04,
+                        text: "صورة البطاقه",
+                        color: AppColors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ],
+                  ),
+                  SizedBox(width: screenSize(context).width * .1),
+                  Row(
+                    // mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      CircleAvatar(
+                        radius: screenSize(context).width * .04,
+                        backgroundColor: Colors.red,
+                        child: const ResponsiveText(
+                          scaleFactor: .04,
+                          text: "1",
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      const ResponsiveText(
+                        scaleFactor: .04,
+                        text: "صورة البطاقه",
+                        color: AppColors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const CustomSizedBox(value: .01),
+
+              Row(
+                // mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  CircleAvatar(
+                    radius: screenSize(context).width * .04,
+                    backgroundColor: Colors.red,
+                    child: const ResponsiveText(
+                      scaleFactor: .04,
+                      text: "3",
+                      color: AppColors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  const ResponsiveText(
+                    scaleFactor: .04,
+                    text: 'الدفع عند الإستلام',
+                    color: AppColors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ],
+              ),
+
+              const CustomSizedBox(value: .01),
+
+              const ResponsiveText(
+                scaleFactor: .04,
+                text: "تفاصيل السياره ",
+                color: AppColors.black,
+                fontWeight: FontWeight.bold,
+              ),
+              //const CustomSizedBox(value: .0),
+              const CustomDivider(),
+               ResponsiveText(
+                scaleFactor: .04,
+                text:
+                '$desc',
+                color: AppColors.black,
+                fontWeight: FontWeight.bold,
+              ),
+              const CustomSizedBox(value: .01),
+              const CustomDivider(),
+              const ResponsiveText(
+                scaleFactor: .04,
+                text: "صور السياره",
+                color: AppColors.black,
+                fontWeight: FontWeight.bold,
+              ),
+              const CustomSizedBox(value: .01),
+              GridView(
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 16 / 9,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                ),
+                children: [
+                  Image.network(
+                    'http://192.168.1.10:8000/$image',
+                    width: screenSize(context).width * .5,
+                    height: screenSize(context).height * .2,
+                    fit: BoxFit.fill,
+                  ),
+                  // CustomAssetsImage(
+                  //   path: 'assets/buyCar.png',
+                  //   boxFit: BoxFit.fill,
+                  // ),
+                  // CustomAssetsImage(
+                  //   path: 'assets/buyCar.png',
+                  //   boxFit: BoxFit.fill,
+                  // ),
+                  // CustomAssetsImage(
+                  //   path: 'assets/buyCar.png',
+                  //   boxFit: BoxFit.fill,
+                  // ),
+                  // CustomAssetsImage(
+                  //   path: 'assets/buyCar.png',
+                  //   boxFit: BoxFit.fill,
+                  // ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    ));
+  }
+}
