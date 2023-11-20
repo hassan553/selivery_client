@@ -13,7 +13,7 @@ class FirebaseMessagingService {
   }
 
   // Get the device token for push notifications
-  static Future<String?> getDeviceToken() async {
+  static Future<String?> getDeviceTok() async {
     try {
       return await _firebaseMessaging.getToken();
     } catch (error) {

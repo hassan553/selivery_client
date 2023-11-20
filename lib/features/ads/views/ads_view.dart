@@ -18,7 +18,7 @@ class AllAdsView extends StatefulWidget {
 }
 
 class _AllAdsViewState extends State<AllAdsView> {
-  final controller = Get.find<AdsController>();
+  final controller = Get.put(AdsController());
   @override
   void initState() {
     // TODO: implement initState

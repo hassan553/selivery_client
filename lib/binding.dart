@@ -5,6 +5,6 @@ import 'core/class/crud.dart';
 class MyBinding extends Bindings {
   @override
   void dependencies() {
-    //Get.put(Crud());
+  Get.put(Crud());
   }
 }
