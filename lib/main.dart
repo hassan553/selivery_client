@@ -6,6 +6,6 @@ import 'core/services/cache_storage_services.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   CacheStorageServices.init();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(const SeliveryClient());
 }
