@@ -44,8 +44,7 @@ class ClientProfileRepo {
   }) async {
     try {
       ClientProfileModel clientProfileModel;
-    
-
+      print('token${CacheStorageServices().token}');
       final response = await http.patch(
         profileUpdateInfoUri,
         body: jsonEncode(
@@ -53,9 +52,14 @@ class ClientProfileRepo {
         headers: authHeadersWithToken(CacheStorageServices().token),
       );
       final result = jsonDecode(response.body);
-      clientProfileModel = ClientProfileModel.fromJson(result['user']);
+      print(result['message']);
 
-      return Right(clientProfileModel);
+      if (response.statusCode == 200) {
+        clientProfileModel = ClientProfileModel.fromJson(result['user']);
+        return Right(clientProfileModel);
+      } else {
+        return Left(result['message']);
+      }
     } catch (e) {
       print(e.toString());
       return Left(e.toString());
@@ -73,10 +77,13 @@ class ClientProfileRepo {
             {'oldPassword': oldPassword, 'newPassword': newPassword}),
         headers: authHeadersWithToken(CacheStorageServices().token),
       );
-
+      final res = jsonDecode(response.body);
       if (response.statusCode == 200) {
+        print(res['message']);
         return const Right('لقد تم تغير كلمة السر بنجاح');
       } else {
+        print(res['message']);
+
         return const Left('قم باعادة المحاوله');
       }
     } catch (e) {
@@ -88,8 +95,7 @@ class ClientProfileRepo {
   Future<Either<String, ClientProfileModel>> updateClientProfileImage() async {
     try {
       ClientProfileModel clientProfileModel;
-     
-  
+
       final response = await http.patch(
         profileUpdateImageUri,
         body: jsonEncode({
@@ -163,8 +169,7 @@ class ClientProfileRepo {
   Future<void> _uploadClientProfileImage(File? image) async {
     var headers = {
       'Accept': 'application/json',
-      "Authorization":
-          'Bearer ${CacheStorageServices().token}',
+      "Authorization": 'Bearer ${CacheStorageServices().token}',
       "Content-Type": 'multipart/form-data',
     };
 
@@ -200,7 +205,6 @@ class ClientProfileRepo {
 
   _uploadImage(String title, File file) async {
     try {
-     
       var request = http.MultipartRequest('PATCH', profileUpdateImageUri);
       request.fields["images"] = title;
       request.files.add(http.MultipartFile.fromBytes(
@@ -208,36 +212,14 @@ class ClientProfileRepo {
         File(file.path).readAsBytesSync(),
         filename: 'image.jpg',
       ));
-      request.headers['Authorization'] = 'Bearer ${CacheStorageServices().token}';
+      request.headers['Authorization'] =
+          'Bearer ${CacheStorageServices().token}';
       request.headers['Content-Type'] = 'multipart/form-data';
       var res = await request.send();
       print('response ${res.toString()}');
       print('image upload success');
     } catch (error) {
       print(error.toString());
-    }
-  }
-
-/////////
-  Future<Either<String, ClientProfileModel>> updateClientProfile() async {
-    try {
-      ClientProfileModel clientProfileModel;
-
-      final response = await http.get(
-        Uri.parse(profileUri),
-        headers: authHeadersWithToken(CacheStorageServices().token),
-      );
-      final result = jsonDecode(response.body);
-      clientProfileModel = ClientProfileModel.fromJson(result['user']);
-      print('profile body ${clientProfileModel.name}');
-      print('token ${CacheStorageServices().token}');
-      if (response.statusCode == 200) {
-        return Right(clientProfileModel);
-      } else {
-        return const Left('لقد حدث خطا ');
-      }
-    } catch (e) {
-      return Left(e.toString());
     }
   }
 }

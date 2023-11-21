@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:selivery_client/core/widgets/custom_button.dart';
 
 import '../../../../../core/widgets/custom_appBar.dart';
 import '../../../../../core/rescourcs/app_colors.dart';
 
 import '../../../../core/widgets/custom_image.dart';
+import '../../../../core/widgets/custom_sized_box.dart';
 import '../../controller/client_profile_controller.dart';
 import '../../data/repository/client_profile_repo.dart';
 
@@ -24,6 +26,13 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
       appBar: customAppBar(context),
       body: ListView(
         children: [
+          CustomButton(
+            function: () {
+              ClientProfileRepo().updateClientPassword('12345678', '12345678');
+            },
+            title: 'update',
+            color: Colors.amber,
+          ),
           Container(
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -31,6 +40,7 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Builder(builder: (context) {
+                controller.setControllers();
                 return Padding(
                   padding: const EdgeInsets.all(8),
                   child: Form(
@@ -60,15 +70,15 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
                             ),
                           ],
                         ),
-                        // const CustomSizedBox(value: .04),
-                        // editTextFiled('الاسم', 'cubit.name'),
+                        const CustomSizedBox(value: .04),
+                        editTextFiled('الاسم', controller.name),
                         // editTextFiled('رقم الموبايل', 'cubit.phone'),
                         // editTextFiled(
                         //   'السن',
                         //   ' cubit.age',
                         // ),
                         // editTextFiled('النوع', 'cubit.gander'),
-                        // const CustomSizedBox(value: .01),
+                        const CustomSizedBox(value: .01),
                       ],
                     ),
                   ),
@@ -165,7 +175,7 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
           controller.text = value;
         });
       },
-      onFieldSubmitted: (value) {
+      onTapOutside: (value) {
         FocusScope.of(context).unfocus();
       },
       textDirection: TextDirection.ltr,

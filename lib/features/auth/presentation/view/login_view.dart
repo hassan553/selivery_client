@@ -32,6 +32,12 @@ class _ClientLoginViewState extends State<ClientLoginView> {
   var passwordFocus = FocusNode();
   final formKey = GlobalKey<FormState>();
   bool isObscure = true;
+  changeIcon() {
+    setState(() {
+      isObscure = !isObscure;
+    });
+  }
+
   @override
   void dispose() {
     email.dispose();
@@ -92,8 +98,9 @@ class _ClientLoginViewState extends State<ClientLoginView> {
                           hintText: 'كلمه السر',
                           focusNode: passwordFocus,
                           obscure: isObscure,
-                          suffixIcon:
-                              VisibilityIconWidget(isObscure: isObscure),
+                          suffixIcon:InkWell(
+                            onTap:()=>changeIcon(),
+                            child: Icon(isObscure?  Icons.visibility_off_outlined: Icons.visibility_outlined,color: AppColors.black)),
                           valid: (String? value) {
                             if (value == null) {
                               return 'قيمه فارغه';
