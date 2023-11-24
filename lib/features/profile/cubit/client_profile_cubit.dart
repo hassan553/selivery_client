@@ -65,11 +65,11 @@ class ClientProfileCubit extends Cubit<ClientProfileState> {
     });
   }
 
-  updatePassword(String newPassword, String oldPassword) async {
-    final result =
-        await _clientProfileRepo.updateClientPassword(newPassword, oldPassword);
-    result.fold((l) => emit(ClientUpdatePasswordError()), (r) {
-      emit(ClientUpdatePasswordSuccess(r));
-    });
-  }
+  // updatePassword(String newPassword, String oldPassword) async {
+  //   final result =
+  //       await _clientProfileRepo.updateClientPassword(newPassword,oldPassword);
+  //   result.fold((l) => emit(ClientUpdatePasswordError()), (r) {
+  //     emit(ClientUpdatePasswordSuccess(r));
+  //   });
+  // }
 }

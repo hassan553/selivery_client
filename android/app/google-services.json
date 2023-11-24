@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:498011456712:android:4cb340442dcb15a0df91fd",
+        "mobilesdk_app_id": "1:498011456712:android:7d406bd2d60e2cc1df91fd",
         "android_client_info": {
           "package_name": "com.example.selivery_client"
         }
@@ -36,7 +36,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:498011456712:android:099ccf995953caa3df91fd",
+        "mobilesdk_app_id": "1:498011456712:android:163d5cec20236bb2df91fd",
         "android_client_info": {
           "package_name": "com.example.selivery_driver"
         }

@@ -67,24 +67,22 @@ class ClientProfileRepo {
   }
 
   Future<Either<String, String>> updateClientPassword(
-    String newPassword,
-    String oldPassword,
+  {
+     required String newPassword,required String oldPassword
+  }
   ) async {
     try {
       final response = await http.patch(
         profileClientUpdatePassword,
-        body: jsonEncode(
-            {'oldPassword': oldPassword, 'newPassword': newPassword}),
+        body: jsonEncode({'newPassword': newPassword,'oldPassword':oldPassword}),
         headers: authHeadersWithToken(CacheStorageServices().token),
       );
       final res = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        print(res['message']);
         return const Right('لقد تم تغير كلمة السر بنجاح');
       } else {
         print(res['message']);
-
-        return const Left('قم باعادة المحاوله');
+        return Left(res['message']);
       }
     } catch (e) {
       print(e.toString());
