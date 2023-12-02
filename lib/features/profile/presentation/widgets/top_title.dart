@@ -23,42 +23,40 @@ class TopTitleWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        LayoutBuilder(
-          builder: (p0, p1) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                FittedBox(
-                  child: ResponsiveText(
-                    text: title1,
-                    scaleFactor: .25,
-                    color: AppColors.primaryColor,
-                  ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            FittedBox(
+              child: Text(
+                title1,
+                style: const TextStyle(
+                    color: AppColors.primaryColor, fontSize: 50),
+              ),
+            ),
+            SizedBox(
+              width: 150,
+              height: 100,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: CustomNetworkImage(
+                  imagePath: image ?? '',
+                  boxFit: BoxFit.fill,
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(60),
-                  child: CustomNetworkImage(
-                    imagePath: image,
-                    boxFit: BoxFit.fill,
-                    width: 60,
-                  ),
-                ),
-                FittedBox(
-                  child: ResponsiveText(
-                    text: title2,
-                    scaleFactor: .25,
-                    color: AppColors.primaryColor,
-                  ),
-                ),
-              ],
-            );
-          },
+              ), // Replace with your image path
+            ),
+            FittedBox(
+              child: Text(
+                title2,
+                style: const TextStyle(
+                    color: AppColors.primaryColor, fontSize: 50),
+              ),
+            ),
+          ],
         ),
-        ResponsiveText(
-          text: name ?? 'hassan ',
-          scaleFactor: .07,
-          color: AppColors.primaryColor,
+        Text(
+          name ?? '',
+          style: const TextStyle(color: AppColors.primaryColor, fontSize: 30),
         ),
       ],
     );

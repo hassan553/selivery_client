@@ -8,10 +8,10 @@ import '../data/repository/client_profile_repo.dart';
 
 class ClientProfileController extends GetxController {
   ClientProfileRepo clientProfileRepo = ClientProfileRepo();
-  final TextEditingController gander = TextEditingController();
-  final TextEditingController name = TextEditingController();
-  final TextEditingController phone = TextEditingController();
-  final TextEditingController age = TextEditingController(text: '0');
+  final TextEditingController genderController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController ageController = TextEditingController(text: '0');
   final TextEditingController password = TextEditingController(text: '*****');
 
   bool isLoading = false;
@@ -28,6 +28,7 @@ class ClientProfileController extends GetxController {
       }, (r) {
         isLoading = false;
         clientProfileModel = r;
+        errorMessage = '';
       });
     } else {
       errorMessage = 'لا يوجد اتصال بالانترنت';
@@ -87,7 +88,36 @@ class ClientProfileController extends GetxController {
             context: context,
             message: 'تم التغير بنجاح',
             requestStates: RequestStates.success);
+        getClientProfile();
       });
+    } else {
+      showSnackBarWidget(
+          context: context,
+          message: 'لا يوجد اتصال بالانترنت',
+          requestStates: RequestStates.error);
+    }
+    update();
+  }
+
+  bool changeImageLoding = false;
+  changePicture(context) async {
+    if (await checkInternet()) {
+      try {
+        changeImageLoding = true;
+        update();
+        await clientProfileRepo.pickClientImage();
+        changeImageLoding = false;
+         showSnackBarWidget(
+            context: context,
+            message: 'تم التغير بنجاح',
+            requestStates: RequestStates.success);
+      } catch (error) {
+        changeImageLoding = false;
+        showSnackBarWidget(
+            context: context,
+            message: "لقد حدث خطا",
+            requestStates: RequestStates.error);
+      }
     } else {
       showSnackBarWidget(
           context: context,
@@ -99,11 +129,11 @@ class ClientProfileController extends GetxController {
 
   void setControllers() {
     try {
-      name.text = clientProfileModel?.name ?? '';
-      age.text = clientProfileModel?.age.toString() ?? '';
-      password.text = '*******';
-      phone.text = clientProfileModel?.phone ?? '';
-      gander.text = clientProfileModel?.gander ?? '';
+      nameController.text = clientProfileModel?.name ?? '';
+      ageController.text = clientProfileModel?.age.toString() ?? '';
+      password.text = '********';
+      phoneController.text = clientProfileModel?.phone ?? '';
+      genderController.text = clientProfileModel?.gander ?? '';
       update();
     } catch (error) {}
   }
@@ -118,9 +148,9 @@ class ClientProfileController extends GetxController {
   @override
   void dispose() {
     // TODO: implement dispose
-    name.dispose();
-    gander.dispose();
-    phone.dispose();
+    nameController.dispose();
+    genderController.dispose();
+    phoneController.dispose();
     password.dispose();
     super.dispose();
   }

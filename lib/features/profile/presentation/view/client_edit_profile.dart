@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
+import 'package:selivery_client/features/profile/presentation/widgets/selecte_gender.dart';
 import '../../../../../core/widgets/custom_appBar.dart';
 import '../../../../../core/rescourcs/app_colors.dart';
-
+import '../../../../core/widgets/custom_image.dart';
 import '../../../../core/widgets/custom_loading_widget.dart';
 import '../../../../core/widgets/custom_sized_box.dart';
 import '../../controller/client_profile_controller.dart';
 import '../../data/repository/client_profile_repo.dart';
 import '../widgets/change_password_widget.dart';
+import '../widgets/custom_textfield.dart';
 
 class ClientEditProfileView extends StatefulWidget {
   const ClientEditProfileView({super.key});
@@ -20,6 +22,12 @@ class ClientEditProfileView extends StatefulWidget {
 class _ClientEditProfileViewState extends State<ClientEditProfileView> {
   final formKey = GlobalKey<FormState>();
   final controller = Get.find<ClientProfileController>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.setControllers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +42,6 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: GetBuilder<ClientProfileController>(builder: (controller) {
-                controller.setControllers();
                 return Padding(
                   padding: const EdgeInsets.all(8),
                   child: Form(
@@ -42,49 +49,121 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        if (controller.changeImageLoding) ...[
+                          const SizedBox(height: 20),
+                          const LinearProgressIndicator(
+                              color: Colors.green, backgroundColor: Colors.red),
+                          const SizedBox(height: 20),
+                        ],
                         Stack(
                           alignment: Alignment.bottomLeft,
                           children: [
-                            // ClipRRect(
-                            //     borderRadius: BorderRadius.circular(60),
-                            //     child: CustomNetworkImage(
-                            //       imagePath:
-                            //           "http://192.168.1.122:8000/${controller.clientProfileModel?.image}",
-                            //       width: 120,
-                            //       boxFit: BoxFit.fill,
-                            //     )),
+                            SizedBox(
+                              width: 150,
+                              height: 100,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: CustomNetworkImage(
+                                  imagePath:
+                                      controller.clientProfileModel?.image ??
+                                          '',
+                                  boxFit: BoxFit.fill,
+                                ),
+                              ), // Replace with your image path
+                            ),
                             InkWell(
                               onTap: () {
-                                ClientProfileRepo().pickClientImage();
+                                controller.changePicture(context);
                               },
-                              child: Icon(
-                                Icons.edit,
-                                color: AppColors.black.withOpacity(.7),
+                              child: CircleAvatar(
+                                backgroundColor: AppColors.primaryColor,
+                                child: Icon(
+                                  Icons.edit,
+                                  color: AppColors.black.withOpacity(.7),
+                                ),
                               ),
                             ),
                           ],
                         ),
                         const CustomSizedBox(value: .04),
-                        editTextFiled('الاسم', controller.name),
+                        EditField(
+                            validate: (p0) {
+                              if (p0 == null) {
+                                return 'لا يسمح بقيمه فارغه';
+                              } else if (p0.isEmpty) {
+                                return 'لا يسمح بقيمه فارغه';
+                              }
+                              return null;
+                            },
+                            prefix: 'الاسم',
+                            hint: controller.nameController),
+                        const SizedBox(height: 15),
+                        InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return const MyDialog();
+                                },
+                              );
+                            },
+                            child: EditField(
+                                prefix: 'كلمة المرور',
+                                hint: TextEditingController(text: '*****'),
+                                isEnable: false)),
+                        const SizedBox(height: 15),
+                        EditField(
+                            validate: (p0) {
+                              if (p0 == null) {
+                                return 'لا يسمح بقيمه فارغه';
+                              } else if (p0.isEmpty) {
+                                return 'لا يسمح بقيمه فارغه';
+                              } else if (p0.length != 11) {
+                                return 'ادخل رقم صحيح';
+                              }
+                              return null;
+                            },
+                            type: TextInputType.phone,
+                            prefix: 'رقم الموبايل',
+                            hint: controller.phoneController),
+                        const SizedBox(height: 15),
+                        EditField(
+                            validate: (p0) {
+                              int p = 0;
+                              if (p0 != null) {
+                                if (p0.isNotEmpty) {
+                                  p = int.parse(p0);
+                                }
+                              }
+                              if (p0 == null) {
+                                return 'لا يسمح بقيمه فارغه';
+                              } else if (p < 21) {
+                                return 'العمر يجب ان يزيد عن 21 عاما';
+                              } else if (p > 100) {
+                                return 'ادخل رقم صحيح';
+                              } else if (p0.isEmpty) {
+                                return 'لا يسمح بقيمه فارغه';
+                              }
+                              return null;
+                            },
+                            type: TextInputType.number,
+                            prefix: 'السن',
+                            hint: controller.ageController),
                         const SizedBox(height: 15),
                         InkWell(
                           onTap: () {
                             showDialog(
                               context: context,
                               builder: (context) {
-                                return const MyDialog();
+                                return const SelecteGenderWidget();
                               },
                             );
                           },
-                          child: editTextFiled(
-                              'كلمة المرور', controller.password, false),
+                          child: EditField(
+                              prefix: 'النوع',
+                              isEnable: false,
+                              hint: controller.genderController),
                         ),
-                        const SizedBox(height: 15),
-                        editTextFiled('رقم الموبايل', controller.phone),
-                        const SizedBox(height: 15),
-                        editTextFiled('السن', controller.age),
-                        const SizedBox(height: 15),
-                        editTextFiled('النوع', controller.gander),
                         const CustomSizedBox(value: .01),
                       ],
                     ),
@@ -100,18 +179,14 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
                       padding: const EdgeInsets.symmetric(horizontal: 50),
                       child: MaterialButton(
                         onPressed: () {
-                          controller.updateProfile(
-                              context: context,
-                              age: controller.age?.text??'',
-                              gender: controller.gander?.text??'',
-                              name: controller.name?.text??'',
-                              phone: controller.phone?.text??'');
-                          // ClientProfileCubit.get(co?ntext)
-                          //     .updateClientProfileInfo(
-                          //         phone: cubit.phone.text,
-                          //         name: cubit.name.text,
-                          //         gender: cubit.gander.text,
-                          //         age: int.parse(cubit.age.text));
+                          if (formKey.currentState!.validate()) {
+                            controller.updateProfile(
+                                context: context,
+                                age: controller.ageController.text,
+                                gender: controller.genderController.text,
+                                name: controller.nameController.text,
+                                phone: controller.phoneController.text);
+                          }
                         },
                         height: 50,
                         minWidth: 80,
@@ -130,15 +205,13 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
     );
   }
 
-  Widget editTextFiled(String prefix, TextEditingController? controller,
-      [bool? isEnable]) {
+  Widget editTextFiled(String prefix, String hint, [bool? isEnable]) {
     return TextFormField(
-      controller: controller,
       onChanged: (value) {
         setState(() {
-          controller?.text = value;
-          print(controller?.text);
+          hint = value;
         });
+        print('hin$hint');
       },
       onTapOutside: (value) {
         FocusScope.of(context).unfocus();
@@ -147,6 +220,8 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
       cursorColor: AppColors.black,
       decoration: InputDecoration(
         enabled: isEnable ?? true,
+        hintText: hint,
+        hintTextDirection: TextDirection.ltr,
         prefixText: prefix,
         prefixStyle: const TextStyle(color: AppColors.black),
         prefixIcon: Icon(
@@ -154,11 +229,11 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
           size: 20,
           color: AppColors.black.withOpacity(.7),
         ),
-        disabledBorder: const UnderlineInputBorder(
+        disabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.black)),
-        enabledBorder: const UnderlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.black)),
-        focusedBorder: const UnderlineInputBorder(
+        focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.black)),
       ),
     );
