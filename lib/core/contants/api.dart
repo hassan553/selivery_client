@@ -9,7 +9,7 @@ final verifyClientEmailCodeUrl = Uri.parse('${authBaseUri}client/verify_email');
 final verifyClientResendEmailCodeUrl =
     Uri.parse('${authBaseUri}resend_verification_code');
 final completeCarInfoUrl = Uri.parse('${baseUri}request');
-final getAllAdsUri = Uri.parse('{$baseUri}dashboard/advertisement');
+final getAllAdsUri = Uri.parse('http://192.168.1.122:8000/advertisement');
 
 final sendNewPasswordUrl = Uri.parse('${baseUri}user/setPassword');
 

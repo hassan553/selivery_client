@@ -12,6 +12,10 @@ class CacheStorageServices {
     _preferences = await SharedPreferences.getInstance();
   }
 
+  Future<void> setTopic(bool value) async =>
+      await _preferences?.setBool(_Keys.isEnabled, value);
+  bool get isEnalbed => _preferences?.getBool(_Keys.isEnabled) ?? true;
+
   Future<void> setToken(String token) async =>
       await _preferences?.setString(_Keys.token, token);
   String get token => _preferences?.getString(_Keys.token) ?? '';
@@ -19,4 +23,5 @@ class CacheStorageServices {
 
 class _Keys {
   static const String token = 'token';
+  static const String isEnabled = 'isEnabled';
 }

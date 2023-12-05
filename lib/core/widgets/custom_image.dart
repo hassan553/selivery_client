@@ -72,12 +72,14 @@ class CustomNetworkImage extends StatelessWidget {
         if (loadingProgress == null) {
           return child;
         }
-        return CircularProgressIndicator(
-          value: loadingProgress.expectedTotalBytes != null
-              ? loadingProgress.cumulativeBytesLoaded /
-                  loadingProgress.expectedTotalBytes!
-              : null,
-          color: AppColors.primaryColor,
+        return Center(
+          child: CircularProgressIndicator(
+            value: loadingProgress.expectedTotalBytes != null
+                ? loadingProgress.cumulativeBytesLoaded /
+                    loadingProgress.expectedTotalBytes!
+                : null,
+            color: AppColors.primaryColor,
+          ),
         );
       },
       errorBuilder:

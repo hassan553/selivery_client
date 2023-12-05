@@ -139,34 +139,4 @@ class ClientProfileRepo {
       print(error.toString());
     }
   }
-  // tryUploadImage(File image)async{
-  //  String url = 'http://192.168.1.122:8000/user/changePicture'; // Replace with your API endpoint
-
-  // Dio dio = Dio();
-  //  var headers = {
-  //       'Accept': 'application/json',
-  //       "Authorization": 'Bearer ${CacheStorageServices().token}',
-  //       "Content-Type": 'multipart/form-data',
-  //     };
-  // try {
-  //   String fileName = image.path.split('/').last;
-
-  //   FormData formData = FormData.fromMap({
-  //     'image': await MultipartFile.fromFile(image.path, filename: fileName),
-  //   });
-
-  //   Response response = await dio.patch(url, data: formData,options: Options(headers: headers));
-
-  //   if (response.statusCode == 200) {
-  //     // Image uploaded successfully
-  //     print('Image uploaded!');
-  //   } else {
-  //     // Handle upload failure
-  //     print('Image upload failed!');
-  //   }
-  // } catch (e) {
-  //   // Handle Dio errors
-  //   print('Error uploading image: $e');
-  // }
-  // }
 }

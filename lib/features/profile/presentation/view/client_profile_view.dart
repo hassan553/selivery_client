@@ -48,12 +48,12 @@ class _ClientProfileViewState extends State<ClientProfileView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // TopTitleWidget(
-            //   title1: 'عم',
-            //   title2: 'يل',
-            //   image: clientModel?.image,
-            //   name: clientModel?.name,
-            // ),
+            TopTitleWidget(
+              title1: 'عم',
+              title2: 'يل',
+              image: clientModel?.image,
+              name: clientModel?.name,
+            ),
             const SizedBox(height: 10),
             ClientUserInfo(clientModel: clientModel),
             const CustomSizedBox(value: .03),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_image.dart';
-import '../../../../core/widgets/responsive_text.dart';
 
 class TopTitleWidget extends StatelessWidget {
   final String title1;
@@ -23,41 +21,42 @@ class TopTitleWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            FittedBox(
-              child: Text(
-                title1,
-                style: const TextStyle(
-                    color: AppColors.primaryColor, fontSize: 50),
-              ),
+            Text(
+              title1,
+              style:
+                  const TextStyle(color: AppColors.primaryColor, fontSize: 50),
             ),
+            const SizedBox(width: 8),
             SizedBox(
-              width: 150,
-              height: 100,
+              width: 100,
+              height: 80,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: CustomNetworkImage(
-                  imagePath: image ?? '',
+                  imagePath: image,
                   boxFit: BoxFit.fill,
                 ),
               ), // Replace with your image path
             ),
-            FittedBox(
-              child: Text(
-                title2,
-                style: const TextStyle(
-                    color: AppColors.primaryColor, fontSize: 50),
-              ),
+            const SizedBox(width: 8),
+            Text(
+              title2,
+              style:
+                  const TextStyle(color: AppColors.primaryColor, fontSize: 50),
             ),
           ],
         ),
+        const SizedBox(height: 8),
         Text(
           name ?? '',
           style: const TextStyle(color: AppColors.primaryColor, fontSize: 30),
         ),
+        const SizedBox(height: 8),
       ],
     );
   }
