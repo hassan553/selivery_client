@@ -19,6 +19,10 @@ class CacheStorageServices {
   Future<void> setToken(String token) async =>
       await _preferences?.setString(_Keys.token, token);
   String get token => _preferences?.getString(_Keys.token) ?? '';
+
+  clear() async{
+   await _preferences?.clear();
+  }
 }
 
 class _Keys {

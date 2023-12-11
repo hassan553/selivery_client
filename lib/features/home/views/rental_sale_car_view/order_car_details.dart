@@ -16,7 +16,7 @@ class OrderCarDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   Get.put(CategoriesListForSalesController()..getCategories(id));
+    Get.put(CategoriesListForSalesController()..getCategories(id));
     List images = [
       'assets/pngwing 4.png',
       'assets/pngwing 5.png',
@@ -27,132 +27,134 @@ class OrderCarDetailsView extends StatelessWidget {
       'assets/pngwing 9.png',
     ];
     return Scaffold(
-      appBar: customAppBar(context),
-      body: GetBuilder<CategoriesListForSalesController>(builder:
-          (controller)=>Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const CustomSizedBox(value: .03),
-          topPartOrderOrRentalCarWidget(context, images),
-          const CustomSizedBox(value: .02),
-          Expanded(
-            child: Scrollbar(
-              child: ListView.builder(
-                itemBuilder: (context, index) =>
-                    Container(
-                      width: screenSize(context).width,
-                      height: screenSize(context).height * .6,
-                      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: LayoutBuilder(
-                        builder: (p0, p1) {
-                          return Column(
-                            children: [
-                              Container(
-                                child: Image.network(
-                                   'http://192.168.1.10:8000/${controller.categories[index]['car']['images'][0]}',
-                                  width: p1.maxWidth * .8,
-                                  height: p1.maxHeight * .6,
-                                  fit: BoxFit.fill,
-                                ),
+      appBar: customAppBarForSearch(context),
+      body: GetBuilder<CategoriesListForSalesController>(
+        builder: (controller) => Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const CustomSizedBox(value: .03),
+            topPartOrderOrRentalCarWidget(context, images),
+            const CustomSizedBox(value: .02),
+            Expanded(
+              child: Scrollbar(
+                child: ListView.builder(
+                  itemBuilder: (context, index) => Container(
+                    width: screenSize(context).width,
+                    height: screenSize(context).height * .6,
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: LayoutBuilder(
+                      builder: (p0, p1) {
+                        return Column(
+                          children: [
+                            Container(
+                              child: Image.network(
+                                'http://192.168.1.10:8000/${controller.categories[index]['car']['images'][0]}',
+                                width: p1.maxWidth * .8,
+                                height: p1.maxHeight * .6,
+                                fit: BoxFit.fill,
                               ),
-                              const Divider(color: AppColors.white),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                     FittedBox(
-                                      child: ResponsiveText(
-                                        scaleFactor: .04,
-                                        text: "نوع السياره : ${controller.categories[index]['car']['type']}",
-                                        color: AppColors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                            ),
+                            const Divider(color: AppColors.white),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  FittedBox(
+                                    child: ResponsiveText(
+                                      scaleFactor: .04,
+                                      text:
+                                          "نوع السياره : ${controller.categories[index]['car']['type']}",
+                                      color: AppColors.black,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    const SizedBox(
-                                      height: 3,
+                                  ),
+                                  const SizedBox(
+                                    height: 3,
+                                  ),
+                                  FittedBox(
+                                    child: ResponsiveText(
+                                      text:
+                                          'السعر : ${controller.categories[index]['price']}',
+                                      scaleFactor: .04,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                     FittedBox(
-                                      child: ResponsiveText(
-                                        text: 'السعر : ${controller.categories[index]['price']}',
-                                        scaleFactor: .04,
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                  ),
+                                  const SizedBox(
+                                    height: 3,
+                                  ),
+                                  FittedBox(
+                                    child: ResponsiveText(
+                                      scaleFactor: .04,
+                                      text:
+                                          'تاريخ النشر : ${controller.categories[index]['publishDate']}',
+                                      color: AppColors.black,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    const SizedBox(
-                                      height: 3,
-                                    ),
-                                     FittedBox(
-                                      child: ResponsiveText(
-                                        scaleFactor: .04,
-                                        text: 'تاريخ النشر : ${controller.categories[index]['publishDate']}',
-                                        color: AppColors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    InkWell(
-                                     onTap: () => navigateTo(
-                                          CarOwnerView(
-                          ownerId:controller.categories[index]['userId'],
-                                            phone:controller.categories[index]['phone'],
-                                            cartype:controller.categories[index]
-                                            ['car']['type'] ,
-                                            price: controller.categories[index]
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  InkWell(
+                                    onTap: () => navigateTo(
+                                      CarOwnerView(
+                                        ownerId: controller.categories[index]
+                                            ['userId'],
+                                        phone: controller.categories[index]
+                                            ['phone'],
+                                        cartype: controller.categories[index]
+                                            ['car']['type'],
+                                        price: controller.categories[index]
                                             ['price'],
-                                            date:controller.categories[index]
+                                        date: controller.categories[index]
                                             ['publishDate'],
-                                            desc:controller.categories[index]
-                                           ['car']['description'] ,
-                                            image:controller.categories[index]
+                                        desc: controller.categories[index]
+                                            ['car']['description'],
+                                        image: controller.categories[index]
                                             ['car']['images'][0],
-                                          ),
-                                          ),
-                                      child: Container(
-                                        padding: const EdgeInsets.all(7),
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xff014842),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: const ResponsiveText(
-                                          scaleFactor: .04,
-                                          text: 'للطب والاستفار',
-                                          color: AppColors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 2,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(7),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xff014842),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: const ResponsiveText(
+                                        scaleFactor: .04,
+                                        text: 'للطب والاستفار',
+                                        color: AppColors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  const SizedBox(
+                                    height: 2,
+                                  ),
+                                ],
                               ),
-                            ],
-                          );
-                        },
-                      ),
-                    ) ,
-                itemCount: controller.categories.length,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  itemCount: controller.categories.length,
+                ),
               ),
             ),
-          ),
-        ],
-      ),),
+          ],
+        ),
+      ),
     );
   }
-
-
-
-
-
 
   //
   // Container orderVehicleWidget(BuildContext context) {

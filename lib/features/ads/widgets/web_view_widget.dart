@@ -60,7 +60,7 @@ class _WebPageState extends State<WebPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: customAppBarForSearch(context),
       body: isError
           ? const Center(
               child: Text('لقد حدث خطا .'),

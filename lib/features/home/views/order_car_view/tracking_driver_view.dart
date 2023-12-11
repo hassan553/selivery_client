@@ -13,7 +13,7 @@ class TrackingDriverView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: customAppBarForSearch(context),
       body: InkWell(
         onTap: () => navigateTo(const DriverArriveToUserView()),
         child: Stack(

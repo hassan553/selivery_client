@@ -11,7 +11,7 @@ import '../../ads/views/ads_view.dart';
 import '../../setting/view/setting_view.dart';
 
 class MainView extends StatefulWidget {
-  MainView({super.key});
+  const MainView({super.key});
 
   @override
   State<MainView> createState() => _MainViewState();
@@ -92,8 +92,8 @@ class _MainViewState extends State<MainView> {
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-       icon:const  Icon(Icons.campaign,size:30),
-        title: ("الاشعارات"),
+        icon: const Icon(Icons.campaign, size: 30),
+        title: ("الاعلانات"),
         activeColorPrimary: AppColors.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

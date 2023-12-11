@@ -32,8 +32,8 @@ final profileUpdateInfoUriHZ = '{$baseUri}user/updateInfo';
 final profileClientUpdatePassword = Uri.parse('http://192.168.1.122:8000/user/changePassword');
 //categories
 
-const String categoriesUrL = '{$baseUri}category';
-String CategoriesList(id) => "{$baseUri}vehicles/sale/category/$id";
+const String categoriesUrL = '${baseUri}category';
+String CategoriesList(id) => "${baseUri}vehicles/sale/category/$id";
 //getdata for owner sale car
 String ownerData(id) => "{$baseUri}user/driver/$id";
 

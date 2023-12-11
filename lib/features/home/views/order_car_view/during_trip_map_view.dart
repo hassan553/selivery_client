@@ -12,7 +12,7 @@ class DuringTripMapView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: customAppBarForSearch(context),
       body: InkWell(
         onTap: () => navigateTo(const EvaluateDriverView()),
         child: Stack(
@@ -45,7 +45,7 @@ class DuringTripMapView extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                   Column(
+                  Column(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
                       ResponsiveText(

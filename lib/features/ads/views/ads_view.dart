@@ -31,24 +31,32 @@ class _AllAdsViewState extends State<AllAdsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(150),
+        child: GetBuilder<AdsController>(
+          builder: (controller) => customAppBarForSearch(
+            context,
+            onTap: () => controller.searchText.value = '',
+            onChanged: (p0) => controller.searchText.value = p0,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8),
-        child:  Obx(
-                () => controller.isLoading.value?const CustomLoadingWidget():
-                controller.allAdsList.isEmpty
-                    ? ErrorComponant(
-                        function: controller.getAllAdsData,
-                        message: controller.allAdsDataError.value)
-                    : ListView.builder(
-                        itemBuilder: (context, index) => customAdsWidget(
-                            context, index, controller.allAdsList[index]),
-                        itemCount: controller.allAdsList.length,
-                      ),
-              ),
-            ),
-          
-      
+        child: Obx(
+           () => controller.isLoading.value
+              ? const CustomLoadingWidget()
+              : controller.filteredItems.isEmpty
+                  ? ErrorComponant(
+                      function: controller.getAllAdsData,
+                      message: controller.allAdsDataError.value)
+                  : ListView.builder(
+                      itemBuilder: (context, index) => customAdsWidget(
+                          context, index, controller.filteredItems[index]),
+                      itemCount: controller.filteredItems.length,
+                    ),
+        ),
+      ),
     );
   }
 
@@ -77,7 +85,7 @@ class _AllAdsViewState extends State<AllAdsView> {
             alignment: Alignment.centerRight,
             child: Text(model.description ?? '')),
         const SizedBox(height: 8),
-         SizedBox(
+        SizedBox(
           width: screenSize(context).width,
           height: 120,
           child: Stack(
@@ -90,7 +98,7 @@ class _AllAdsViewState extends State<AllAdsView> {
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: AppColors.primaryColor)),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),                  
+                    borderRadius: BorderRadius.circular(20),
                     child: CustomNetworkImage(
                       imagePath: model.image,
                       boxFit: BoxFit.fill,
@@ -99,8 +107,7 @@ class _AllAdsViewState extends State<AllAdsView> {
                 ),
               ),
               InkWell(
-                onTap: () =>
-                    navigateTo(WebPage(link: model.link ?? '')),
+                onTap: () => navigateTo(WebPage(link: model.link ?? '')),
                 child: Card(
                   elevation: 10,
                   semanticContainer: true,

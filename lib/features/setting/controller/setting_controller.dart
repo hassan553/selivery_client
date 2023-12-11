@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:selivery_client/core/functions/checkinternet.dart';
+import 'package:selivery_client/core/functions/global_function.dart';
 import 'package:selivery_client/core/services/cache_storage_services.dart';
 import 'package:selivery_client/core/widgets/show_awesomeDialog.dart';
+import 'package:selivery_client/features/auth/presentation/view/login_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/contants/strings.dart';
@@ -44,5 +46,10 @@ class SettingController extends GetxController {
           requestStates: RequestStates.error);
     }
     update();
+  }
+
+  logout() {
+    CacheStorageServices().clear();
+    navigateOff(const ClientLoginView());
   }
 }

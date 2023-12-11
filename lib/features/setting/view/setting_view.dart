@@ -91,22 +91,25 @@ class _SettingViewState extends State<SettingView> {
     );
   }
 
-  Row logoutWidget(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Icon(
-          Icons.logout,
-          color: Colors.red,
-          size: screenSize(context).width * .07,
-        ),
-        const SizedBox(width: 5),
-        const ResponsiveText(
-          text: 'تسجيل الخروج',
-          scaleFactor: .06,
-          color: Colors.red,
-        ),
-      ],
+  Widget logoutWidget(BuildContext context) {
+    return InkWell(
+      onTap: ()=>controller.logout(),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.logout,
+            color: Colors.red,
+            size: screenSize(context).width * .07,
+          ),
+          const SizedBox(width: 5),
+          const ResponsiveText(
+            text: 'تسجيل الخروج',
+            scaleFactor: .06,
+            color: Colors.red,
+          ),
+        ],
+      ),
     );
   }
 
@@ -149,9 +152,9 @@ class _SettingViewState extends State<SettingView> {
             borderRadius: BorderRadius.circular(8),
             color: const Color(0xff262E2D),
           ),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Icon(
                 Icons.arrow_drop_down,
                 color: AppColors.white,
