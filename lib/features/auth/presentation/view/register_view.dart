@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/widgets/custom_loading_widget.dart';
 import '../../../../../core/widgets/show_awesomeDialog.dart';
+import '../../../home/views/main_view.dart';
 import '../../cubit/register/client_register_cubit.dart';
 import '../../../../../core/functions/global_function.dart';
 import '../../../../../core/rescourcs/app_colors.dart';
@@ -14,6 +15,7 @@ import '../../../../../core/widgets/snack_bar_widget.dart';
 import '../../../../../core/widgets/build_rich_text.dart';
 
 import '../../data/data_source/client_auth_repo.dart';
+import '../../verify_email/views/otp_view.dart';
 
 class ClientRegisterView extends StatefulWidget {
   const ClientRegisterView({super.key});
@@ -122,10 +124,10 @@ class _ClientRegisterViewState extends State<ClientRegisterView> {
                               context: context,
                               message: 'تم انشاء الحساب بنجاح',
                               requestStates: RequestStates.success);
-                          // navigateOff(VerifyEmailOTPView(
-                          //   email: email.text,
-                          //   screen: MainView(),
-                          // ));
+                          navigateOff(VerifyEmailOTPView(
+                            email: email.text,
+                            screen: MainView(),
+                          ));
                         } else if (state is ClientRegisterError) {
                           
                         showErrorAwesomeDialog(

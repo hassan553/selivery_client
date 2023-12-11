@@ -15,7 +15,7 @@ class ToSetLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: customAppBarForSearch(context),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(

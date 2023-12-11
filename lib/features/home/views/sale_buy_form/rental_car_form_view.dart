@@ -15,12 +15,12 @@ class RentalCarFormView extends StatelessWidget {
   TextEditingController typeController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController descController = TextEditingController();
-   RentalCarFormView({super.key});
+  RentalCarFormView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: customAppBarForSearch(context),
       body: Container(
         width: screenSize(context).width,
         height: screenSize(context).height,
@@ -46,21 +46,45 @@ class RentalCarFormView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 15),
-               BuyRentalCarFormWidget(title: 'الاسم',controller: nameController,),
+              BuyRentalCarFormWidget(
+                title: 'الاسم',
+                controller: nameController,
+              ),
               const SizedBox(height: 10),
-               BuyRentalCarFormWidget(title: 'السن',controller: ageController,),
+              BuyRentalCarFormWidget(
+                title: 'السن',
+                controller: ageController,
+              ),
               const SizedBox(height: 10),
-               BuyRentalCarFormWidget(title: 'رقم الموبايل',controller: phoneController,),
+              BuyRentalCarFormWidget(
+                title: 'رقم الموبايل',
+                controller: phoneController,
+              ),
               const SizedBox(height: 10),
-               BuyRentalCarFormWidget(title: 'لينك الفيس بوك',controller: faceLinkController,),
+              BuyRentalCarFormWidget(
+                title: 'لينك الفيس بوك',
+                controller: faceLinkController,
+              ),
               const SizedBox(height: 10),
-               BuyRentalCarFormWidget(title: 'لينك التليجرام',controller: telController,),
+              BuyRentalCarFormWidget(
+                title: 'لينك التليجرام',
+                controller: telController,
+              ),
               const SizedBox(height: 10),
-               BuyRentalCarFormWidget(title: 'نوع السياره',controller: typeController,),
+              BuyRentalCarFormWidget(
+                title: 'نوع السياره',
+                controller: typeController,
+              ),
               const SizedBox(height: 10),
-               BuyRentalCarFormWidget(title: 'سعر السياره',controller: priceController,),
+              BuyRentalCarFormWidget(
+                title: 'سعر السياره',
+                controller: priceController,
+              ),
               const SizedBox(height: 10),
-               BuyRentalCarFormWidget(title: 'تفاصيل السياره',controller: descController,),
+              BuyRentalCarFormWidget(
+                title: 'تفاصيل السياره',
+                controller: descController,
+              ),
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -75,15 +99,15 @@ class RentalCarFormView extends StatelessWidget {
                   Container(
                     width: screenSize(context).width * .6,
                     //height: screenSize(context).height * .15,
-                    padding:const  EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: AppColors.black),
                     ),
-                    child:  Column(
-                      mainAxisSize: MainAxisSize.min,
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children:const  [
+                        children: const [
                           ResponsiveText(
                             text: '1-',
                             scaleFactor: .05,

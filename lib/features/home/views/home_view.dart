@@ -23,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: customAppBar(context),
+      appBar: customAppBarForSearch(context),
       body: ListView(
         children: const [
           SizedBox(height: 10),

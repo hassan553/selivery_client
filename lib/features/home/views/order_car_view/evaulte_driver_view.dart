@@ -14,7 +14,7 @@ class EvaluateDriverView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff1E2B3C),
-      appBar: customAppBar(context),
+      appBar: customAppBarForSearch(context),
       body: Container(
         width: screenSize(context).width,
         height: screenSize(context).height,

@@ -7,7 +7,7 @@ Future<GoogleSignInAccount?> signInWithGoogle() async {
     print(account);
     return account;
   } catch (error) {
-    print('error ${error.toString()}');
+    print(error);
     return null;
   }
 }

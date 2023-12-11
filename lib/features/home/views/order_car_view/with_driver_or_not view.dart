@@ -12,13 +12,13 @@ import '../rental_sale_car_view/rental_car_view_with_driver.dart';
 
 class WithDriverOrNotView extends StatelessWidget {
   final String catId;
-   WithDriverOrNotView({super.key, required this.catId});
+  WithDriverOrNotView({super.key, required this.catId});
 
   @override
   Widget build(BuildContext context) {
     print("catid for rent $catId");
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: customAppBarForSearch(context),
       body: ListView(
         children: [
           const CustomSizedBox(value: .02),
@@ -35,11 +35,13 @@ class WithDriverOrNotView extends StatelessWidget {
           ),
           const CustomSizedBox(value: .04),
           InkWell(
-            onTap: () => navigateTo( RentalCarViewWithoutDriver(id:catId,)),
+            onTap: () => navigateTo(RentalCarViewWithoutDriver(
+              id: catId,
+            )),
             child: Container(
               width: screenSize(context).width,
               decoration: BoxDecoration(
-                //color: Colors.black.withOpacity(0.5),
+                  //color: Colors.black.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(10)),
               margin: const EdgeInsets.symmetric(horizontal: 5),
               child: Stack(
@@ -76,47 +78,49 @@ class WithDriverOrNotView extends StatelessWidget {
             ),
           ),
           const CustomSizedBox(value: .02),
-        InkWell(
-          onTap: () => navigateTo( RentalCarViewWithDriver(id: catId,)),
-          child: Container(
-            width: screenSize(context).width,
-            decoration: BoxDecoration(
-              //color: Colors.black.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(10)),
-            margin: const EdgeInsets.symmetric(horizontal: 5),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.5),
-                    BlendMode.srcATop,
-                  ),
-                  child: Image.asset(
-                    "assets/Rectangle 156.png",
-                    height: screenSize(context).height * .3,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/tap.png'),
-                    const SizedBox(width: 10),
-                    Text(
-                      "  بسائق ",
-                      style: const TextStyle(
-                        color: AppColors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w300,
-                      ),
+          InkWell(
+            onTap: () => navigateTo(RentalCarViewWithDriver(
+              id: catId,
+            )),
+            child: Container(
+              width: screenSize(context).width,
+              decoration: BoxDecoration(
+                  //color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(10)),
+              margin: const EdgeInsets.symmetric(horizontal: 5),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5),
+                      BlendMode.srcATop,
                     ),
-                  ],
-                ),
-              ],
+                    child: Image.asset(
+                      "assets/Rectangle 156.png",
+                      height: screenSize(context).height * .3,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/tap.png'),
+                      const SizedBox(width: 10),
+                      Text(
+                        "  بسائق ",
+                        style: const TextStyle(
+                          color: AppColors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
         ],
       ),
     );

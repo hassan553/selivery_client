@@ -3,9 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import '../../../../core/contants/api.dart';
 
-
 import '../../../../core/services/cache_storage_services.dart';
-
 
 class VerifyEmailAddressRepo {
   Future<Either<String, String>> clientVerifyEmailCode(
@@ -18,8 +16,8 @@ class VerifyEmailAddressRepo {
         headers: authHeaders,
       );
       final result = jsonDecode(response.body);
-      CacheStorageServices().setToken(result['token']);
       if (response.statusCode == 200) {
+        CacheStorageServices().setToken(result['token']);
         return Right(result['message']);
       } else {
         return Left(result['message']);

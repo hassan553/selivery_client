@@ -15,7 +15,7 @@ class GetLocationFromUserView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: customAppBarForSearch(context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

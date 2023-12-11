@@ -7,7 +7,7 @@ class PickImage {
   File pickedImage;
     final imagePicker = ImagePicker();
     final _pickedImage =
-        await imagePicker.pickImage(source: ImageSource.gallery);
+        await imagePicker.pickImage(source: ImageSource.gallery,imageQuality: 60);
 
     if (_pickedImage != null) {
       pickedImage = File(_pickedImage.path);

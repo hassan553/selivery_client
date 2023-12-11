@@ -52,10 +52,11 @@ class ClientProfileRepo {
         headers: authHeadersWithToken(CacheStorageServices().token),
       );
       final result = jsonDecode(response.body);
-      print(result['message']);
 
       if (response.statusCode == 200) {
         clientProfileModel = ClientProfileModel.fromJson(result['user']);
+        print(result['message']);
+        print(clientProfileModel.age.toString());
         return Right(clientProfileModel);
       } else {
         return Left(result['message']);
@@ -67,51 +68,23 @@ class ClientProfileRepo {
   }
 
   Future<Either<String, String>> updateClientPassword(
-    String newPassword,
-    String oldPassword,
-  ) async {
+      {required String newPassword, required String oldPassword}) async {
     try {
       final response = await http.patch(
         profileClientUpdatePassword,
         body: jsonEncode(
-            {'oldPassword': oldPassword, 'newPassword': newPassword}),
+            {'newPassword': newPassword, 'oldPassword': oldPassword}),
         headers: authHeadersWithToken(CacheStorageServices().token),
       );
       final res = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        print(res['message']);
         return const Right('لقد تم تغير كلمة السر بنجاح');
       } else {
         print(res['message']);
-
-        return const Left('قم باعادة المحاوله');
+        return Left(res['message']);
       }
     } catch (e) {
       print(e.toString());
-      return Left(e.toString());
-    }
-  }
-
-  Future<Either<String, ClientProfileModel>> updateClientProfileImage() async {
-    try {
-      ClientProfileModel clientProfileModel;
-
-      final response = await http.patch(
-        profileUpdateImageUri,
-        body: jsonEncode({
-          'image': '',
-        }),
-        headers: authHeadersWithToken(CacheStorageServices().token),
-      );
-      final result = jsonDecode(response.body);
-      clientProfileModel = ClientProfileModel.fromJson(result['user']);
-      print('profile body ${clientProfileModel.name}');
-      if (response.statusCode == 200) {
-        return Right(clientProfileModel);
-      } else {
-        return const Left('لقد حدث خطا ');
-      }
-    } catch (e) {
       return Left(e.toString());
     }
   }
@@ -121,10 +94,9 @@ class ClientProfileRepo {
   Future pickClientImage() async {
     try {
       carImage = await PickImage().pickImage();
-      if (carImage != null) {
-        await _uploadClientProfileImage(carImage!).then((value) {
-          getClientProfile();
-        });
+      if (carImage != null) {    
+        await postDataWithFile(carImage!);
+        await getClientProfile();
       }
     } catch (error) {
       print(error.toString());
@@ -155,69 +127,14 @@ class ClientProfileRepo {
 
       var response = await http.Response.fromStream(myrequest);
       Map responsebody = jsonDecode(response.body);
+      print(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("tm");
         print(response.body);
       } else {
+        print('errrrrrrr');
         print(response.body);
       }
-    } catch (error) {
-      print(error.toString());
-    }
-  }
-
-  Future<void> _uploadClientProfileImage(File? image) async {
-    var headers = {
-      'Accept': 'application/json',
-      "Authorization": 'Bearer ${CacheStorageServices().token}',
-      "Content-Type": 'multipart/form-data',
-    };
-
-    try {
-      final formData = FormData.fromMap({
-        'image': await MultipartFile.fromFile(
-          image!.path,
-          filename: 'image.jpg',
-        ),
-      });
-      final response = await Dio().patch(
-        'http://192.168.1.122:8000/user/changePicture',
-        data: formData,
-        options: Options(headers: headers),
-      );
-      if (response.statusCode == 200) {
-        print('Image upload successful');
-      } else {
-        print('Image upload failed with status code: ${response.statusCode}');
-        print(response.data); // You can print the response for debugging
-      }
-    } catch (error) {
-      if (error is DioException) {
-        print(error.message);
-        print('Dio Error:');
-        print(ServerFailure.serverFailure(
-            error)); // You can print the response for debugging
-      } else {
-        print('Error: $error');
-      }
-    }
-  }
-
-  _uploadImage(String title, File file) async {
-    try {
-      var request = http.MultipartRequest('PATCH', profileUpdateImageUri);
-      request.fields["images"] = title;
-      request.files.add(http.MultipartFile.fromBytes(
-        'image',
-        File(file.path).readAsBytesSync(),
-        filename: 'image.jpg',
-      ));
-      request.headers['Authorization'] =
-          'Bearer ${CacheStorageServices().token}';
-      request.headers['Content-Type'] = 'multipart/form-data';
-      var res = await request.send();
-      print('response ${res.toString()}');
-      print('image upload success');
     } catch (error) {
       print(error.toString());
     }
