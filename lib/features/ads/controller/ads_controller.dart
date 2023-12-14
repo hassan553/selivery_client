@@ -51,14 +51,13 @@ class AdsController extends GetxController {
   }
 
   RxString searchText = ''.obs;
-  List get filteredItems {
-    print(searchText.value);
+  List get filteredList {
     if (searchText.value.isEmpty) {
-      return allAdsList;
+      return [];
     } else {
       return allAdsList.where((item) {
         String? name = item.name ?? '';
-        print(name);
+      
         return name.toLowerCase().startsWith(searchText.value.toLowerCase());
       }).toList();
     }
