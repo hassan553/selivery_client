@@ -12,13 +12,10 @@ class ClientAuthRepo {
 
       final response = await http.post(
         clientLogin,
-<<<<<<< HEAD
         body: jsonEncode({'email': email, 'password': password,
           "deviceToken":await FirebaseMessagingService.getDeviceToken()}),
-=======
         body: jsonEncode(
             {'email': email, 'password': password, 'deviceToken': 'sdsdsd'}),
->>>>>>> e75399400b10bf81a5d06800a8e1111972736177
         headers: authHeaders,
       );
       final result = jsonDecode(response.body);
@@ -43,20 +40,17 @@ class ClientAuthRepo {
     try {
       final response = await http.post(
         clientRegister,
-<<<<<<< HEAD
         body: jsonEncode({'email': email, 'password': password,
           'name': name,
           "gender":"male",
           "age":22,
           "deviceToken":await FirebaseMessagingService.getDeviceToken()}),
-=======
         body: jsonEncode({
           'email': email,
           'password': password,
           'name': name,
           'deviceToken': 'sdsdsd'
         }),
->>>>>>> e75399400b10bf81a5d06800a8e1111972736177
         headers: authHeaders,
       );
       final result = jsonDecode(response.body);

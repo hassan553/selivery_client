@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:selivery_client/core/services/cache_storage_services.dart';
@@ -56,8 +55,7 @@ class AdsController extends GetxController {
       return [];
     } else {
       return allAdsList.where((item) {
-        String? name = item.name ?? '';
-      
+        String ? name = item.name ?? '';
         return name.toLowerCase().startsWith(searchText.value.toLowerCase());
       }).toList();
     }

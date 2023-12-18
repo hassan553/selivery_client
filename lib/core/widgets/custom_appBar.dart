@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import '../../features/home/views/mytrips.dart';
 import '../contants/strings.dart';
-=======
->>>>>>> e75399400b10bf81a5d06800a8e1111972736177
 import 'custom_image.dart';
 import 'responsive_text.dart';
 
@@ -89,13 +86,9 @@ PreferredSize customAppBarForSearch(context,
               bottom: 5,
               left: 5,
               child: InkWell(
-<<<<<<< HEAD
                 onTap:(){
                   navigateTo(const MyTrips());
-                },// () =>
-=======
-                onTap: () {}, // () => navigateTo(const OrdersView()),
->>>>>>> e75399400b10bf81a5d06800a8e1111972736177
+                },// () =>// () => navigateTo(const OrdersView()),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
