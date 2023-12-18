@@ -12,8 +12,7 @@ import '../model/ads_model.dart';
 class AdsController extends GetxController {
   var isLoading = false.obs;
   var allAdsDataError = ''.obs;
-  RxList allAdsList = <AdsModel>[].obs;
-
+  RxList<AdsModel> allAdsList = <AdsModel>[].obs;
 
   Future<void> getAllAdsData() async {
     if (await checkInternet()) {
@@ -44,12 +43,23 @@ class AdsController extends GetxController {
         print(e.toString());
         isLoading.value = false;
         allAdsDataError.value = e.toString();
-      } finally {
-        isLoading.value = false;
       }
     } else {
       allAdsDataError.value = 'لا يوجد اتصال بالانترنت';
     }
     print(allAdsList);
+  }
+
+  RxString searchText = ''.obs;
+  List get filteredList {
+    if (searchText.value.isEmpty) {
+      return [];
+    } else {
+      return allAdsList.where((item) {
+        String? name = item.name ?? '';
+      
+        return name.toLowerCase().startsWith(searchText.value.toLowerCase());
+      }).toList();
+    }
   }
 }

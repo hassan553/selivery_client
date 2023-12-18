@@ -9,7 +9,7 @@ final verifyClientEmailCodeUrl = Uri.parse('${authBaseUri}client/verify_email');
 final verifyClientResendEmailCodeUrl =
     Uri.parse('${authBaseUri}resend_verification_code');
 final completeCarInfoUrl = Uri.parse('${baseUri}request');
-final getAllAdsUri = Uri.parse('{$baseUri}dashboard/advertisement');
+final getAllAdsUri = Uri.parse('http://192.168.1.122:8000/advertisement');
 
 final sendNewPasswordUrl = Uri.parse('${baseUri}user/setPassword');
 
@@ -32,9 +32,14 @@ final profileUpdateInfoUriHZ = '{$baseUri}user/updateInfo';
 final profileClientUpdatePassword = Uri.parse('http://192.168.1.5:8000/user/changePassword');
 //categories
 
+<<<<<<< HEAD
 const String categoriesUrL = 'http://192.168.1.5:8000/category';
 String CategoriesList(id) => "http://192.168.1.5:8000/vehicles/sale/category/$id";
 String starttrip(id) => "http://192.168.1.5:8000/trip/$id/start_trip";
+=======
+const String categoriesUrL = '${baseUri}category';
+String CategoriesList(id) => "${baseUri}vehicles/sale/category/$id";
+>>>>>>> e75399400b10bf81a5d06800a8e1111972736177
 //getdata for owner sale car
 String ownerData(id) => "{$baseUri}user/driver/$id";
 

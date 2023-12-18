@@ -132,10 +132,10 @@ class _ClientLoginViewState extends State<ClientLoginView> {
                                 message:
                                     "لقد تم ارسال كود التحقق الي بريدك الاكتروني",
                                 requestStates: RequestStates.success);
-                            // navigateOff(VerifyEmailOTPView(
-                            //   email: email.text,
-                            //   screen: MainView(),
-                            // ));
+                            navigateOff(VerifyEmailOTPView(
+                              email: email.text,
+                              screen: MainView(),
+                            ));
                           } else if (state is ClientLoginError) {
                             showErrorAwesomeDialog(
                                 context, 'تنبيه', state.message);

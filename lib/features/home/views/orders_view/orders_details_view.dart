@@ -13,7 +13,7 @@ class OrdersDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(context),
+      appBar: customAppBarForSearch(context),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -60,8 +60,6 @@ class OrdersDetailsScreen extends StatelessWidget {
                     ]),
               ),
             ),
-          
-          
             const CustomSizedBox(value: .03),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

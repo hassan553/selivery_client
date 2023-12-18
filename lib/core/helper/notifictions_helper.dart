@@ -18,6 +18,7 @@ class FirebaseMessagingService {
   // Get the device token for push notifications
   static Future<String?> getDeviceToken() async {
     try {
+      print(await _firebaseMessaging.getToken());
       return await _firebaseMessaging.getToken();
     } catch (error) {
       return null;
@@ -51,7 +52,7 @@ class FirebaseMessagingService {
   }
 
   // Subscribe to a topic
- static Future<void> subscribeToTopic(String topic) async {
+  static Future<void> subscribeToTopic(String topic) async {
     await _firebaseMessaging.subscribeToTopic(topic);
   }
 

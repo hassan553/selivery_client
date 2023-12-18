@@ -27,177 +27,194 @@ class RentalCarViewWithoutDriver extends StatelessWidget {
     ];
     Get.put(CarWithOutDriverController()..getcarswithoutdriver(id));
     return Scaffold(
-      appBar: customAppBar(context),
-      body: GetBuilder<CarWithOutDriverController>(builder:
-          (controller)=>controller.statusRequest==StatusRequest.loading?
-      Center(child:  CircularProgressIndicator())
-          :Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const CustomSizedBox(value: .03),
-          topPartOrderOrRentalCarWidget(context, images),
-          const CustomSizedBox(value: .02),
-          Expanded(
-            child: Scrollbar(
-              child: ListView.builder(
-                itemBuilder: (context, index) => Container(
-                  width: screenSize(context).width,
-                  height: screenSize(context).height * .5,
-                  margin:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: LayoutBuilder(
-                    builder: (p0, p1) {
-                      return Column(
-                        children: [
-                          Image.network(
-                            "http://192.168.1.10:8000/${controller.carswithoutdriver[index]['car']['images'][0]}",
-                            width: p1.maxWidth * .6,
-                            height: p1.maxHeight * .4,
-                            fit: BoxFit.fill,
+      appBar: customAppBarForSearch(context),
+      body: GetBuilder<CarWithOutDriverController>(
+        builder: (controller) => controller.statusRequest ==
+                StatusRequest.loading
+            ? Center(child: CircularProgressIndicator())
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CustomSizedBox(value: .03),
+                  topPartOrderOrRentalCarWidget(context, images),
+                  const CustomSizedBox(value: .02),
+                  Expanded(
+                    child: Scrollbar(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) => Container(
+                          width: screenSize(context).width,
+                          height: screenSize(context).height * .5,
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(20),
                           ),
-
-                          const Divider(color: AppColors.white),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding:
-                                        const EdgeInsets.only(right: 5),
-                                        child: Column(
-                                          children:  [
-                                            FittedBox(
-                                              child: ResponsiveText(
-                                                scaleFactor: .04,
-                                                text: "نوع السياره ",
-                                                color: AppColors.black,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 3,
-                                            ),
-                                            FittedBox(
-                                              child: ResponsiveText(
-                                                scaleFactor: .04,
-                                                text: " ${controller.carswithoutdriver[index]['car']['type']}",
-                                                color: AppColors.black,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 3,
-                                            ),
-                                            FittedBox(
-                                              child: ResponsiveText(
-                                                scaleFactor: .04,
-                                                text:
-                                                'سعر الإيجار في اليوم : ${controller.carswithoutdriver[index]['price']} جنية',
-                                                color: AppColors.black,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 8),
-                                        child: Column(
+                          child: LayoutBuilder(
+                            builder: (p0, p1) {
+                              return Column(
+                                children: [
+                                  Image.network(
+                                    "http://192.168.1.10:8000/${controller.carswithoutdriver[index]['car']['images'][0]}",
+                                    width: p1.maxWidth * .6,
+                                    height: p1.maxHeight * .4,
+                                    fit: BoxFit.fill,
+                                  ),
+                                  const Divider(color: AppColors.white),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Row(
                                           children: [
-                                            FittedBox(
-                                              child: ResponsiveText(
-                                                scaleFactor: .04,
-                                                text: "المسافة المسموحه ",
-                                                color: AppColors.black,
-                                                fontWeight: FontWeight.bold,
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 5),
+                                                child: Column(
+                                                  children: [
+                                                    FittedBox(
+                                                      child: ResponsiveText(
+                                                        scaleFactor: .04,
+                                                        text: "نوع السياره ",
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    FittedBox(
+                                                      child: ResponsiveText(
+                                                        scaleFactor: .04,
+                                                        text:
+                                                            " ${controller.carswithoutdriver[index]['car']['type']}",
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    FittedBox(
+                                                      child: ResponsiveText(
+                                                        scaleFactor: .04,
+                                                        text:
+                                                            'سعر الإيجار في اليوم : ${controller.carswithoutdriver[index]['price']} جنية',
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                            SizedBox(
-                                              height: 3,
-                                            ),
-                                            FittedBox(
-                                              child: ResponsiveText(
-                                                scaleFactor: .04,
-                                                text: " 150 كيلو ",
-                                                color: AppColors.black,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 3,
-                                            ),
-                                            FittedBox(
-                                              child: ResponsiveText(
-                                                scaleFactor: .04,
-                                                text: 'تاريخ النشر : ${controller.carswithoutdriver[index]['publishDate']}',
-                                                color: AppColors.black,
-                                                fontWeight: FontWeight.bold,
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 8),
+                                                child: Column(
+                                                  children: [
+                                                    FittedBox(
+                                                      child: ResponsiveText(
+                                                        scaleFactor: .04,
+                                                        text:
+                                                            "المسافة المسموحه ",
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    FittedBox(
+                                                      child: ResponsiveText(
+                                                        scaleFactor: .04,
+                                                        text: " 150 كيلو ",
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    FittedBox(
+                                                      child: ResponsiveText(
+                                                        scaleFactor: .04,
+                                                        text:
+                                                            'تاريخ النشر : ${controller.carswithoutdriver[index]['publishDate']}',
+                                                        color: AppColors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                InkWell(
-                                  onTap: () =>
-                                      navigateTo(
-                                              RentalCarOwnerView(
-                                                ownerId:controller.carswithoutdriver[index]['userId'],
-                                                price:controller.carswithoutdriver[index]['price'],
-                                                phone:controller.carswithoutdriver[index]['phone'] ,
-                                                image: controller.carswithoutdriver[index]['car']['images'][0],
-                                                cartype:controller.carswithoutdriver[index]['car']['type'] ,
-                                                date:controller.carswithoutdriver[index]['publishDate'] ,
-                                                desc:controller.carswithoutdriver[index]['car']['description'] , ownername:controller.carswithoutdriver[index]['ownerName']
-                                              )
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        InkWell(
+                                          onTap: () => navigateTo(RentalCarOwnerView(
+                                              ownerId: controller.carswithoutdriver[index]
+                                                  ['userId'],
+                                              price: controller.carswithoutdriver[index]
+                                                  ['price'],
+                                              phone: controller.carswithoutdriver[index]
+                                                  ['phone'],
+                                              image: controller.carswithoutdriver[index]
+                                                  ['car']['images'][0],
+                                              cartype: controller.carswithoutdriver[index]
+                                                  ['car']['type'],
+                                              date: controller.carswithoutdriver[index]
+                                                  ['publishDate'],
+                                              desc: controller.carswithoutdriver[index]
+                                                  ['car']['description'],
+                                              ownername: controller.carswithoutdriver[index]
+                                                  ['ownerName'])),
+                                          child: Container(
+                                            padding: const EdgeInsets.all(7),
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xff014842),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                            child: const ResponsiveText(
+                                              scaleFactor: .04,
+                                              text: 'للطب والاستفار',
+                                              color: AppColors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(7),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xff014842),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: const ResponsiveText(
-                                      scaleFactor: .04,
-                                      text: 'للطب والاستفار',
-                                      color: AppColors.white,
-                                      fontWeight: FontWeight.bold,
+                                        ),
+                                        const SizedBox(
+                                          height: 2,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 2,
-                                ),
-                              ],
-                            ),
+                                ],
+                              );
+                            },
                           ),
-                        ],
-                      );
-                    },
+                        ),
+                        itemCount: controller.carswithoutdriver.length,
+                      ),
+                    ),
                   ),
-                ),
-                itemCount: controller.carswithoutdriver.length,
+                ],
               ),
-            ),
-          ),
-        ],
-      ),),
+      ),
     );
   }
 }

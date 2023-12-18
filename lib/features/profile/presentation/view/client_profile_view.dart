@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:selivery_client/core/contants/api.dart';
 import 'package:selivery_client/features/profile/presentation/widgets/update_profile.dart';
 import '../../../../../core/widgets/custom_loading_widget.dart';
 import '../../../../core/widgets/error_componant.dart';
@@ -50,8 +51,7 @@ class _ClientProfileViewState extends State<ClientProfileView> {
             TopTitleWidget(
               title1: 'عم',
               title2: 'يل',
-              image:
-                  "http://192.168.1.122:8000${clientModel?.image}", //clientModel?.image
+              image: clientModel?.image,
               name: clientModel?.name,
             ),
             const SizedBox(height: 10),

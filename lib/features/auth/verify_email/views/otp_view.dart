@@ -182,6 +182,18 @@ class _NumericKeyboardScreenState extends State<NumericKeyboardScreen> {
                   : TextFormField(
                       controller: controller,
                       autofocus: true,
+                      onFieldSubmitted: (value) {
+                        if (formKey.currentState!.validate()) {
+                          if (controller.text.length == 6) {
+                            OtpCubit.get(context).verifyEmailWithCode(
+                                widget.email, controller.text.trim());
+                          } else {
+                            showErrorAwesomeDialog(context, 'تنبيه',
+                                "كود الدخال يجب ان لا يقل عن 6 احرف");
+                          }
+                        }
+                      },
+                      keyboardType: TextInputType.number,
                       focusNode: FocusScopeNode(canRequestFocus: false),
                       cursorColor: AppColors.white,
                       textAlign: TextAlign.center,
@@ -194,48 +206,48 @@ class _NumericKeyboardScreenState extends State<NumericKeyboardScreen> {
                     ),
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildKeyboardButton('1'),
-                _buildKeyboardButton('2'),
-                _buildKeyboardButton('3'),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildKeyboardButton('4'),
-                _buildKeyboardButton('5'),
-                _buildKeyboardButton('6'),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildKeyboardButton('7'),
-                _buildKeyboardButton('8'),
-                _buildKeyboardButton('9'),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildKeyboardButton('تم', onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    if (controller.text.length == 6) {
-                      OtpCubit.get(context)
-                          .verifyEmailWithCode(widget.email, controller.text);
-                    } else {
-                      showErrorAwesomeDialog(context, 'تنبيه',
-                          "كود الدخال يجب ان لا يقل عن 6 احرف");
-                    }
-                  }
-                }),
-                _buildKeyboardButton('0'),
-                _buildKeyboardButton('حذف', onPressed: _onDeletePressed),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     _buildKeyboardButton('1'),
+            //     _buildKeyboardButton('2'),
+            //     _buildKeyboardButton('3'),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     _buildKeyboardButton('4'),
+            //     _buildKeyboardButton('5'),
+            //     _buildKeyboardButton('6'),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     _buildKeyboardButton('7'),
+            //     _buildKeyboardButton('8'),
+            //     _buildKeyboardButton('9'),
+            //   ],
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     _buildKeyboardButton('تم', onPressed: () {
+            //       if (formKey.currentState!.validate()) {
+            //         if (controller.text.length == 6) {
+            //           OtpCubit.get(context)
+            //               .verifyEmailWithCode(widget.email, controller.text);
+            //         } else {
+            //           showErrorAwesomeDialog(context, 'تنبيه',
+            //               "كود الدخال يجب ان لا يقل عن 6 احرف");
+            //         }
+            //       }
+            //     }),
+            //     _buildKeyboardButton('0'),
+            //     _buildKeyboardButton('حذف', onPressed: _onDeletePressed),
+            //   ],
+            // ),
           ],
         ),
       ),

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import '../../features/home/views/mytrips.dart';
 import '../contants/strings.dart';
+=======
+>>>>>>> e75399400b10bf81a5d06800a8e1111972736177
 import 'custom_image.dart';
 import 'responsive_text.dart';
 
 import '../functions/global_function.dart';
 import '../rescourcs/app_colors.dart';
 
-PreferredSize customAppBar(context) {
+PreferredSize customAppBarForSearch(context,
+    {void Function()? onTap, void Function(String)? onChanged}) {
+  final controller = TextEditingController();
   return PreferredSize(
     preferredSize: const Size.fromHeight(150),
     child: Container(
@@ -26,28 +31,50 @@ PreferredSize customAppBar(context) {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               const SizedBox(height: 50),
-              Container(
-                height: 40,
-                width: screenSize(context).width,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white, width: 2)),
-                child: const TextField(
-                  decoration: InputDecoration(
-                      suffixIcon: Icon(
-                        Icons.search,
-                        color: AppColors.white,
-                        size: 25,
+              Row(
+                children: [
+                  const SizedBox(width: 10),
+                  InkWell(
+                      onTap: () {
+                        controller.clear();
+                        onTap;
+                      },
+                      child: const CircleAvatar(
+                        backgroundColor: AppColors.white,
+                        child: Icon(Icons.clear, color: Colors.red, size: 25),
+                      )),
+                  Expanded(
+                    child: Container(
+                      height: 40,
+                      width: screenSize(context).width,
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: Colors.white, width: 2)),
+                      child: TextFormField(
+                        controller: controller,
+                        onTapOutside: (event) =>
+                            FocusScope.of(context).unfocus(),
+                        onChanged: onChanged,
+                        decoration: const InputDecoration(
+                            suffixIcon: InkWell(
+                              child: Icon(
+                                Icons.search,
+                                color: AppColors.white,
+                                size: 25,
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.only(right: 20),
+                            hintText: 'ابحث',
+                            hintStyle: TextStyle(color: AppColors.white),
+                            enabledBorder: InputBorder.none,
+                            border: InputBorder.none,
+                            disabledBorder: InputBorder.none),
                       ),
-                      contentPadding: EdgeInsets.only(right: 20),
-                      hintText: 'ابحث',
-                      hintStyle: TextStyle(color: AppColors.white),
-                      enabledBorder: InputBorder.none,
-                      border: InputBorder.none,
-                      disabledBorder: InputBorder.none),
-                ),
+                    ),
+                  ),
+                ],
               ),
               Image.asset(
                 'assets/logo.png',
@@ -57,14 +84,18 @@ PreferredSize customAppBar(context) {
             ],
           ),
           Visibility(
-            visible:true,// sharedPreferences.getBool(isDriver) ?? false,
+            visible: true, // sharedPreferences.getBool(isDriver) ?? false,
             child: Positioned(
               bottom: 5,
               left: 5,
               child: InkWell(
+<<<<<<< HEAD
                 onTap:(){
                   navigateTo(const MyTrips());
                 },// () =>
+=======
+                onTap: () {}, // () => navigateTo(const OrdersView()),
+>>>>>>> e75399400b10bf81a5d06800a8e1111972736177
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -101,6 +132,36 @@ PreferredSize customAppBar(context) {
             ),
           ),
         ],
+      ),
+    ),
+  );
+}
+
+PreferredSize customAppBar(context) {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(70),
+    child: SafeArea(
+      child: Container(
+        width: screenSize(context).width,
+        decoration: const BoxDecoration(
+          color: AppColors.primaryColor,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Image.asset(
+                'assets/logo.png',
+                height: 70,
+                fit: BoxFit.fitWidth,
+              ),
+            ],
+          ),
+        ),
       ),
     ),
   );

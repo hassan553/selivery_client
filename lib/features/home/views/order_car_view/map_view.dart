@@ -22,6 +22,7 @@ class MapScreen extends StatelessWidget {
     SetLocationGoToController setLocationGoToController =
     Get.put(SetLocationGoToController());
     return Scaffold(
+<<<<<<< HEAD
       appBar: customAppBar(context),
       body: GetBuilder<SetLocationWithDriverController>(builder:
           (controller)=>
@@ -43,6 +44,45 @@ class MapScreen extends StatelessWidget {
                         onMapCreated: (GoogleMapController mapcontroller) {
                           controllerDriver.completercontroller!.complete(mapcontroller);
                         },
+=======
+      appBar: customAppBarForSearch(context),
+      body: Stack(
+        children: [
+          CustomAssetsImage(
+            path: 'assets/unnamed 1.png',
+            width: screenSize(context).width,
+            height: screenSize(context).height,
+            boxFit: BoxFit.cover,
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              width: screenSize(context).width,
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(.3),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  InkWell(
+                    onTap: () => navigateTo(const DriverOnMapView()),
+                    child: const CircleAvatar(
+                      radius: 30,
+                      backgroundColor: AppColors.white,
+                      child: CircleAvatar(
+                        radius: 27,
+                        backgroundColor: Colors.green,
+                        child: ResponsiveText(
+                          text: 'تنفيذ',
+                          scaleFactor: .05,
+                          color: AppColors.white,
+                        ),
+>>>>>>> e75399400b10bf81a5d06800a8e1111972736177
                       ),
                       (setLocationController.lat != null &&
                           setLocationController.long !=null

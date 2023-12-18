@@ -11,7 +11,7 @@ import '../../ads/views/ads_view.dart';
 import '../../setting/view/setting_view.dart';
 
 class MainView extends StatefulWidget {
-  MainView({super.key});
+  const MainView({super.key});
 
   @override
   State<MainView> createState() => _MainViewState();
@@ -26,7 +26,11 @@ class _MainViewState extends State<MainView> {
     Future(() async {
       await FirebaseMessagingService.initialize();
     });
+<<<<<<< HEAD
     super.initState();
+=======
+    FirebaseMessagingService.getDeviceTok();
+>>>>>>> e75399400b10bf81a5d06800a8e1111972736177
   }
 
   @override
@@ -91,8 +95,8 @@ class _MainViewState extends State<MainView> {
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.notifications),
-        title: ("الاشعارات"),
+        icon: const Icon(Icons.campaign, size: 30),
+        title: ("الاعلانات"),
         activeColorPrimary: AppColors.primaryColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

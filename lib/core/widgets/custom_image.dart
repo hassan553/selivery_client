@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import '../contants/api.dart';
 import '../rescourcs/app_colors.dart';
 
 class CustomAssetsImage extends StatelessWidget {
@@ -39,22 +41,45 @@ class CustomNetworkImage extends StatelessWidget {
     this.height,
     this.boxFit,
   });
+  String checkImage(String? image) {
+    try {
+      if (image == null) {
+        return '';
+      }
+      String i = '${baseUri}images\\$image';
+      print(i);
+      if (i == baseUri) {
+        return '';
+      }
+      return i;
+    } on PlatformException catch (e) {
+      print('e${e.toString()}');
+      return '';
+    } catch (error) {
+      print(error.toString());
+      return '';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    print('image$imagePath');
     return Image.network(
-      imagePath??'',
+      checkImage(imagePath),
+      fit: boxFit,
       loadingBuilder: (BuildContext context, Widget child,
           ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) {
           return child;
         }
-        return CircularProgressIndicator(
-          value: loadingProgress.expectedTotalBytes != null
-              ? loadingProgress.cumulativeBytesLoaded /
-                  loadingProgress.expectedTotalBytes!
-              : null,
-          color: AppColors.primaryColor,
+        return Center(
+          child: CircularProgressIndicator(
+            value: loadingProgress.expectedTotalBytes != null
+                ? loadingProgress.cumulativeBytesLoaded /
+                    loadingProgress.expectedTotalBytes!
+                : null,
+            color: AppColors.primaryColor,
+          ),
         );
       },
       errorBuilder:
