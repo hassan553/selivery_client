@@ -23,10 +23,10 @@ class _MainViewState extends State<MainView> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     Future(() async {
       await FirebaseMessagingService.initialize();
     });
+    super.initState();
   }
 
   @override

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:selivery_client/features/home/views/order_car_view/googlemapforlaunch.dart';
+import 'package:selivery_client/features/home/views/order_car_view/googlemapgoto.dart';
 import '../../../../core/functions/global_function.dart';
 import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_appBar.dart';
@@ -40,13 +42,11 @@ class ToSetLocation extends StatelessWidget {
                 color: const Color(0xffD9D9D9),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const TextField(
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(right: 8),
-                  hintText: 'أدخل موقع الإقلال',
-                  border: InputBorder.none,
-                ),
-              ),
+              child: InkWell(
+                  onTap: (){
+                    navigateTo(const SetLaunchLocation());
+                  },
+                  child: Text("حدد موقع الاقلاع")),
             ),
             const CustomSizedBox(value: .02),
             Container(
@@ -56,13 +56,11 @@ class ToSetLocation extends StatelessWidget {
                 color: const Color(0xffD9D9D9),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const TextField(
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(right: 8),
-                  hintText: 'إلي أين ؟',
-                  border: InputBorder.none,
-                ),
-              ),
+              child: InkWell(
+                  onTap: (){
+                    navigateTo(const SetLaunchLocationGoTo());
+                  },
+                  child: Text("حدد موقع الذهاب")),
             ),
             const CustomSizedBox(value: .02),
             Container(
@@ -128,7 +126,7 @@ class ToSetLocation extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           color: const Color(0xffD9D9D9)),
                       child: const ResponsiveText(
-                        text: 'حدد الموقع علي الخريطة',
+                        text: 'اختار السائق الاقرب لك',
                         scaleFactor: .05,
                       ),
                     ),

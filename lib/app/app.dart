@@ -15,7 +15,7 @@ class SeliveryClient extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: MyBinding(),
-      title: 'Selivery ',
+      title: 'Selivery',
       theme: appTheme(),
       textDirection: TextDirection.rtl,
       home:MainView(),

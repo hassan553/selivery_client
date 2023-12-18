@@ -19,6 +19,7 @@ class VerifyEmailAddressRepo {
       );
       final result = jsonDecode(response.body);
       CacheStorageServices().setToken(result['token']);
+      CacheStorageServices().setId(result['user']['_id']);
       if (response.statusCode == 200) {
         return Right(result['message']);
       } else {
