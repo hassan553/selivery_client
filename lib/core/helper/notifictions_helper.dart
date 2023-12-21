@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class FirebaseMessagingService {
@@ -13,7 +16,7 @@ class FirebaseMessagingService {
   }
 
   // Get the device token for push notifications
-  static Future<String?> getDeviceTok() async {
+  static Future<String?> getDeviceToken() async {
     try {
       print(await _firebaseMessaging.getToken());
       return await _firebaseMessaging.getToken();
@@ -31,6 +34,7 @@ class FirebaseMessagingService {
         // Extract notification details
         final title = notification.title ?? '';
         final body = notification.body ?? '';
+        Get.snackbar("$title","$body");
         print(title);
         print(body);
       }
@@ -67,6 +71,7 @@ class FirebaseMessagingService {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) {
       if (message != null) {
         _handleNotification(message);
+
       }
     });
   }

@@ -20,8 +20,9 @@ class Crud {
     try {
       if (await checkInternet()) {
         var response = await http.post(Uri.parse(linkurl),
-            body: data,
-            headers: authHeadersWithTokenIm(CacheStorageServices().token));
+            body: jsonEncode(data),
+            headers: authHeadersWithToken(CacheStorageServices().token));
+           print(response.body);
         if (response.statusCode == 200 || response.statusCode == 201) {
           print(response.statusCode);
           print(response.body);
@@ -46,9 +47,12 @@ class Crud {
       if (await checkInternet()) {
         var response = await http.get(Uri.parse(linkurl),
             headers: authHeadersWithToken(CacheStorageServices().token));
+        print(response.statusCode);
+        print(response.body);
         if (response.statusCode == 200 || response.statusCode == 201) {
           // Map reponseBody = jsonDecode(response.body);
           print("responsennnn ${response.body}");
+          print("responsennnn ${response.statusCode}");
           return Right(jsonDecode(response.body));
         } else {
           return const Left(StatusRequest.serverFailure);

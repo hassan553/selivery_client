@@ -1,6 +1,6 @@
-const baseUri = 'http://192.168.1.122:8000/';
+const baseUri = 'http://192.168.1.5:8000/';
 const authBaseUri = '${baseUri}auth/';
-final clientLogin = Uri.parse('${authBaseUri}login/client');
+final clientLogin = Uri.parse('http://192.168.1.5:8000/auth/login/client');
 final clientRegister = Uri.parse('${authBaseUri}signup/client');
 final driverLogin = Uri.parse('${authBaseUri}login/driver');
 final driverRegister = Uri.parse('${authBaseUri}signup/driver');
@@ -27,13 +27,19 @@ final driverGoogleSignIn = Uri.parse('${authBaseUri}google/driver');
 ///////profile uri
 const profileUri = '${baseUri}user/profile';
 final profileUpdateImageUri = Uri.parse('{$baseUri}user/changePicture');
-final profileUpdateInfoUri = Uri.parse('http://192.168.1.122:8000/user/updateInfo');
+final profileUpdateInfoUri = Uri.parse('http://192.168.1.5:8000/user/updateInfo');
 final profileUpdateInfoUriHZ = '{$baseUri}user/updateInfo';
-final profileClientUpdatePassword = Uri.parse('http://192.168.1.122:8000/user/changePassword');
+final profileClientUpdatePassword = Uri.parse('http://192.168.1.5:8000/user/changePassword');
 //categories
 
+<<<<<<< HEAD
+const String categoriesUrL = 'http://192.168.1.5:8000/category';
+String CategoriesList(id) => "http://192.168.1.5:8000/vehicles/sale/category/$id";
+String starttrip(id) => "http://192.168.1.5:8000/trip/$id/start_trip";
+=======
 const String categoriesUrL = '${baseUri}category';
 String CategoriesList(id) => "${baseUri}vehicles/sale/category/$id";
+>>>>>>> e75399400b10bf81a5d06800a8e1111972736177
 //getdata for owner sale car
 String ownerData(id) => "{$baseUri}user/driver/$id";
 
@@ -44,7 +50,18 @@ String carsWithDriver(id) => "{$baseUri}vehicles/rent/with_driver/category/$id";
 String carsWithoutDriver(id) =>
     "{$baseUri}vehicles/rent/without_driver/category/$id";
 
-const String addCarForSale = "{$baseUri}vehicles/sale";
+const String addCarForSale = "http://192.168.1.5:8000/vehicles/sale";
+
+//rating
+ String rating(tripid) => "http://192.168.1.5:8000/trip/$tripid/rate";
+
+//getdrivers
+String getdrivers(lat,long) =>"http://192.168.1.5:8000/trip/nearest_drivers?latitude=$lat&longitude=$long";
+const String requestDriver = "${baseUri}trip/request";
+const String getMyTrips = "http://192.168.1.5:8000/user/client/trips";
+
+//driver
+String getdriverProfile(id)=>"http://192.168.1.5:8000/user/driver/$id";
 /////////
 final authHeaders = {
   'Keep-Alive': 'timeout=5',
@@ -60,7 +77,7 @@ authHeadersWithToken(String token) => {
       'Connection': 'keep-alive',
       'Date': 'Fri, 18 Aug 2023 21:32:41 GMT',
       'ETag': 'W/"260-WWE610PoFt4+PMlb4uXuYqzj+4w"',
-      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Type': 'application/json',
       'X-Powered-By': 'Express',
       'Access-Control-Allow-Origin': '*',
       'AUTHORIZATION': 'Bearer $token',

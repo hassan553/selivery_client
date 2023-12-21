@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../features/home/views/mytrips.dart';
+import '../contants/strings.dart';
 import 'custom_image.dart';
 import 'responsive_text.dart';
 
@@ -84,12 +86,14 @@ PreferredSize customAppBarForSearch(context,
               bottom: 5,
               left: 5,
               child: InkWell(
-                onTap: () {}, // () => navigateTo(const OrdersView()),
+                onTap:(){
+                  navigateTo(const MyTrips());
+                },// () =>// () => navigateTo(const OrdersView()),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const ResponsiveText(
-                      text: 'الطلبات',
+                      text: 'الرحلات',
                       scaleFactor: .03,
                       color: AppColors.white,
                     ),

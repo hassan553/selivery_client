@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'advises.dart';
 import 'rental_sale_car_view/order_car_view.dart';
 import '../../../core/rescourcs/app_colors.dart';
 import '../../../core/widgets/custom_appBar.dart';
@@ -31,7 +32,7 @@ class _HomeViewState extends State<HomeView> {
             imagePath: 'assets/orderCar.png',
             title: 'طلب مركبة',
             isRental: false,
-            screen: GetLocationFromUserView(),
+            screen:AdvisesScreen(),
           ),
           CategoryItem(
             imagePath: 'assets/rentalCar.png',

@@ -53,30 +53,30 @@ class GetLocationFromUserView extends StatelessWidget {
             ),
           ),
           const CustomSizedBox(value: .02),
-          InkWell(
-            onTap: () => navigateTo(const ConnectWithDriverView()),
-            child: Container(
-              width: screenSize(context).width,
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                color: const Color(0xff0F534D),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomAssetsImage(path: 'assets/Here.png'),
-                  const SizedBox(width: 4),
-                  const ResponsiveText(
-                    text: 'التواصل مع السائق مباشرة',
-                    scaleFactor: .05,
-                    color: AppColors.white,
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // InkWell(
+          //   onTap: () => navigateTo(const ConnectWithDriverView()),
+          //   child: Container(
+          //     width: screenSize(context).width,
+          //     padding: const EdgeInsets.symmetric(vertical: 30),
+          //     margin: const EdgeInsets.symmetric(horizontal: 10),
+          //     decoration: BoxDecoration(
+          //       color: const Color(0xff0F534D),
+          //       borderRadius: BorderRadius.circular(10),
+          //     ),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         CustomAssetsImage(path: 'assets/Here.png'),
+          //         const SizedBox(width: 4),
+          //         const ResponsiveText(
+          //           text: 'التواصل مع السائق مباشرة',
+          //           scaleFactor: .05,
+          //           color: AppColors.white,
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
