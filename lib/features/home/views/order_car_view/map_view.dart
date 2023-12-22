@@ -3,10 +3,13 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:selivery_client/core/functions/global_function.dart';
 import 'package:selivery_client/features/home/views/driverprofile.dart';
+import 'package:selivery_client/features/home/views/order_car_view/driver_on_map_view.dart';
 import '../../../../controllers/setlocation.dart';
 import '../../../../controllers/setlocationgoto.dart';
 import '../../../../controllers/setlocationwithdriver.dart';
+import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_appBar.dart';
+import '../../../../core/widgets/custom_image.dart';
 import '../../../../core/widgets/responsive_text.dart';
 
 class MapScreen extends StatelessWidget {
@@ -22,29 +25,6 @@ class MapScreen extends StatelessWidget {
     SetLocationGoToController setLocationGoToController =
     Get.put(SetLocationGoToController());
     return Scaffold(
-<<<<<<< HEAD
-      appBar: customAppBar(context),
-      body: GetBuilder<SetLocationWithDriverController>(builder:
-          (controller)=>
-          Container(
-            child: Column(
-              children: [
-                if(controllerDriver.kGooglePlex!=null)
-                  Expanded(child:
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      GoogleMap(
-                        markers: controllerDriver.markers.toSet(),
-                        onTap: (latlong){
-                          controllerDriver.addMarkers(latlong);
-                        },
-                        mapType: MapType.normal,
-                        initialCameraPosition: controllerDriver.kGooglePlex!,
-                        onMapCreated: (GoogleMapController mapcontroller) {
-                          controllerDriver.completercontroller!.complete(mapcontroller);
-                        },
-=======
       appBar: customAppBarForSearch(context),
       body: Stack(
         children: [
@@ -82,7 +62,6 @@ class MapScreen extends StatelessWidget {
                           scaleFactor: .05,
                           color: AppColors.white,
                         ),
->>>>>>> e75399400b10bf81a5d06800a8e1111972736177
                       ),
                       (setLocationController.lat != null &&
                           setLocationController.long !=null
@@ -113,7 +92,7 @@ class MapScreen extends StatelessWidget {
                   ),),
               ],
             ),
-          )),
+          )),)
     );
   }
 }

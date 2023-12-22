@@ -26,11 +26,7 @@ class _MainViewState extends State<MainView> {
     Future(() async {
       await FirebaseMessagingService.initialize();
     });
-<<<<<<< HEAD
-    super.initState();
-=======
-    FirebaseMessagingService.getDeviceTok();
->>>>>>> e75399400b10bf81a5d06800a8e1111972736177
+    FirebaseMessagingService.getDeviceToken();
   }
 
   @override
