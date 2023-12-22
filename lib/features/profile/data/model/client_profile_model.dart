@@ -11,6 +11,7 @@ class ClientProfileModel {
   String? role;
   bool? available;
   int? iV;
+  String? googleId;
 
   ClientProfileModel(
       {this.sId,
@@ -24,7 +25,8 @@ class ClientProfileModel {
       this.phone,
       this.gander,
       this.age,
-      this.iV});
+      this.iV,
+      this.googleId});
 
   ClientProfileModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -36,9 +38,10 @@ class ClientProfileModel {
     role = json['role'];
     phone = json['phone'];
     gander = json['gender'];
-    age = json['age']??0;
+    age = json['age'] ?? 0;
     available = json['available'];
     iV = json['__v'];
+    googleId = json['googleId'];
   }
 
   Map<String, dynamic> toJson() {

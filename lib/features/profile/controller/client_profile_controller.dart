@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:selivery_client/core/functions/checkinternet.dart';
 import 'package:selivery_client/core/widgets/snack_bar_widget.dart';
 
+import '../../../core/services/cache_storage_services.dart';
 import '../data/model/client_profile_model.dart';
 import '../data/repository/client_profile_repo.dart';
 
@@ -18,6 +19,7 @@ class ClientProfileController extends GetxController {
   String errorMessage = '';
   ClientProfileModel? clientProfileModel;
   void getClientProfile() async {
+    print("this token ${CacheStorageServices().token}");
     if (await checkInternet()) {
       isLoading = true;
       update();
@@ -107,7 +109,7 @@ class ClientProfileController extends GetxController {
         update();
         await clientProfileRepo.pickClientImage();
         changeImageLoding = false;
-         showSnackBarWidget(
+        showSnackBarWidget(
             context: context,
             message: 'تم التغير بنجاح',
             requestStates: RequestStates.success);

@@ -4,6 +4,7 @@ import 'package:selivery_client/core/contants/api.dart';
 import 'package:selivery_client/features/profile/presentation/widgets/update_profile.dart';
 import '../../../../../core/widgets/custom_loading_widget.dart';
 import '../../../../core/widgets/error_componant.dart';
+import '../../../setting/controller/setting_controller.dart';
 import '../../controller/client_profile_controller.dart';
 import '../../../../../core/functions/global_function.dart';
 import '../../../../../core/widgets/custom_sized_box.dart';
@@ -21,7 +22,8 @@ class ClientProfileView extends StatefulWidget {
 }
 
 class _ClientProfileViewState extends State<ClientProfileView> {
-  final controller = Get.put(ClientProfileController());
+  final settingController = Get.put(ClientProfileController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

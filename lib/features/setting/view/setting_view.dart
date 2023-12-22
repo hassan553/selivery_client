@@ -32,15 +32,8 @@ class _SettingViewState extends State<SettingView> {
             const CustomSizedBox(value: .03),
             notificationWidget(),
             const CustomSizedBox(value: .03),
-            //ringtoneWidget(),
-            // const CustomSizedBox(value: .03),
-            // settingWidget('assets/Settings.png', 'إعدادت الحساب والخصوصية '),
-            // const CustomSizedBox(value: .03),
-            //connect with us .i use same setting widget
             settingWidget('assets/Man On Phone.png', ' تواصل معنا'),
             const CustomSizedBox(value: .03),
-            //  socialAccountWidget(context),
-            //const CustomSizedBox(value: .03),
             logoutWidget(context),
           ],
         ),
@@ -93,7 +86,9 @@ class _SettingViewState extends State<SettingView> {
 
   Widget logoutWidget(BuildContext context) {
     return InkWell(
-      onTap: ()=>controller.logout(),
+      onTap: ()async {
+       await controller.logout();
+      },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

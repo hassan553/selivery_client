@@ -42,8 +42,8 @@ class _SearchAdsViewState extends State<SearchAdsView> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: CustomTextFieldWidget(
-                      autofocus: true,
-                      onchange: (p0) {
+                      autoFocus: true,
+                      onChange: (p0) {
                         controller.searchText.value = p0;
                       },
                       controller: searchController,

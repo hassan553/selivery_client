@@ -194,7 +194,6 @@ class _NumericKeyboardScreenState extends State<NumericKeyboardScreen> {
                         }
                       },
                       keyboardType: TextInputType.number,
-                      focusNode: FocusScopeNode(canRequestFocus: false),
                       cursorColor: AppColors.white,
                       textAlign: TextAlign.center,
                       decoration: const InputDecoration(

@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import '../../../core/contants/strings.dart';
+import 'package:selivery_client/features/profile/controller/client_profile_controller.dart';
+import 'package:selivery_client/features/setting/controller/setting_controller.dart';
 import '../../../core/helper/notifictions_helper.dart';
-import '../../../main.dart';
 import '../../../core/rescourcs/app_colors.dart';
 import '../../profile/presentation/view/client_profile_view.dart';
 import 'home_view.dart';
 import '../../ads/views/ads_view.dart';
 import '../../setting/view/setting_view.dart';
+import 'package:get/get.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});

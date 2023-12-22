@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/functions/checkinternet.dart';
 
 import '../../data/data_source/client_auth_repo.dart';
+import '../../data/data_source/social_auth.dart';
 
 part 'client_register_state.dart';
 
@@ -29,4 +30,19 @@ class ClientRegisterCubit extends Cubit<ClientRegisterState> {
       emit(const ClientRegisterError("لا يوجد اتصال بالانترنت"));
     }
   }
+  
+  void registerWithGoogle() async {
+    if (await checkInternet()) {
+      emit(ClientGoogleRegisterLoading());
+      final result = await handleSignInWithGoogle();
+      result.fold((l) {
+        emit(ClientGoogleRegisterError(l));
+      }, (r) {
+        emit(ClientGoogleRegisterSuccess());
+      });
+    } else {
+      emit(const ClientGoogleRegisterError("لا يوجد اتصال بالانترنت"));
+    }
+  }
+
 }

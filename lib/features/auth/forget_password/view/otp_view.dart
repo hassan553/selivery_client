@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:selivery_client/core/widgets/custom_button.dart';
 import 'package:selivery_client/features/auth/cubit/forget_password/forget_password_cubit.dart';
 import '../../../../../../core/rescourcs/app_colors.dart';
 import '../../../../../../core/widgets/custom_image.dart';
@@ -40,7 +41,7 @@ class _OTPViewState extends State<OTPView> {
         if (_resendCooldown > 0) {
           _resendCooldown--;
         } else {
-          _isResendEnabled = false;
+          _isResendEnabled = true;
           _resendCooldownTimer?.cancel();
         }
       });
@@ -162,117 +163,150 @@ class _NumericKeyboardScreenState extends State<NumericKeyboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Form(
-        key: formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
-              listener: (context, state) {
-                if (state is ForgetPasswordOTPSuccessState) {
-                  navigateOff(widget.screen);
-                }
-                if (state is ForgetPasswordOTPErrorState) {
-                  showErrorAwesomeDialog(context, 'تنبيه', state.message);
-                }
-              },
-              builder: (context, state) => state
-                      is ForgetPasswordOTPCodeLoadingState
-                  ? const CustomLoadingWidget()
-                  : TextFormField(
-                      controller: controller,
-                      keyboardType: TextInputType.number,
-                      autofocus: true,
-                      onFieldSubmitted: (value) {
-                       if (formKey.currentState!.validate()) {
-                    if (controller.text.length == 6) {
-                      int intValue = int.parse(controller.text);
-                      ForgetPasswordCubit.get(context)
-                          .verifyEmailWithCode(widget.email, intValue);
-                    } else {
-                      showSnackBarWidget(
-                          context: context,
-                          message: "كود الدخال يجب ان لا يقل عن 6 احرف",
-                          requestStates: RequestStates.error);
+      child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  controller: controller,
+                  keyboardType: TextInputType.number,
+                  autofocus: true,
+                  onFieldSubmitted: (value) {
+                    if (formKey.currentState!.validate()) {
+                      if (controller.text.length == 6) {
+                        int intValue = int.parse(controller.text);
+                        ForgetPasswordCubit.get(context)
+                            .verifyEmailWithCode(widget.email, intValue);
+                      }
+                      if (controller.text.length > 6) {
+                        showSnackBarWidget(
+                            context: context,
+                            message: "كود الدخال يجب ان لا يزيد عن 6 احرف",
+                            requestStates: RequestStates.error);
+                      } else {
+                        showSnackBarWidget(
+                            context: context,
+                            message: "كود الدخال يجب ان لا يقل عن 6 احرف",
+                            requestStates: RequestStates.error);
+                      }
                     }
-                  }
-                      },
-                      focusNode: FocusScopeNode(canRequestFocus: false),
-                      cursorColor: AppColors.white,
-                      textAlign: TextAlign.center,
-                      decoration: const InputDecoration(
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.white)),
-                        border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: AppColors.white)),
-                      ),
-                    ),
+                  },
+                  cursorColor: AppColors.white,
+                  textAlign: TextAlign.center,
+                  decoration: const InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.white)),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.white)),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
+                  listener: (context, state) {
+                    if (state is ForgetPasswordSuccessState) {
+                      navigateOff(widget.screen);
+                    }
+                    if (state is ForgetPasswordOTPErrorState) {
+                      showErrorAwesomeDialog(context, 'تنبيه', state.message);
+                    }
+                  },
+                  builder: (context, state) {
+                    return AnimatedCrossFade(
+                        firstChild: CustomButton(
+                            function: () {
+                              if (formKey.currentState!.validate()) {
+                                if (controller.text.length == 6) {
+                                  int intValue = int.parse(controller.text);
+                                  ForgetPasswordCubit.get(context)
+                                      .verifyEmailWithCode(
+                                          widget.email, intValue);
+                                } else {
+                                  showSnackBarWidget(
+                                      context: context,
+                                      message:
+                                          "كود الدخال يجب ان لا يقل عن 6 احرف",
+                                      requestStates: RequestStates.error);
+                                }
+                              }
+                            },
+                            title: 'تاكيد',
+                            color: AppColors.primaryColor),
+                        secondChild: const CustomLoadingWidget(),
+                        crossFadeState:
+                            state is ForgetPasswordOTPCodeLoadingState
+                                ? CrossFadeState.showSecond
+                                : CrossFadeState.showFirst,
+                        duration: const Duration(milliseconds: 500));
+                  },
+                )
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     _buildKeyboardButton('1'),
+                //     _buildKeyboardButton('2'),
+                //     _buildKeyboardButton('3'),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     _buildKeyboardButton('4'),
+                //     _buildKeyboardButton('5'),
+                //     _buildKeyboardButton('6'),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     _buildKeyboardButton('7'),
+                //     _buildKeyboardButton('8'),
+                //     _buildKeyboardButton('9'),
+                //   ],
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     _buildKeyboardButton('تم', onPressed: () {
+                //       if (formKey.currentState!.validate()) {
+                //         if (controller.text.length == 6) {
+                //           int intValue = int.parse(controller.text);
+                //           ForgetPasswordCubit.get(context)
+                //               .verifyEmailWithCode(widget.email, intValue);
+                //         } else {
+                //           showSnackBarWidget(
+                //               context: context,
+                //               message: "كود الدخال يجب ان لا يقل عن 6 احرف",
+                //               requestStates: RequestStates.error);
+                //         }
+                //       }
+                //     }),
+                //     _buildKeyboardButton('0'),
+                //     _buildKeyboardButton('حذف', onPressed: _onDeletePressed),
+                //   ],
+                // ),
+              ],
             ),
-            const SizedBox(height: 20),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _buildKeyboardButton('1'),
-            //     _buildKeyboardButton('2'),
-            //     _buildKeyboardButton('3'),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _buildKeyboardButton('4'),
-            //     _buildKeyboardButton('5'),
-            //     _buildKeyboardButton('6'),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _buildKeyboardButton('7'),
-            //     _buildKeyboardButton('8'),
-            //     _buildKeyboardButton('9'),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _buildKeyboardButton('تم', onPressed: () {
-            //       if (formKey.currentState!.validate()) {
-            //         if (controller.text.length == 6) {
-            //           int intValue = int.parse(controller.text);
-            //           ForgetPasswordCubit.get(context)
-            //               .verifyEmailWithCode(widget.email, intValue);
-            //         } else {
-            //           showSnackBarWidget(
-            //               context: context,
-            //               message: "كود الدخال يجب ان لا يقل عن 6 احرف",
-            //               requestStates: RequestStates.error);
-            //         }
-            //       }
-            //     }),
-            //     _buildKeyboardButton('0'),
-            //     _buildKeyboardButton('حذف', onPressed: _onDeletePressed),
-            //   ],
-            // ),
-          ],
-        ),
-      ),
+          )),
     );
   }
 
-  Widget _buildKeyboardButton(String label, {VoidCallback? onPressed}) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-        ),
-        onPressed: onPressed ?? () => _onKeyPressed(label),
-        child: Text(
-          label,
-          style: const TextStyle(color: AppColors.black),
-        ),
-      ),
-    );
-  }
+  // Widget _buildKeyboardButton(String label, {VoidCallback? onPressed}) {
+  //   return Padding(
+  //     padding: const EdgeInsets.all(8.0),
+  //     child: ElevatedButton(
+  //       style: ElevatedButton.styleFrom(
+  //         backgroundColor: Colors.white,
+  //       ),
+  //       onPressed: onPressed ?? () => _onKeyPressed(label),
+  //       child: Text(
+  //         label,
+  //         style: const TextStyle(color: AppColors.black),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

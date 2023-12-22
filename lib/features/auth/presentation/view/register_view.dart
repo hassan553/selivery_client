@@ -11,11 +11,11 @@ import '../../../../../core/widgets/custom_image.dart';
 import '../../../../../core/widgets/custom_text_filed.dart';
 import '../../../../../core/widgets/snack_bar_widget.dart';
 
-
 import '../../../../../core/widgets/build_rich_text.dart';
 
 import '../../data/data_source/client_auth_repo.dart';
 import '../../verify_email/views/otp_view.dart';
+import '../widgets/google_sigin_widgets.dart';
 
 class ClientRegisterView extends StatefulWidget {
   const ClientRegisterView({super.key});
@@ -126,11 +126,10 @@ class _ClientRegisterViewState extends State<ClientRegisterView> {
                               requestStates: RequestStates.success);
                           navigateOff(VerifyEmailOTPView(
                             email: email.text,
-                            screen: MainView(),
+                            screen: const MainView(),
                           ));
                         } else if (state is ClientRegisterError) {
-                          
-                        showErrorAwesomeDialog(
+                          showErrorAwesomeDialog(
                               context, 'تنبيه', state.message);
                         }
                       }, builder: (context, state) {
@@ -152,6 +151,29 @@ class _ClientRegisterViewState extends State<ClientRegisterView> {
                             title: 'ان شاء حساب');
                       }),
                       SizedBox(height: screenSize(context).height * .03),
+                      BlocConsumer<ClientRegisterCubit, ClientRegisterState>(
+                        listener: (context, state) {
+                          if (state is ClientGoogleRegisterSuccess) {
+                            showSnackBarWidget(
+                                context: context,
+                                message: 'تم تسجيل الدخوال بنجاح',
+                                requestStates: RequestStates.success);
+                            navigateOff(const MainView());
+                          } else if (state is ClientGoogleRegisterError) {
+                            print(state.message);
+                            showErrorAwesomeDialog(
+                                context, 'تنبيه', state.message);
+                          }
+                        },
+                        builder: (context, state) {
+                          return state is ClientGoogleRegisterLoading
+                              ? const CustomLoadingWidget()
+                              : GoogleSignWidget(onTap: () {
+                                  BlocProvider.of<ClientRegisterCubit>(context)
+                                      .registerWithGoogle();
+                                });
+                        },
+                      ),
                     ],
                   ),
                 ),

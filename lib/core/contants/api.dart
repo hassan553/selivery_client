@@ -1,6 +1,8 @@
 const baseUri = 'http://192.168.1.122:8000/';
 const authBaseUri = '${baseUri}auth/';
 final clientLogin = Uri.parse('${authBaseUri}login/client');
+final clientLoginWithGoogle = Uri.parse('${authBaseUri}google/client');
+final clientLoginWithFacebook = Uri.parse('${authBaseUri}facebook/client');
 final clientRegister = Uri.parse('${authBaseUri}signup/client');
 final driverLogin = Uri.parse('${authBaseUri}login/driver');
 final driverRegister = Uri.parse('${authBaseUri}signup/driver');
@@ -9,7 +11,7 @@ final verifyClientEmailCodeUrl = Uri.parse('${authBaseUri}client/verify_email');
 final verifyClientResendEmailCodeUrl =
     Uri.parse('${authBaseUri}resend_verification_code');
 final completeCarInfoUrl = Uri.parse('${baseUri}request');
-final getAllAdsUri = Uri.parse('http://192.168.1.122:8000/advertisement');
+final getAllAdsUri = Uri.parse('${baseUri}advertisement');
 
 final sendNewPasswordUrl = Uri.parse('${baseUri}user/setPassword');
 
@@ -23,28 +25,27 @@ final verifyDriverForgetPasswordCodeUrl =
 
 //google sign in
 final clientGoogleSignIn = Uri.parse('${authBaseUri}google/client');
-final driverGoogleSignIn = Uri.parse('${authBaseUri}google/driver');
 ///////profile uri
 const profileUri = '${baseUri}user/profile';
-final profileUpdateImageUri = Uri.parse('{$baseUri}user/changePicture');
-final profileUpdateInfoUri = Uri.parse('http://192.168.1.122:8000/user/updateInfo');
-final profileUpdateInfoUriHZ = '{$baseUri}user/updateInfo';
-final profileClientUpdatePassword = Uri.parse('http://192.168.1.122:8000/user/changePassword');
+final profileUpdateImageUri = Uri.parse('${baseUri}user/changePicture');
+final profileUpdateInfoUri = Uri.parse('${baseUri}user/updateInfo');
+final profileUpdateInfoUriHZ = '${baseUri}user/updateInfo';
+final profileClientUpdatePassword = Uri.parse('${baseUri}user/changePassword');
 //categories
 
 const String categoriesUrL = '${baseUri}category';
 String CategoriesList(id) => "${baseUri}vehicles/sale/category/$id";
 //getdata for owner sale car
-String ownerData(id) => "{$baseUri}user/driver/$id";
+String ownerData(id) => "${baseUri}user/driver/$id";
 
 // add rent car
-const String rentcar = '{$baseUri}vehicles/rent';
+const String rentcar = '${baseUri}vehicles/rent';
 
-String carsWithDriver(id) => "{$baseUri}vehicles/rent/with_driver/category/$id";
+String carsWithDriver(id) => "${baseUri}vehicles/rent/with_driver/category/$id";
 String carsWithoutDriver(id) =>
-    "{$baseUri}vehicles/rent/without_driver/category/$id";
+    "${baseUri}vehicles/rent/without_driver/category/$id";
 
-const String addCarForSale = "{$baseUri}vehicles/sale";
+const String addCarForSale = "${baseUri}vehicles/sale";
 /////////
 final authHeaders = {
   'Keep-Alive': 'timeout=5',

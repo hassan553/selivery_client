@@ -9,9 +9,9 @@ class CustomTextFieldWidget extends StatelessWidget {
   final bool obscure;
   final FocusNode? focusNode;
   final Widget? suffixIcon;
-  final Function(dynamic p0)? onchange;
+  final Function(dynamic p0)? onChange;
   final void Function(String)? submit;
-  final bool? autofocus;
+  final bool? autoFocus;
   final Color? borderColor;
   const CustomTextFieldWidget({
     super.key,
@@ -24,8 +24,8 @@ class CustomTextFieldWidget extends StatelessWidget {
     this.valid,
     this.submit,
     this.suffixIcon,
-    this.onchange,
-    this.autofocus,
+    this.onChange,
+    this.autoFocus,
     this.borderColor,
   });
 
@@ -36,8 +36,8 @@ class CustomTextFieldWidget extends StatelessWidget {
       validator: valid,
       focusNode: focusNode,
       onFieldSubmitted: submit,
-      autofocus: autofocus ?? false,
-      onChanged: onchange,
+      autofocus: autoFocus ?? false,
+      onChanged: onChange,
       controller: controller,
       cursorColor: Colors.white,
       style: const TextStyle(color: Colors.black),
