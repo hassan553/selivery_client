@@ -23,3 +23,12 @@ class ClientRegisterError extends ClientRegisterState {
 
   const ClientRegisterError(this.message);
 }
+class ClientGoogleRegisterLoading extends ClientRegisterState {}
+
+class ClientGoogleRegisterSuccess extends ClientRegisterState {}
+
+class ClientGoogleRegisterError extends ClientRegisterState {
+  final String message;
+
+  const ClientGoogleRegisterError(this.message);
+}

@@ -14,8 +14,7 @@ class ClientAuthRepo {
         clientLogin,
         body: jsonEncode({'email': email, 'password': password,
           "deviceToken":await FirebaseMessagingService.getDeviceToken()}),
-        body: jsonEncode(
-            {'email': email, 'password': password, 'deviceToken': 'sdsdsd'}),
+      
         headers: authHeaders,
       );
       final result = jsonDecode(response.body);
@@ -45,12 +44,7 @@ class ClientAuthRepo {
           "gender":"male",
           "age":22,
           "deviceToken":await FirebaseMessagingService.getDeviceToken()}),
-        body: jsonEncode({
-          'email': email,
-          'password': password,
-          'name': name,
-          'deviceToken': 'sdsdsd'
-        }),
+       
         headers: authHeaders,
       );
       final result = jsonDecode(response.body);

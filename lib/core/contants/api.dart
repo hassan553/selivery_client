@@ -1,6 +1,6 @@
-const baseUri = 'http://192.168.1.5:8000/';
+const baseUri = 'http://192.168.1.122:8000/';
 const authBaseUri = '${baseUri}auth/';
-final clientLogin = Uri.parse('http://192.168.1.5:8000/auth/login/client');
+final clientLogin = Uri.parse('${baseUri}auth/login/client');
 final clientRegister = Uri.parse('${authBaseUri}signup/client');
 final driverLogin = Uri.parse('${authBaseUri}login/driver');
 final driverRegister = Uri.parse('${authBaseUri}signup/driver');
@@ -9,7 +9,7 @@ final verifyClientEmailCodeUrl = Uri.parse('${authBaseUri}client/verify_email');
 final verifyClientResendEmailCodeUrl =
     Uri.parse('${authBaseUri}resend_verification_code');
 final completeCarInfoUrl = Uri.parse('${baseUri}request');
-final getAllAdsUri = Uri.parse('http://192.168.1.122:8000/advertisement');
+final getAllAdsUri = Uri.parse('${baseUri}advertisement');
 
 final sendNewPasswordUrl = Uri.parse('${baseUri}user/setPassword');
 
@@ -23,23 +23,20 @@ final verifyDriverForgetPasswordCodeUrl =
 
 //google sign in
 final clientGoogleSignIn = Uri.parse('${authBaseUri}google/client');
-final driverGoogleSignIn = Uri.parse('${authBaseUri}google/driver');
 ///////profile uri
 const profileUri = '${baseUri}user/profile';
 final profileUpdateImageUri = Uri.parse('{$baseUri}user/changePicture');
-final profileUpdateInfoUri = Uri.parse('http://192.168.1.5:8000/user/updateInfo');
-final profileUpdateInfoUriHZ = '{$baseUri}user/updateInfo';
-final profileClientUpdatePassword = Uri.parse('http://192.168.1.5:8000/user/changePassword');
+final profileUpdateInfoUri =
+    Uri.parse('${baseUri}user/updateInfo');
+const profileUpdateInfoUriHZ = '{$baseUri}user/updateInfo';
+final profileClientUpdatePassword =
+    Uri.parse('${baseUri}user/changePassword');
 //categories
 
-<<<<<<< HEAD
-const String categoriesUrL = 'http://192.168.1.5:8000/category';
-String CategoriesList(id) => "http://192.168.1.5:8000/vehicles/sale/category/$id";
-String starttrip(id) => "http://192.168.1.5:8000/trip/$id/start_trip";
-=======
 const String categoriesUrL = '${baseUri}category';
-String CategoriesList(id) => "${baseUri}vehicles/sale/category/$id";
->>>>>>> e75399400b10bf81a5d06800a8e1111972736177
+String categoriesList(id) =>
+    "${baseUri}vehicles/sale/category/$id";
+String starttrip(id) => "${baseUri}trip/$id/start_trip";
 //getdata for owner sale car
 String ownerData(id) => "{$baseUri}user/driver/$id";
 
@@ -50,18 +47,19 @@ String carsWithDriver(id) => "{$baseUri}vehicles/rent/with_driver/category/$id";
 String carsWithoutDriver(id) =>
     "{$baseUri}vehicles/rent/without_driver/category/$id";
 
-const String addCarForSale = "http://192.168.1.5:8000/vehicles/sale";
+const String addCarForSale = "${baseUri}vehicles/sale";
 
 //rating
- String rating(tripid) => "http://192.168.1.5:8000/trip/$tripid/rate";
+String rating(tripid) => "${baseUri}trip/$tripid/rate";
 
 //getdrivers
-String getdrivers(lat,long) =>"http://192.168.1.5:8000/trip/nearest_drivers?latitude=$lat&longitude=$long";
+String getdrivers(lat, long) =>
+    "${baseUri}trip/nearest_drivers?latitude=$lat&longitude=$long";
 const String requestDriver = "${baseUri}trip/request";
-const String getMyTrips = "http://192.168.1.5:8000/user/client/trips";
+const String getMyTrips = "${baseUri}user/client/trips";
 
 //driver
-String getdriverProfile(id)=>"http://192.168.1.5:8000/user/driver/$id";
+String getdriverProfile(id) => "${baseUri}user/driver/$id";
 /////////
 final authHeaders = {
   'Keep-Alive': 'timeout=5',

@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,7 +22,7 @@ class CustomAssetsImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      path,
+      path??'',
       width: width,
       height: height,
       fit: boxFit,

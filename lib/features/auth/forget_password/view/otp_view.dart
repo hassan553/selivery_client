@@ -181,7 +181,7 @@ class _NumericKeyboardScreenState extends State<NumericKeyboardScreen> {
                   ? const CustomLoadingWidget()
                   : TextFormField(
                       controller: controller,
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.none,
                       autofocus: true,
                       onFieldSubmitted: (value) {
                        if (formKey.currentState!.validate()) {

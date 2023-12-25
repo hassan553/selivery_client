@@ -26,3 +26,12 @@ class ClientLoginError extends ClientLoginState {
 
   const ClientLoginError(this.message);
 }
+class ClientGoogleLoginLoading extends ClientLoginState {}
+
+class ClientGoogleLoginSuccess extends ClientLoginState {}
+
+class ClientGoogleLoginError extends ClientLoginState {
+  final String message;
+
+  const ClientGoogleLoginError(this.message);
+}

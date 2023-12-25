@@ -10,7 +10,7 @@ class SetLaunchLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SetLocationController addAddressController =
-    Get.put(SetLocationController(),permanent: true);
+    Get.put(SetLocationController(),permanent: false);
     return Scaffold(
         appBar: AppBar(
           title: Text("حدد مكان الاقلاع",

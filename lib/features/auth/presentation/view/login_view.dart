@@ -16,6 +16,7 @@ import '../../../../../core/widgets/snack_bar_widget.dart';
 import '../../cubit/login/client_login_cubit.dart';
 import '../../forget_password/view/forget_password_view.dart';
 import '../../verify_email/views/otp_view.dart';
+import '../../widgets/google_sign_widget.dart';
 import 'register_view.dart';
 
 class ClientLoginView extends StatefulWidget {
@@ -98,9 +99,13 @@ class _ClientLoginViewState extends State<ClientLoginView> {
                           hintText: 'كلمه السر',
                           focusNode: passwordFocus,
                           obscure: isObscure,
-                          suffixIcon:InkWell(
-                            onTap:()=>changeIcon(),
-                            child: Icon(isObscure?  Icons.visibility_off_outlined: Icons.visibility_outlined,color: AppColors.black)),
+                          suffixIcon: InkWell(
+                              onTap: () => changeIcon(),
+                              child: Icon(
+                                  isObscure
+                                      ? Icons.visibility_off_outlined
+                                      : Icons.visibility_outlined,
+                                  color: AppColors.black)),
                           valid: (String? value) {
                             if (value == null) {
                               return 'قيمه فارغه';
@@ -125,7 +130,7 @@ class _ClientLoginViewState extends State<ClientLoginView> {
                                 context: context,
                                 message: 'تم تسجيل الدخوال بنجاح',
                                 requestStates: RequestStates.success);
-                            navigateOff(MainView());
+                            navigateOff(const MainView());
                           } else if (state is ClientSndCodeToEmailState) {
                             showSnackBarWidget(
                                 context: context,
@@ -134,7 +139,7 @@ class _ClientLoginViewState extends State<ClientLoginView> {
                                 requestStates: RequestStates.success);
                             navigateOff(VerifyEmailOTPView(
                               email: email.text,
-                              screen: MainView(),
+                              screen: const MainView(),
                             ));
                           } else if (state is ClientLoginError) {
                             showErrorAwesomeDialog(
@@ -157,43 +162,38 @@ class _ClientLoginViewState extends State<ClientLoginView> {
                               title: 'تسجيل الدخوال');
                         }),
                         SizedBox(height: screenSize(context).height * .03),
+                        BlocConsumer<ClientLoginCubit, ClientLoginState>(
+                          listener: (context, state) {
+                            if (state is ClientGoogleLoginSuccess) {
+                              showSnackBarWidget(
+                                  context: context,
+                                  message: 'تم تسجيل الدخوال بنجاح',
+                                  requestStates: RequestStates.success);
+                              navigateOff(const MainView());
+                            } else if (state is ClientGoogleLoginError) {
+                              print(state.message);
+                              showErrorAwesomeDialog(
+                                  context, 'تنبيه', state.message);
+                            }
+                          },
+                          builder: (context, state) {
+                            return state is ClientGoogleLoginLoading
+                                ? const CustomLoadingWidget()
+                                : GoogleSignWidget(onTap: () {
+                                    BlocProvider.of<ClientLoginCubit>(context)
+                                        .loginWithGoogle();
+                                  });
+                          },
+                        ),
                         Align(
                             alignment: Alignment.center,
                             child: CustomTextButton(
                                 function: () {
-                                  navigateTo(ClientRegisterView());
+                                  navigateTo(const ClientRegisterView());
                                 },
                                 color: AppColors.primaryColor,
                                 title: 'انشاء حساب جديد')),
                         SizedBox(height: screenSize(context).height * .03),
-                        Center(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Card(
-                                  child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CustomAssetsImage(
-                                  path: 'assets/facebook.png',
-                                  width: 30,
-                                  height: 30,
-                                  boxFit: BoxFit.fill,
-                                ),
-                              )),
-                              const SizedBox(width: 10),
-                              Card(
-                                  child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CustomAssetsImage(
-                                  path: 'assets/google.png',
-                                  width: 30,
-                                  height: 30,
-                                  boxFit: BoxFit.fill,
-                                ),
-                              )),
-                            ],
-                          ),
-                        )
                       ],
                     ),
                   ),

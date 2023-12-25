@@ -10,10 +10,10 @@ class SetLaunchLocationGoTo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SetLocationGoToController addAddressController =
-    Get.put(SetLocationGoToController(),permanent:true);
+    Get.put(SetLocationGoToController(),permanent:false);
     return Scaffold(
       appBar: AppBar(
-        title: Text("حدد مكان الذهاب",style: TextStyle(color: Colors.black,
+        title:const  Text("حدد مكان الذهاب",style: TextStyle(color: Colors.black,
         fontWeight: FontWeight.bold),),
         centerTitle: true,
         backgroundColor: Colors.tealAccent,
