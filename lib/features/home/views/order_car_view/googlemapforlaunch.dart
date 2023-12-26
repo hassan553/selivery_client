@@ -9,8 +9,8 @@ class SetLaunchLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    SetLocationController addAddressController =
-    Get.lazyPut(()=>SetLocationController(),fenix: true);
+   // SetLocationController addAddressController =
+    Get.put(SetLocationController());
     return GetBuilder<
         SetLocationController>(
       builder:(controller) =>  Scaffold(
@@ -22,26 +22,30 @@ class SetLaunchLocation extends StatelessWidget {
             backgroundColor: Colors.tealAccent,
           ),
         body: GetBuilder<SetLocationController>(builder:
-            (controller)=>
+            (addAddressController)=>
                 Container(
                   child: Column(
                     children: [
-                      if(controller.kGooglePlex!=null)
+                      if(addAddressController.kGooglePlex!=null)
                         Expanded(child:
                         Stack(
                           alignment: Alignment.center,
                           children: [
                             GoogleMap(
-                              markers: controller.markers.toSet(),
+                              markers: addAddressController.markers.toSet(),
                               onTap: (latlong){
-                                controller.addMarkers(latlong);
+                                addAddressController.addMarkers(latlong);
                                 print(latlong);
       
                               },
                               mapType: MapType.normal,
-                              initialCameraPosition: controller.kGooglePlex!,
+                              initialCameraPosition: addAddressController.kGooglePlex!,
                               onMapCreated: (GoogleMapController mapcontroller) {
-                                controller.completercontroller!.complete(mapcontroller);
+                                // controller.completercontroller!.complete(mapcontroller);
+                                if (!addAddressController.completercontroller!.isCompleted) {
+                           addAddressController.completercontroller!
+                                .complete(mapcontroller);
+                          }
                               },
                             ),
       

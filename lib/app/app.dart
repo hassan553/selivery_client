@@ -25,7 +25,7 @@ class SeliveryClient extends StatelessWidget {
       title: 'Selivery',
       theme: appTheme(),
       textDirection: TextDirection.rtl,
-      home:  SplashView(),
+      home:  MainView(),
     );
   }
 }

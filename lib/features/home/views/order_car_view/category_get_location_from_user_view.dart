@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
+import '../../../../controllers/setlocation.dart';
+import '../../../../controllers/setlocationgoto.dart';
 import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_appBar.dart';
 import '../../../../core/widgets/custom_image.dart';
 import 'toSet_location_view.dart';
-
+import 'package:get/get.dart';
 import '../../../../core/functions/global_function.dart';
 import '../../../../core/widgets/custom_sized_box.dart';
 import '../../../../core/widgets/responsive_text.dart';
 import 'connect_with_driver.dart';
 
-class GetLocationFromUserView extends StatelessWidget {
+class GetLocationFromUserView extends StatefulWidget {
   const GetLocationFromUserView({super.key});
 
+  @override
+  State<GetLocationFromUserView> createState() =>
+      _GetLocationFromUserViewState();
+}
+
+class _GetLocationFromUserViewState extends State<GetLocationFromUserView> {
+  SetLocationGoToController setLocationGoToController =
+      Get.put(SetLocationGoToController());
+  SetLocationController setLocationController =
+      Get.put(SetLocationController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

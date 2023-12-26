@@ -9,8 +9,8 @@ class SetLaunchLocationGoTo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   // SetLocationGoToController addAddressController =
-    Get.lazyPut(()=>SetLocationGoToController());
+    // SetLocationGoToController addAddressController =
+    Get.put(SetLocationGoToController());
     return GetBuilder<
         SetLocationGoToController>(
       builder:(addAddressController) =>  Scaffold(
@@ -40,7 +40,12 @@ class SetLaunchLocationGoTo extends StatelessWidget {
                           mapType: MapType.normal,
                           initialCameraPosition: addAddressController.kGooglePlex!,
                           onMapCreated: (GoogleMapController mapcontroller) {
-                            addAddressController.completercontroller!.complete(mapcontroller);
+                           // addAddressController.completercontroller!.complete(mapcontroller);
+                          if (!addAddressController
+                              .completercontroller!.isCompleted) {
+                            addAddressController.completercontroller!
+                                .complete(mapcontroller);
+                          }
                           },
                         ),
       
