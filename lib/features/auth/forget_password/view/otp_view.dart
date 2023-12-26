@@ -209,51 +209,51 @@ class _NumericKeyboardScreenState extends State<NumericKeyboardScreen> {
                     ),
             ),
             const SizedBox(height: 20),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _buildKeyboardButton('1'),
-            //     _buildKeyboardButton('2'),
-            //     _buildKeyboardButton('3'),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _buildKeyboardButton('4'),
-            //     _buildKeyboardButton('5'),
-            //     _buildKeyboardButton('6'),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _buildKeyboardButton('7'),
-            //     _buildKeyboardButton('8'),
-            //     _buildKeyboardButton('9'),
-            //   ],
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     _buildKeyboardButton('تم', onPressed: () {
-            //       if (formKey.currentState!.validate()) {
-            //         if (controller.text.length == 6) {
-            //           int intValue = int.parse(controller.text);
-            //           ForgetPasswordCubit.get(context)
-            //               .verifyEmailWithCode(widget.email, intValue);
-            //         } else {
-            //           showSnackBarWidget(
-            //               context: context,
-            //               message: "كود الدخال يجب ان لا يقل عن 6 احرف",
-            //               requestStates: RequestStates.error);
-            //         }
-            //       }
-            //     }),
-            //     _buildKeyboardButton('0'),
-            //     _buildKeyboardButton('حذف', onPressed: _onDeletePressed),
-            //   ],
-            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildKeyboardButton('1'),
+                _buildKeyboardButton('2'),
+                _buildKeyboardButton('3'),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildKeyboardButton('4'),
+                _buildKeyboardButton('5'),
+                _buildKeyboardButton('6'),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildKeyboardButton('7'),
+                _buildKeyboardButton('8'),
+                _buildKeyboardButton('9'),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildKeyboardButton('تم', onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    if (controller.text.length == 6) {
+                      int intValue = int.parse(controller.text);
+                      ForgetPasswordCubit.get(context)
+                          .verifyEmailWithCode(widget.email, intValue);
+                    } else {
+                      showSnackBarWidget(
+                          context: context,
+                          message: "كود الدخال يجب ان لا يقل عن 6 احرف",
+                          requestStates: RequestStates.error);
+                    }
+                  }
+                }),
+                _buildKeyboardButton('0'),
+                _buildKeyboardButton('حذف', onPressed: _onDeletePressed),
+              ],
+            ),
           ],
         ),
       ),

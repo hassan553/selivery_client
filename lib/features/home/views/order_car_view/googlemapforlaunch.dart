@@ -9,46 +9,49 @@ class SetLaunchLocation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SetLocationController addAddressController =
-    Get.put(SetLocationController(),permanent: false);
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("حدد مكان الاقلاع",
-            style: TextStyle(color: Colors.black,
-              fontWeight: FontWeight.bold),),
-          centerTitle: true,
-          backgroundColor: Colors.tealAccent,
-        ),
-      body: GetBuilder<SetLocationController>(builder:
-          (controller)=>
-              Container(
-                child: Column(
-                  children: [
-                    if(addAddressController.kGooglePlex!=null)
-                      Expanded(child:
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          GoogleMap(
-                            markers: addAddressController.markers.toSet(),
-                            onTap: (latlong){
-                              addAddressController.addMarkers(latlong);
-                              print(latlong);
-
-                            },
-                            mapType: MapType.normal,
-                            initialCameraPosition: addAddressController.kGooglePlex!,
-                            onMapCreated: (GoogleMapController mapcontroller) {
-                              addAddressController.completercontroller!.complete(mapcontroller);
-                            },
-                          ),
-
-
-                        ],
-                      ) ),
-                  ],
-                ),
-              ),),
+//    SetLocationController addAddressController =
+    Get.lazyPut(()=>SetLocationController(),fenix: true);
+    return GetBuilder<
+        SetLocationController>(
+      builder:(controller) =>  Scaffold(
+          appBar: AppBar(
+            title:const  Text("حدد مكان الاقلاع",
+              style: TextStyle(color: Colors.black,
+                fontWeight: FontWeight.bold),),
+            centerTitle: true,
+            backgroundColor: Colors.tealAccent,
+          ),
+        body: GetBuilder<SetLocationController>(builder:
+            (controller)=>
+                Container(
+                  child: Column(
+                    children: [
+                      if(controller.kGooglePlex!=null)
+                        Expanded(child:
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            GoogleMap(
+                              markers: controller.markers.toSet(),
+                              onTap: (latlong){
+                                controller.addMarkers(latlong);
+                                print(latlong);
+      
+                              },
+                              mapType: MapType.normal,
+                              initialCameraPosition: controller.kGooglePlex!,
+                              onMapCreated: (GoogleMapController mapcontroller) {
+                                controller.completercontroller!.complete(mapcontroller);
+                              },
+                            ),
+      
+      
+                          ],
+                        ) ),
+                    ],
+                  ),
+                ),),
+      ),
     );
   }
 }

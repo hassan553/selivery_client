@@ -9,6 +9,7 @@ class ClientProfileModel {
   String? password;
   String? image;
   String? role;
+  String? googleId;
   bool? available;
   int? iV;
 
@@ -36,6 +37,7 @@ class ClientProfileModel {
     role = json['role'];
     phone = json['phone'];
     gander = json['gender'];
+    googleId = json['googleId'];
     age = json['age']??0;
     available = json['available'];
     iV = json['__v'];
@@ -53,6 +55,7 @@ class ClientProfileModel {
     data['password'] = password;
     data['image'] = image;
     data['role'] = role;
+    data['googleId'] = googleId;
     data['available'] = available;
     data['__v'] = iV;
     return data;

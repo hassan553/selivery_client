@@ -98,7 +98,8 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
                             prefix: 'الاسم',
                             hint: controller.nameController),
                         const SizedBox(height: 15),
-                        InkWell(
+                       if(controller.clientProfileModel?.googleId==null)...[
+                         InkWell(
                             onTap: () {
                               showDialog(
                                 context: context,
@@ -112,6 +113,7 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
                                 hint: TextEditingController(text: '*****'),
                                 isEnable: false)),
                         const SizedBox(height: 15),
+                       ],
                         EditField(
                             validate: (p0) {
                               if (p0 == null) {

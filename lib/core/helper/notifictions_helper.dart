@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 class FirebaseMessagingService {
   static final FirebaseMessaging _firebaseMessaging =
       FirebaseMessaging.instance;
@@ -80,5 +80,38 @@ class FirebaseMessagingService {
     final notification = message.notification;
     final data = message.data;
     print(' i click on message');
+  }
+  
+  static Future sendNotification(
+      {required String title,
+      required String body,
+      required String userToken}) async {
+    const String serverKey =
+        'AAAAc_PLxMg:APA91bEDAc_I4jG2wzGgRCq6drkNzO-JlvyA91MzGABJrRx6Kix_uKreTGAF34AaLAxvQ8Nz1XGeWTwgNutQpccQzYcelYpRyqply0PITDPjIMugIuaqk_-uK4Ar0Q_TvSjNQoEW_7fA'; // Replace with your server key
+    const String fcmEndpoint = 'https://fcm.googleapis.com/fcm/send';
+
+    final Map<String, dynamic> notificationData = {
+      'notification': {
+        'title': title,
+        'body': body,
+      },
+      'to': userToken,
+    };
+
+    final http.Response response = await http.post(
+      Uri.parse(fcmEndpoint),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'key=$serverKey',
+      },
+      body: jsonEncode(notificationData),
+    );
+
+    if (response.statusCode == 200) {
+      print('Notification sent successfully');
+    } else {
+      print('Failed to send notification. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
   }
 }

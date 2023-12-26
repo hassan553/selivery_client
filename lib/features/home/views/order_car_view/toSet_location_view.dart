@@ -43,10 +43,10 @@ class ToSetLocation extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     navigateTo(const SetLaunchLocation());
                   },
-                  child: Text("حدد موقع الاقلاع")),
+                  child: const Text("حدد موقع الاقلاع")),
             ),
             const CustomSizedBox(value: .02),
             Container(
@@ -57,10 +57,10 @@ class ToSetLocation extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     navigateTo(const SetLaunchLocationGoTo());
                   },
-                  child: Text("حدد موقع الذهاب")),
+                  child: const Text("حدد موقع الذهاب")),
             ),
             const CustomSizedBox(value: .02),
             Container(
