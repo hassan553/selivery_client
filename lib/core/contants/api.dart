@@ -2,9 +2,6 @@ const baseUri = 'http://192.168.1.5:8000/';
 const authBaseUri = '${baseUri}auth/';
 final clientLogin = Uri.parse('http://192.168.1.5:8000/auth/login/client');
 final clientRegister = Uri.parse('${authBaseUri}signup/client');
-final driverLogin = Uri.parse('${authBaseUri}login/driver');
-final driverRegister = Uri.parse('${authBaseUri}signup/driver');
-final verifyDriverEmailCodeUrl = Uri.parse('${authBaseUri}driver/verify_email');
 final verifyClientEmailCodeUrl = Uri.parse('${authBaseUri}client/verify_email');
 final verifyClientResendEmailCodeUrl =
     Uri.parse('${authBaseUri}resend_verification_code');
