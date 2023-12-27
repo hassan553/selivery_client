@@ -32,6 +32,7 @@ class SetLaunchLocation extends StatelessWidget {
                           GoogleMap(
                             markers: addAddressController.markers.toSet(),
                             onTap: (latlong){
+                              print("lat");
                               addAddressController.addMarkers(latlong);
                               print(latlong);
 

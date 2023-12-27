@@ -8,7 +8,7 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAONLgc_nhy6gCHLKcG8xj_cz9_t10paC8"/>
+            android:value="AIzaSyDRRLHDp_rI08h4pcyemMDrqQKBLoSdc-U"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -39,7 +39,4 @@
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 </manifest>

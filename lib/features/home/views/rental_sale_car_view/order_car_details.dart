@@ -54,7 +54,7 @@ class OrderCarDetailsView extends StatelessWidget {
                           children: [
                             Container(
                               child: Image.network(
-                                'http://192.168.1.10:8000/${controller.categories[index]['car']['images'][0]}',
+                                'http://192.168.1.5:8000/${controller.categories[index]['car']['images'][0]}',
                                 width: p1.maxWidth * .8,
                                 height: p1.maxHeight * .6,
                                 fit: BoxFit.fill,

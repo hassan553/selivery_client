@@ -43,6 +43,15 @@ String ? driverId;
         print("Received driver location update: $driverId - $location");
       }
     });
+
+
+    //with room
+    // Emit the 'joinRoom' event to the server with the driver to track's ID
+    socket!.emit('joinRoom', driverId);
+    // Optionally, you can handle the server's response if needed
+    socket!.on('joinedRoom', (data) {
+      print('Joined room for tracking driver: $data');
+    });
   }
 
 
