@@ -53,7 +53,7 @@ class CarOwnerView extends StatelessWidget {
                                   CircleAvatar(
                                     radius: screenSize(context).width * .15,
                                     child: Image.network(
-                                      'http://192.168.1.10:8000/${controller.ownerModel.image}',
+                                      'http://192.168.1.5:8000/${controller.ownerModel.image}',
                                       width: 50,
                                       height: 60,
                                       fit: BoxFit.fill,
@@ -203,7 +203,7 @@ class CarOwnerView extends StatelessWidget {
                                     padding:
                                         const EdgeInsets.only(left: 4, top: 4),
                                     child: Image.network(
-                                      "http://192.168.1.10:8000/$image",
+                                      "http://192.168.1.5:8000/$image",
                                       width: screenSize(context).width * .5,
                                       height: screenSize(context).height * .2,
                                       fit: BoxFit.fill,
@@ -247,7 +247,7 @@ class CarOwnerView extends StatelessWidget {
                               ),
                               children: [
                                 Image.network(
-                                  'http://192.168.1.10:8000/$image',
+                                  'http://192.168.1.5:8000/$image',
                                   width: 50,
                                   height: 60,
                                   fit: BoxFit.fill,

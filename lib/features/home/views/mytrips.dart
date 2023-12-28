@@ -6,6 +6,7 @@ import 'tracking.dart';
 
 import '../../../controllers/mytrips.dart';
 import '../../../core/functions/ratingdailog.dart';
+import '../../../core/functions/ratingdriver.dart';
 import '../../../core/rescourcs/app_colors.dart';
 
 class MyTrips extends StatelessWidget {
@@ -111,8 +112,7 @@ class MyTrips extends StatelessWidget {
 
                         ),
                         onPressed: (){
-                          showDialogRating(context,
-                              controller.trips[index].sId);
+                          RatingScreen(id:controller.trips[index].sId.toString());
                           // controller.acceptTrip(id);
                         },child: const Text("تقييم السائق",
                         style: TextStyle(

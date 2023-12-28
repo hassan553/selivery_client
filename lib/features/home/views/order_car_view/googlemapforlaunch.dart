@@ -10,7 +10,7 @@ class SetLaunchLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    // SetLocationController addAddressController =
-    Get.put(SetLocationController());
+    Get.put(SetLocationController(),permanent: false);
     return GetBuilder<
         SetLocationController>(
       builder:(controller) =>  Scaffold(

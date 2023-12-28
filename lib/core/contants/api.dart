@@ -1,6 +1,6 @@
 const baseUri = 'https://selivery.onrender.com/'; //'http://192.168.1.122:8000/';
 const authBaseUri = '${baseUri}auth/';
-final clientLogin = Uri.parse('${baseUri}auth/login/client');
+final clientLogin = Uri.parse('http://192.168.1.5:8000/auth/login/client');
 final clientRegister = Uri.parse('${authBaseUri}signup/client');
 final verifyClientEmailCodeUrl = Uri.parse('${authBaseUri}client/verify_email');
 final verifyClientResendEmailCodeUrl =

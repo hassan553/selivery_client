@@ -39,7 +39,7 @@ class SetLocationController extends GetxController{
     position = await Geolocator.getCurrentPosition();
     kGooglePlex =  CameraPosition(
       target: LatLng(position!.latitude, position!.longitude),
-      zoom: 14.4746,
+      zoom: 12.4746,
     );
     addMarkers(LatLng(position!.latitude, position!.longitude));
     statusRequest=StatusRequest.none;
