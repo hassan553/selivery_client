@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'dart:async';
-import 'package:selivery_client/models/message_model.dart';
+import '../models/message_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatController extends GetxController {

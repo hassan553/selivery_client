@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:selivery_client/controllers/setlocation.dart';
-import 'package:selivery_client/controllers/setlocationgoto.dart';
+import 'setlocation.dart';
+import 'setlocationgoto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_common/src/util/event_emitter.dart';
 

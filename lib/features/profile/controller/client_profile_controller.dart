@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:selivery_client/core/functions/checkinternet.dart';
-import 'package:selivery_client/core/widgets/snack_bar_widget.dart';
+import '../../../core/functions/checkinternet.dart';
+import '../../../core/widgets/snack_bar_widget.dart';
 
 import '../data/model/client_profile_model.dart';
 import '../data/repository/client_profile_repo.dart';
@@ -106,8 +106,9 @@ class ClientProfileController extends GetxController {
         changeImageLoding = true;
         update();
         await clientProfileRepo.pickClientImage();
+        getClientProfile();
         changeImageLoding = false;
-         showSnackBarWidget(
+        showSnackBarWidget(
             context: context,
             message: 'تم التغير بنجاح',
             requestStates: RequestStates.success);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:selivery_client/features/profile/presentation/widgets/selecte_gender.dart';
+import '../widgets/selecte_gender.dart';
 import '../../../../../core/widgets/custom_appBar.dart';
 import '../../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_image.dart';

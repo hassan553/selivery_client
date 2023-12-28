@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:selivery_client/core/contants/api.dart';
-import 'package:selivery_client/features/profile/presentation/widgets/update_profile.dart';
+import '../../../../core/contants/api.dart';
+import '../widgets/update_profile.dart';
 import '../../../../../core/widgets/custom_loading_widget.dart';
 import '../../../../core/widgets/error_componant.dart';
 import '../../controller/client_profile_controller.dart';
@@ -21,7 +21,7 @@ class ClientProfileView extends StatefulWidget {
 }
 
 class _ClientProfileViewState extends State<ClientProfileView> {
-  final controller = Get.put(ClientProfileController());
+  final controller = Get.find<ClientProfileController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

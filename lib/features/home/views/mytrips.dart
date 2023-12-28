@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:selivery_client/core/class/statusrequst.dart';
-import 'package:selivery_client/core/functions/global_function.dart';
-import 'package:selivery_client/features/home/views/tracking.dart';
+import '../../../core/class/statusrequst.dart';
+import '../../../core/functions/global_function.dart';
+import 'tracking.dart';
 
 import '../../../controllers/mytrips.dart';
 import '../../../core/functions/ratingdailog.dart';

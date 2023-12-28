@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:selivery_client/features/auth/cubit/forget_password/forget_password_cubit.dart';
+import '../../cubit/forget_password/forget_password_cubit.dart';
 import '../../../../../../core/rescourcs/app_colors.dart';
 import '../../../../../../core/widgets/custom_image.dart';
 import '../../../../../../core/widgets/custom_loading_widget.dart';

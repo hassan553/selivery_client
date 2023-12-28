@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rating_dialog/rating_dialog.dart';
-import 'package:flutter/material.dart';
 
 import '../../controllers/mytrips.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:selivery_client/features/ads/views/search_ads_view.dart';
+import 'search_ads_view.dart';
 import '../../../core/functions/global_function.dart';
 import '../../../core/widgets/custom_appBar.dart';
 import '../../../core/widgets/custom_loading_widget.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:selivery_client/core/rescourcs/app_colors.dart';
+import '../../../core/rescourcs/app_colors.dart';
 
 import '../../../core/functions/global_function.dart';
 import 'order_car_view/category_get_location_from_user_view.dart';

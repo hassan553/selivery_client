@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:selivery_client/features/home/views/order_car_view/googlemapforlaunch.dart';
-import 'package:selivery_client/features/home/views/order_car_view/googlemapgoto.dart';
+import 'googlemapforlaunch.dart';
+import 'googlemapgoto.dart';
 import '../../../../core/functions/global_function.dart';
 import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_appBar.dart';

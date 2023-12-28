@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:selivery_client/core/widgets/custom_button.dart';
+import 'custom_button.dart';
 import '../functions/global_function.dart';
 import '../rescourcs/app_colors.dart';
 
