@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rating_dialog/rating_dialog.dart';
-
 import '../../controllers/mytrips.dart';
 
-
-
 // show the dialog
-void showDialogRating(BuildContext context,id){
+void showDialogRating(BuildContext context, id) {
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -15,37 +12,29 @@ void showDialogRating(BuildContext context,id){
     builder: (context) => RatingDialog(
       initialRating: 1.0,
       // your app's name?
-      title: Text(
-
+      title: const Text(
         "تقييم السائق",
-
         textAlign: TextAlign.center,
-
-        style: const TextStyle(
-
+        style: TextStyle(
           fontSize: 25,
-
           fontWeight: FontWeight.bold,
-
         ),
-
       ),
 
       // encourage your user to leave a high rating?
 
-      message: Text(
-
+      message: const Text(
         "قيم السائق ضعيف جيد سئ ",
-
         textAlign: TextAlign.center,
-
-        style: const TextStyle(fontSize: 15),
-
+        style: TextStyle(fontSize: 15),
       ),
 
       // your app's logo?
 
-      image: Image.asset("assets/car.png",height: 60,),
+      image: Image.asset(
+        "assets/car.png",
+        height: 60,
+      ),
 
       submitButtonText: "ارسال",
 
@@ -56,9 +45,7 @@ void showDialogRating(BuildContext context,id){
       onSubmitted: (response) {
         MyTripsController controller = Get.find();
         controller.rateTrip(id, response.comment);
-
       },
-
     ),
   );
 }
