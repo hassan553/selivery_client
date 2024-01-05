@@ -126,6 +126,7 @@ class ChatScreen extends StatelessWidget {
                     senderId: CacheStorageServices().id,//client
                     dateTime: DateTime.now().toString(),
                     message: controller.chatController!.text));
+                    
                 controller.chatController!.clear();
               },
                   icon: Icon(Icons.send,color: Colors.green,size: 30,)),

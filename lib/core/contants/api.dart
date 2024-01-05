@@ -1,6 +1,8 @@
-const baseUri = 'https://selivery.onrender.com/'; //'http://192.168.1.122:8000/';
+//'https://selivery.onrender.com/'; 
+const baseUri =
+    'http://192.168.1.122:8000/';
 const authBaseUri = '${baseUri}auth/';
-final clientLogin = Uri.parse('http://192.168.1.5:8000/auth/login/client');
+final clientLogin = Uri.parse('${authBaseUri}login/client');
 final clientRegister = Uri.parse('${authBaseUri}signup/client');
 final verifyClientEmailCodeUrl = Uri.parse('${authBaseUri}client/verify_email');
 final verifyClientResendEmailCodeUrl =
@@ -17,22 +19,18 @@ final verifyClientForgetPasswordCodeUrl =
     Uri.parse('${authBaseUri}client/verify_password_code');
 final verifyDriverForgetPasswordCodeUrl =
     Uri.parse('${authBaseUri}driver/verify_password_code');
-
 //google sign in
 final clientGoogleSignIn = Uri.parse('${authBaseUri}google/client');
 ///////profile uri
 const profileUri = '${baseUri}user/profile';
 final profileUpdateImageUri = Uri.parse('${baseUri}user/changePicture');
-final profileUpdateInfoUri =
-    Uri.parse('${baseUri}user/updateInfo');
+final profileUpdateInfoUri = Uri.parse('${baseUri}user/updateInfo');
 const profileUpdateInfoUriHZ = '${baseUri}user/updateInfo';
-final profileClientUpdatePassword =
-    Uri.parse('${baseUri}user/changePassword');
+final profileClientUpdatePassword = Uri.parse('${baseUri}user/changePassword');
 //categories
 
 const String categoriesUrL = '${baseUri}category';
-String categoriesList(id) =>
-    "${baseUri}vehicles/sale/category/$id";
+String categoriesList(id) => "${baseUri}vehicles/sale/category/$id";
 String starttrip(id) => "${baseUri}trip/$id/start_trip";
 //getdata for owner sale car
 String ownerData(id) => "${baseUri}user/driver/$id";
@@ -40,7 +38,8 @@ String ownerData(id) => "${baseUri}user/driver/$id";
 // add rent car
 const String rentcar = '${baseUri}vehicles/rent';
 
-String carsWithDriver(id) => "{${baseUri}vehicles/rent/with_driver/category/$id";
+String carsWithDriver(id) =>
+    "{${baseUri}vehicles/rent/with_driver/category/$id";
 String carsWithoutDriver(id) =>
     "${baseUri}vehicles/rent/without_driver/category/$id";
 
@@ -51,7 +50,7 @@ String rating(tripid) => "${baseUri}trip/$tripid/rate";
 
 //getdrivers
 String getdrivers(lat, long) =>
-    "http://192.168.1.5:8000/trip/nearest_drivers?latitude=$lat&longitude=$long";
+    "http://192.168.1.122:8000/trip/nearest_drivers?latitude=$lat&longitude=$long";
 const String requestDriver = "${baseUri}trip/request";
 const String getMyTrips = "${baseUri}user/client/trips";
 

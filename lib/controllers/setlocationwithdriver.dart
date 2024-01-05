@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,6 @@ import 'setlocation.dart';
 import 'setlocationgoto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_common/src/util/event_emitter.dart';
-
 import '../core/class/statusrequst.dart';
 import '../core/functions/global_function.dart';
 import '../core/functions/handlingdata.dart';
@@ -34,7 +32,7 @@ class SetLocationWithDriverController extends GetxController {
   double? long;
   //IO.Socket ? socket;
 
-  //Position? position;
+  Position? position;
   Completer<GoogleMapController>? completercontroller;
   CameraPosition? kGooglePlex;
   //new code
@@ -66,6 +64,7 @@ class SetLocationWithDriverController extends GetxController {
   String? driverimage;
   String? driverimagecar;
   String? drivercarmodel;
+  List drivers = [];
   getdrivers() async {
     statusRequest = StatusRequest.loading;
     update();
@@ -75,7 +74,7 @@ class SetLocationWithDriverController extends GetxController {
     );
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
-      List drivers = response['drivers'];
+      drivers = response['drivers'] ?? [];
       // driversLocations = List.from(response['drivers']);
       // for (var driverLocation in driversLocations) {
       //   addMarkers(LatLng(
@@ -105,7 +104,7 @@ class SetLocationWithDriverController extends GetxController {
   }
 
   getCurrentLocation() async {
-    // position = await Geolocator.getCurrentPosition();
+    position = await Geolocator.getCurrentPosition();
     kGooglePlex = CameraPosition(
       target: LatLng(setLocationController.lat!, setLocationController.long!),
       zoom: 14.4746,
@@ -125,13 +124,19 @@ class SetLocationWithDriverController extends GetxController {
         setLocationGoToController.lat2,
         setLocationGoToController.long2);
     statusRequest = handlingData(response);
-    if(setLocationController.lat ==null || setLocationController.long== null
-        || setLocationGoToController.lat2==null || setLocationGoToController.long2==null){
+    if (setLocationController.lat == null ||
+        setLocationController.long == null ||
+        setLocationGoToController.lat2 == null ||
+        setLocationGoToController.long2 == null) {
       return Get.defaultDialog(
           title: 'تنيه', middleText: 'من فضلك حدد مكان الذهاب ومكان الاقلاع');
     }
     if (StatusRequest.success == statusRequest) {
       print(response);
+      if (drivers.isEmpty) {
+        return Get.defaultDialog(
+            title: 'تنيه', middleText: "لا يمكنك طلب رحله . لا يوجد سائقين");
+      }
       print("success trip");
     } else {
       print("error to trip");
@@ -145,8 +150,10 @@ class SetLocationWithDriverController extends GetxController {
     getCurrentLocation();
     completercontroller = Completer<GoogleMapController>();
     sharedPreferences = await SharedPreferences.getInstance();
-    if(setLocationController.lat ==null || setLocationController.long== null
-        || setLocationGoToController.lat2==null || setLocationGoToController.long2==null){
+    if (setLocationController.lat == null ||
+        setLocationController.long == null ||
+        setLocationGoToController.lat2 == null ||
+        setLocationGoToController.long2 == null) {
       return Get.defaultDialog(
           title: 'تنيه', middleText: 'من فضلك حدد مكان الذهاب ومكان الاقلاع');
     }
