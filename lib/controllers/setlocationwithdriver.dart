@@ -37,6 +37,8 @@ class SetLocationWithDriverController extends GetxController {
   //Position? position;
   Completer<GoogleMapController>? completercontroller;
   CameraPosition? kGooglePlex;
+  //new code
+  //List<Map<String, dynamic>> driversLocations = [];
 
   List<Marker> markers = [];
 
@@ -72,14 +74,19 @@ class SetLocationWithDriverController extends GetxController {
       setLocationController.long,
     );
     statusRequest = handlingData(response);
-
     if (StatusRequest.success == statusRequest) {
       List drivers = response['drivers'];
+      // driversLocations = List.from(response['drivers']);
+      // for (var driverLocation in driversLocations) {
+      //   addMarkers(LatLng(
+      //     driverLocation['location']['latitude'],
+      //     driverLocation['location']['longitude'],
+      //   ));
+      // }
       if (drivers.isEmpty) {
         return Get.defaultDialog(
             title: 'تنيه', middleText: 'لا يوجد سائق متاحين الان');
       }
-
       print(response['drivers'][0]['location']['latitude']);
       drivername = response['drivers'][0]['driver']['name'];
       driverid = response['drivers'][0]['driver']['_id'];
@@ -118,6 +125,11 @@ class SetLocationWithDriverController extends GetxController {
         setLocationGoToController.lat2,
         setLocationGoToController.long2);
     statusRequest = handlingData(response);
+    if(setLocationController.lat ==null || setLocationController.long== null
+        || setLocationGoToController.lat2==null || setLocationGoToController.long2==null){
+      return Get.defaultDialog(
+          title: 'تنيه', middleText: 'من فضلك حدد مكان الذهاب ومكان الاقلاع');
+    }
     if (StatusRequest.success == statusRequest) {
       print(response);
       print("success trip");
@@ -133,8 +145,13 @@ class SetLocationWithDriverController extends GetxController {
     getCurrentLocation();
     completercontroller = Completer<GoogleMapController>();
     sharedPreferences = await SharedPreferences.getInstance();
-    print("clint lat ${setLocationController.lat}");
+    if(setLocationController.lat ==null || setLocationController.long== null
+        || setLocationGoToController.lat2==null || setLocationGoToController.long2==null){
+      return Get.defaultDialog(
+          title: 'تنيه', middleText: 'من فضلك حدد مكان الذهاب ومكان الاقلاع');
+    }
     getdrivers();
+    print("clint lat ${setLocationController.lat}");
     print("clint lat ${setLocationController.lat}");
     print("clint long ${setLocationController.long}");
     // print("clint long ${position!.longitude}");

@@ -56,7 +56,9 @@ class MyTrips extends StatelessWidget {
                   return InkWell(
                     onTap: (){
                       //go to tracking
-                       navigateTo(const Tracking());
+                       navigateTo( Tracking(
+                         id: controller.trips[index].driver!,
+                       ));
                     },
                       child: Text("تم الموافقة علي الرحلة والسائق في الطريق اليك ",style: TextStyle(
                           fontSize: 20,

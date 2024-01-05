@@ -89,8 +89,9 @@ class _OrderCarViewState extends State<OrderCarView> {
                             'رساله تنبيه',
                             'الان سوف تقوم باضافة مركبه',
                             widget.isRental
-                                ? RentalCarFormView()
-                                : SaleCarFormView(
+                                ? RentalCarFormView(
+                              catId: controller.categories[index]['_id'],
+                            ) : SaleCarFormView(
                                     catId: controller.categories[index]['_id'],
                                   )),
                         child: Container(

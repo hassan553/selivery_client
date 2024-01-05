@@ -7,11 +7,14 @@ import '../../../controllers/tracking.dart';
 import '../../../core/functions/global_function.dart';
 
 class Tracking extends StatelessWidget {
-  const Tracking({super.key});
+  final String id;
+  const Tracking({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
-    TrackingController trackingController=  Get.put(TrackingController());
+    print("idddd $id");
+    TrackingController trackingController=
+    Get.put(TrackingController()..initalSocket(id));
     return Scaffold(
       appBar: AppBar(
         title: Text("تتبع مسار السائق",style: TextStyle(color: Colors.black,
