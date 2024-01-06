@@ -24,10 +24,17 @@ class TrackingController extends GetxController{
 double ? lat;
 double ? lon;
 String ? driverId;
-  initalSocket(){
+  initalSocket(id){
     socket =IO.io("http://192.168.1.5:8000",options);
     socket!.connect();
     socket!.onConnect((_) => print("connect with server"));
+    //with room
+    // Emit the 'joinRoom' event to the server with the driver to track's ID
+    socket!.emit('joinRoom', id);
+    // Optionally, you can handle the server's response if needed
+    socket!.on('joinedRoom', (data) {
+      print('Joined room for tracking driver: $data');
+    });
     socket!.on("driver_location_update", (data) {
       // Handle the driver location update here
       if (data is Map<String, dynamic>) {
@@ -40,18 +47,12 @@ String ? driverId;
           //update();
         }
         // Update the UI or perform any other actions based on the received data
-        print("Received driver location update: $driverId - $location");
+        print("Received driver location update: $id - $location");
       }
     });
 
 
-    //with room
-    // Emit the 'joinRoom' event to the server with the driver to track's ID
-    socket!.emit('joinRoom', driverId);
-    // Optionally, you can handle the server's response if needed
-    socket!.on('joinedRoom', (data) {
-      print('Joined room for tracking driver: $data');
-    });
+
   }
 
 
@@ -81,7 +82,7 @@ String ? driverId;
 
   @override
   void onInit() {
-    initalSocket();
+    //initalSocket();
     getCurrentLocation();
     completercontroller = Completer<GoogleMapController>();
     super.onInit();

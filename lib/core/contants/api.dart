@@ -51,7 +51,7 @@ String rating(tripid) => "${baseUri}trip/$tripid/rate";
 
 //getdrivers
 String getdrivers(lat, long) =>
-    "${baseUri}trip/nearest_drivers?latitude=$lat&longitude=$long";
+    "http://192.168.1.5:8000/trip/nearest_drivers?latitude=$lat&longitude=$long";
 const String requestDriver = "${baseUri}trip/request";
 const String getMyTrips = "${baseUri}user/client/trips";
 
