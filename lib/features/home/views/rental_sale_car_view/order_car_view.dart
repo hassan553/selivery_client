@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../controllers/categoriescontroller.dart';
-import '../../../../core/widgets/show_awesomeDialog.dart';
-import '../sale_buy_form/sale_car_form_view.dart';
 
+import '../../../../controllers/categoriescontroller.dart';
 import '../../../../core/functions/global_function.dart';
 import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_appBar.dart';
 import '../../../../core/widgets/responsive_text.dart';
+import '../../../../core/widgets/show_awesomeDialog.dart';
 import '../order_car_view/with_driver_or_not view.dart';
 import '../sale_buy_form/rental_car_form_view.dart';
+import '../sale_buy_form/sale_car_form_view.dart';
 import 'order_car_details.dart';
 
 class OrderCarView extends StatefulWidget {

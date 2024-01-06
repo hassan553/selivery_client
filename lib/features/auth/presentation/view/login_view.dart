@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:selivery_client/core/functions/google_sign.dart';
+import '../../../../core/functions/google_sign.dart';
 import '../../../../../core/widgets/show_awesomeDialog.dart';
 import '../../../../../core/widgets/custom_loading_widget.dart';
 import '../../../../../core/widgets/visibility_icon.dart';

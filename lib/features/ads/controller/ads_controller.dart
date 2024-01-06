@@ -3,7 +3,7 @@ import 'dart:core';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:selivery_client/core/services/cache_storage_services.dart';
+import '../../../core/services/cache_storage_services.dart';
 
 import '../../../core/contants/api.dart';
 import '../../../core/functions/checkinternet.dart';

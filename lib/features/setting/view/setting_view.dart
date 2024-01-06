@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:selivery_client/core/services/cache_storage_services.dart';
-import 'package:selivery_client/features/setting/controller/setting_controller.dart';
+import '../../../core/services/cache_storage_services.dart';
+import '../controller/setting_controller.dart';
 import '../../../core/functions/global_function.dart';
 import '../../../core/widgets/custom_image.dart';
 import '../../../core/widgets/custom_sized_box.dart';

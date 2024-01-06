@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
-import 'package:selivery_client/core/functions/checkinternet.dart';
-import 'package:selivery_client/core/functions/global_function.dart';
-import 'package:selivery_client/core/services/cache_storage_services.dart';
-import 'package:selivery_client/core/widgets/show_awesomeDialog.dart';
-import 'package:selivery_client/features/auth/presentation/view/login_view.dart';
+import '../../../core/functions/checkinternet.dart';
+import '../../../core/functions/global_function.dart';
+import '../../../core/services/cache_storage_services.dart';
+import '../../../core/widgets/show_awesomeDialog.dart';
+import '../../auth/data/data_source/google_sigin.dart';
+import '../../auth/presentation/view/login_view.dart';
+import '../../profile/controller/client_profile_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/contants/strings.dart';
@@ -48,7 +50,11 @@ class SettingController extends GetxController {
     update();
   }
 
+  final _clientController = Get.find<ClientProfileController>();
   logout() {
+    if (_clientController.clientProfileModel?.googleId != null) {
+      googleLogOut();
+    }
     CacheStorageServices().clear();
     navigateOff(const ClientLoginView());
   }

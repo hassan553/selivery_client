@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:selivery_client/features/auth/presentation/view/login_view.dart';
+import '../../auth/presentation/view/login_view.dart';
 import '../../../core/functions/global_function.dart';
 import '../../../core/rescourcs/app_colors.dart';
 

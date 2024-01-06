@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
-import 'package:selivery_client/core/services/cache_storage_services.dart';
+import '../../../../core/services/cache_storage_services.dart';
 import '../../../../../core/contants/api.dart';
 import '../../../../../core/contants/strings.dart';
 import '../../../../../core/errors/failures.dart';
@@ -94,8 +94,7 @@ class ClientProfileRepo {
   Future pickClientImage() async {
     carImage = await PickImage().pickImage();
     if (carImage != null) {
-      await postDataWithFile(carImage!);
-      await getClientProfile();
+      await postDataWithFile(carImage!);   
     }
   }
 

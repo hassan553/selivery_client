@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:selivery_client/core/widgets/custom_appBar.dart';
-import 'package:selivery_client/core/widgets/custom_text_filed.dart';
-import 'package:selivery_client/features/ads/controller/ads_controller.dart';
-import 'package:selivery_client/features/ads/widgets/ads_widget.dart';
+import '../../../core/widgets/custom_appBar.dart';
+import '../../../core/widgets/custom_text_filed.dart';
+import '../controller/ads_controller.dart';
+import '../widgets/ads_widget.dart';
 import 'package:get/get.dart';
 import '../../../core/rescourcs/app_colors.dart';
 

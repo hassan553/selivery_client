@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:selivery_client/core/widgets/custom_loading_widget.dart';
+import '../../../../core/widgets/custom_loading_widget.dart';
 
 import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_sized_box.dart';

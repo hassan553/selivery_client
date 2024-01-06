@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:selivery_client/features/home/views/chats.dart';
+import 'chats.dart';
 
 import '../../../controllers/tracking.dart';
 import '../../../core/functions/global_function.dart';

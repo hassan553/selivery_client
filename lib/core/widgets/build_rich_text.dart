@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'custom_image.dart';
 
 class CustomRichText extends StatelessWidget {
   final Color color;

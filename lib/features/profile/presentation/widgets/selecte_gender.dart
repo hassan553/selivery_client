@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:selivery_client/features/profile/controller/client_profile_controller.dart';
+import '../../controller/client_profile_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/rescourcs/app_colors.dart';

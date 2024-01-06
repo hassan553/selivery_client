@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:selivery_client/core/class/statusrequst.dart';
-import 'package:selivery_client/dataforcrud/getdriverprofile.dart';
+import '../core/class/statusrequst.dart';
+import '../dataforcrud/getdriverprofile.dart';
 
 import '../core/functions/handlingdata.dart';
 

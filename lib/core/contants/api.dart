@@ -1,4 +1,4 @@
-const baseUri = 'http://192.168.1.5:8000/';
+const baseUri = 'https://selivery.onrender.com/'; //'http://192.168.1.122:8000/';
 const authBaseUri = '${baseUri}auth/';
 final clientLogin = Uri.parse('http://192.168.1.5:8000/auth/login/client');
 final clientRegister = Uri.parse('${authBaseUri}signup/client');
@@ -22,10 +22,10 @@ final verifyDriverForgetPasswordCodeUrl =
 final clientGoogleSignIn = Uri.parse('${authBaseUri}google/client');
 ///////profile uri
 const profileUri = '${baseUri}user/profile';
-final profileUpdateImageUri = Uri.parse('{$baseUri}user/changePicture');
+final profileUpdateImageUri = Uri.parse('${baseUri}user/changePicture');
 final profileUpdateInfoUri =
     Uri.parse('${baseUri}user/updateInfo');
-const profileUpdateInfoUriHZ = '{$baseUri}user/updateInfo';
+const profileUpdateInfoUriHZ = '${baseUri}user/updateInfo';
 final profileClientUpdatePassword =
     Uri.parse('${baseUri}user/changePassword');
 //categories
@@ -35,14 +35,14 @@ String categoriesList(id) =>
     "${baseUri}vehicles/sale/category/$id";
 String starttrip(id) => "${baseUri}trip/$id/start_trip";
 //getdata for owner sale car
-String ownerData(id) => "{$baseUri}user/driver/$id";
+String ownerData(id) => "${baseUri}user/driver/$id";
 
 // add rent car
-const String rentcar = '{$baseUri}vehicles/rent';
+const String rentcar = '${baseUri}vehicles/rent';
 
-String carsWithDriver(id) => "{$baseUri}vehicles/rent/with_driver/category/$id";
+String carsWithDriver(id) => "{${baseUri}vehicles/rent/with_driver/category/$id";
 String carsWithoutDriver(id) =>
-    "{$baseUri}vehicles/rent/without_driver/category/$id";
+    "${baseUri}vehicles/rent/without_driver/category/$id";
 
 const String addCarForSale = "${baseUri}vehicles/sale";
 
