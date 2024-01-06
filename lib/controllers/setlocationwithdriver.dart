@@ -35,9 +35,7 @@ class SetLocationWithDriverController extends GetxController {
   Position? position;
   Completer<GoogleMapController>? completercontroller;
   CameraPosition? kGooglePlex;
-  //new code
-  //List<Map<String, dynamic>> driversLocations = [];
-
+ 
   List<Marker> markers = [];
 
   addMarkers(LatLng latLng) {
@@ -58,7 +56,6 @@ class SetLocationWithDriverController extends GetxController {
 
   Map<String, dynamic>? locations;
   Map<String, dynamic>? locations2;
-
   String? drivername;
   String? driverid;
   String? driverimage;
@@ -75,27 +72,17 @@ class SetLocationWithDriverController extends GetxController {
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       drivers = response['drivers'] ?? [];
-      // driversLocations = List.from(response['drivers']);
-      // for (var driverLocation in driversLocations) {
-      //   addMarkers(LatLng(
-      //     driverLocation['location']['latitude'],
-      //     driverLocation['location']['longitude'],
-      //   ));
-      // }
+      
       if (drivers.isEmpty) {
         return Get.defaultDialog(
             title: 'تنيه', middleText: 'لا يوجد سائق متاحين الان');
       }
-      print(response['drivers'][0]['location']['latitude']);
+      
       drivername = response['drivers'][0]['driver']['name'];
       driverid = response['drivers'][0]['driver']['_id'];
       driverimage = response['drivers'][0]['driver']['image'];
-      print(driverimagecar);
-      print(drivercarmodel);
-      print("okkkkk");
+    
     } else {
-      print("error driver");
-      // print(response.statuscode);
       statusRequest = StatusRequest.failure;
     }
     addMarkers(LatLng(response['drivers'][0]['location']['latitude'],
@@ -131,15 +118,19 @@ class SetLocationWithDriverController extends GetxController {
       return Get.defaultDialog(
           title: 'تنيه', middleText: 'من فضلك حدد مكان الذهاب ومكان الاقلاع');
     }
+
     if (StatusRequest.success == statusRequest) {
-      print(response);
+     
+      
       if (drivers.isEmpty) {
         return Get.defaultDialog(
             title: 'تنيه', middleText: "لا يمكنك طلب رحله . لا يوجد سائقين");
       }
-      print("success trip");
+return Get.defaultDialog(
+          title: 'تنيه', middleText: "تم الطلب بنجاح");
+      
     } else {
-      print("error to trip");
+     
       statusRequest = StatusRequest.failure;
     }
     update();
@@ -150,6 +141,7 @@ class SetLocationWithDriverController extends GetxController {
     getCurrentLocation();
     completercontroller = Completer<GoogleMapController>();
     sharedPreferences = await SharedPreferences.getInstance();
+      getdrivers();
     if (setLocationController.lat == null ||
         setLocationController.long == null ||
         setLocationGoToController.lat2 == null ||
@@ -157,12 +149,6 @@ class SetLocationWithDriverController extends GetxController {
       return Get.defaultDialog(
           title: 'تنيه', middleText: 'من فضلك حدد مكان الذهاب ومكان الاقلاع');
     }
-    getdrivers();
-    print("clint lat ${setLocationController.lat}");
-    print("clint lat ${setLocationController.lat}");
-    print("clint long ${setLocationController.long}");
-    // print("clint long ${position!.longitude}");
-    //initalSocket();
     super.onInit();
   }
 }
