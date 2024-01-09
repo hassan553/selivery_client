@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 showSnackBarWidget(
     {required BuildContext context,
-    required String message,
+     String? message,
     required RequestStates requestStates}) {
   AnimatedSnackBar.material(
-    message,
+    message??'',
     duration: const Duration(milliseconds: 500),
     type:getAnimatedSnackBarType(requestStates),
   ).show(

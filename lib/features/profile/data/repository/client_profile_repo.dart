@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dartz/dartz.dart';
@@ -94,9 +95,46 @@ class ClientProfileRepo {
   Future pickClientImage() async {
     carImage = await PickImage().pickImage();
     if (carImage != null) {
-      await postDataWithFile(carImage!);   
+      await postDataWithFile(carImage!);
     }
   }
+
+  http.Client _client = http.Client();
+  cancelClient() {
+    _client.close();
+  }
+
+  // Future postDataWithFile(File image) async {
+  //   CancelToken cancelToken=CancelToken();
+  //   try {
+  //     var headers = {
+  //       'Accept': 'application/json',
+  //       'Authorization': 'Bearer ${CacheStorageServices().token}',
+  //       'Content-Type': 'multipart/form-data',
+  //     };
+
+  //     var request = http.MultipartRequest('PATCH', profileUpdateImageUri);
+  //     request.headers.addAll(headers);
+
+  //     var fileExtension = image.path;
+  //     var length = await image.length();
+  //     var stream = http.ByteStream(image.openRead());
+  //     var multipartFile =
+  //         http.MultipartFile('image', stream, length, filename: image.path);
+  //     request.files.add(multipartFile);
+
+  //     var response = await _client.send(request);
+  //     var responseString = await http.Response.fromStream(response);
+
+  //     if (response.statusCode == 200 || response.statusCode == 201) {
+  //       print(responseString);
+  //     } else {
+  //       throw Exception('لقد حدث خطا');
+  //     }
+  //   } catch (error) {
+  //     throw Exception(error.toString());
+  //   }
+  // }
 
   Future postDataWithFile(File image) async {
     try {
@@ -106,8 +144,7 @@ class ClientProfileRepo {
         "Content-Type": 'multipart/form-data',
       };
 
-      var request = http.MultipartRequest(
-          "PATCH", Uri.parse('http://192.168.1.122:8000/user/changePicture'));
+      var request = http.MultipartRequest("PATCH", profileUpdateImageUri);
       request.headers.addAll(headers);
       var fileExtension = image.path;
 
@@ -119,16 +156,26 @@ class ClientProfileRepo {
       request.files.add(multipartFile);
 
       var myrequest = await request.send();
-
       var response = await http.Response.fromStream(myrequest);
       final result = jsonDecode(response.body);
       print(result['message']);
+      // var completer = Completer<http.Response>();
+      // _client.send(request).then((http.StreamedResponse streamedResponse) {
+      //   return streamedResponse.stream.toBytes();
+      // }).then((List<int> bytes) {
+      //   final String responseString = String.fromCharCodes(bytes);
+      //   final http.Response response = http.Response(responseString, 200);
+      //   completer.complete(response);
+      // });
 
+      // // Wait for the response or cancellation
+      // var response = await completer.future;
       if (response.statusCode == 200 || response.statusCode == 201) {
         print("tm");
         print(response.body);
       } else {
-        throw Exception(result['message']);
+        // throw Exception(result['message']);
+        throw Exception("لقد حدث خطا");
       }
     } catch (error) {
       throw Exception(error.toString());

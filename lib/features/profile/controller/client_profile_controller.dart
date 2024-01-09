@@ -99,32 +99,38 @@ class ClientProfileController extends GetxController {
     update();
   }
 
-  bool changeImageLoding = false;
+  bool changeImageLoading = false;
   changePicture(context) async {
     if (await checkInternet()) {
       try {
-        changeImageLoding = true;
+        changeImageLoading = true;
         update();
         await clientProfileRepo.pickClientImage();
         getClientProfile();
-        changeImageLoding = false;
-        showSnackBarWidget(
-            context: context,
-            message: 'تم التغير بنجاح',
-            requestStates: RequestStates.success);
+        changeImageLoading = false;
+        // showSnackBarWidget(
+        //     context: context,
+        //     message: 'تم التغير بنجاح',
+        //     requestStates: RequestStates.success);
       } catch (error) {
-        changeImageLoding = false;
-        showSnackBarWidget(
-            context: context,
-            message: "لقد حدث خطا",
-            requestStates: RequestStates.error);
+        changeImageLoading = false;
+        // showSnackBarWidget(
+        //     context: context,
+        //     message: "لقد حدث خطا",
+        //     requestStates: RequestStates.error);
       }
     } else {
-      showSnackBarWidget(
-          context: context,
-          message: 'لا يوجد اتصال بالانترنت',
-          requestStates: RequestStates.error);
+      // showSnackBarWidget(
+      //     context: context,
+      //     message: 'لا يوجد اتصال بالانترنت',
+      //     requestStates: RequestStates.error);
     }
+    update();
+  }
+
+  void cancelRequest() async {
+    await clientProfileRepo.cancelClient();
+    changeImageLoading = false;
     update();
   }
 
@@ -153,6 +159,7 @@ class ClientProfileController extends GetxController {
     genderController.dispose();
     phoneController.dispose();
     password.dispose();
+    cancelRequest();
     super.dispose();
   }
 }

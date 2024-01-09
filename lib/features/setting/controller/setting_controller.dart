@@ -15,7 +15,7 @@ import '../../../core/widgets/snack_bar_widget.dart';
 class SettingController extends GetxController {
   void openWhatsApp() async {
     try {
-      final url = Uri.parse('https://wa.me/+201003208297');
+      final url = Uri.parse('https://wa.me/+965 6663 0325');
       if (await canLaunchUrl(url)) {
         await launchUrl(url);
       } else {

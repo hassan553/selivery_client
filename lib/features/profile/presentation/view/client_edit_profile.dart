@@ -30,6 +30,12 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
   }
 
   @override
+  void dispose() {
+    controller.cancelRequest();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(context),
@@ -49,7 +55,7 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        if (controller.changeImageLoding) ...[
+                        if (controller.changeImageLoading) ...[
                           const SizedBox(height: 20),
                           const LinearProgressIndicator(
                               color: Colors.green, backgroundColor: Colors.red),
@@ -98,22 +104,23 @@ class _ClientEditProfileViewState extends State<ClientEditProfileView> {
                             prefix: 'الاسم',
                             hint: controller.nameController),
                         const SizedBox(height: 15),
-                       if(controller.clientProfileModel?.googleId==null)...[
-                         InkWell(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return const MyDialog();
-                                },
-                              );
-                            },
-                            child: EditField(
-                                prefix: 'كلمة المرور',
-                                hint: TextEditingController(text: '*****'),
-                                isEnable: false)),
-                        const SizedBox(height: 15),
-                       ],
+                        if (controller.clientProfileModel?.googleId ==
+                            null) ...[
+                          InkWell(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return const MyDialog();
+                                  },
+                                );
+                              },
+                              child: EditField(
+                                  prefix: 'كلمة المرور',
+                                  hint: TextEditingController(text: '*****'),
+                                  isEnable: false)),
+                          const SizedBox(height: 15),
+                        ],
                         EditField(
                             validate: (p0) {
                               if (p0 == null) {

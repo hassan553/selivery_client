@@ -52,7 +52,6 @@ class ForgetPasswordRepo {
     }
   }
 
-
   Future<Either<String, String>> verifyClientForgetPasswordCode(
       String email, int code) async {
     try {
@@ -62,7 +61,9 @@ class ForgetPasswordRepo {
         headers: authHeaders,
       );
       final result = jsonDecode(response.body);
+      print(result['message']);
       if (response.statusCode == 200) {
+        CacheStorageServices().setToken(result['token']);
         return Right(result['message']);
       } else {
         return Left(result['message']);
@@ -82,7 +83,8 @@ class ForgetPasswordRepo {
       final result = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        CacheStorageServices().setToken(result['token']);
+        print(result['message']);
+       
         return Right(result['message']);
       } else {
         return Left(result['message']);

@@ -7,6 +7,7 @@ import '../../../../../../core/widgets/custom_loading_widget.dart';
 import '../../../../../../core/widgets/custom_sized_box.dart';
 import '../../../../../../core/widgets/responsive_text.dart';
 import '../../../../../../core/widgets/show_awesomeDialog.dart';
+import '../../../home/views/main_view.dart';
 import '../../cubit/forget_password/forget_password_cubit.dart';
 import '../../data/data_source/forgetpassword_repo.dart';
 
@@ -157,7 +158,7 @@ class _NewPasswordViewState extends State<NewPasswordView> {
                                   context: context,
                                   message: 'تم تغير كلمه السر بنجاح',
                                   requestStates: RequestStates.success);
-                             // navigateOff(MainView());
+                              navigateOff(const MainView());
                             } else if (state is NewForgetPasswordErrorState) {
                               showErrorAwesomeDialog(
                                   context, 'تنبيه', state.message);
