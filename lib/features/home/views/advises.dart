@@ -15,7 +15,7 @@ class _AdvisesScreenState extends State<AdvisesScreen> {
 
   void splashNavTimer() {
     Future.delayed(const Duration(seconds: 5), () {
-      navigateTo(const GetLocationFromUserView());
+      navigateOff(const GetLocationFromUserView());
     });
   }
 

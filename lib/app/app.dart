@@ -17,16 +17,15 @@ class SeliveryClient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: AppColors.primaryColor, // Replace with your desired color
+      statusBarColor: AppColors.primaryColor, 
     ));
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: MyBinding(),
       title: 'Selivery',
       theme: appTheme(),
       textDirection: TextDirection.rtl,
-      home: MainView(),
+      home:const  SplashView(),
     );
   }
 }

@@ -19,7 +19,6 @@ class _AllAdsViewState extends State<AllAdsView> {
   final controller = Get.put(AdsController());
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller.getAllAdsData();
   }
