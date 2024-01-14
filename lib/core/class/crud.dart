@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -16,7 +17,7 @@ import '../functions/get_token.dart';
 import 'package:path/path.dart';
 
 class Crud {
-  Future<Either<StatusRequest, Map>> postData(String linkurl, Map data) async {
+  Future<Either<StatusRequest, Map>> postData( linkurl, Map data) async {
     try {
       if (await checkInternet()) {
         var response = await http.post(Uri.parse(linkurl),
@@ -87,7 +88,7 @@ class Crud {
     }
   }
 
-  postDataWithFile(String linkurl, Map data, File? image) async {
+  postDataWithFile( linkurl, Map data, File? image) async {
     var headers = {
       'Accept': 'application/json',
       "Authorization": 'Bearer ${CacheStorageServices().token}',
@@ -130,7 +131,7 @@ class Crud {
 
 Future<Either<StatusRequest, Map>> addRequestWithImageOne(
     url, data, File? image,
-    [String? namerequest]) async {
+    [ namerequest]) async {
   if (namerequest == null) {
     namerequest = "files";
   }
@@ -170,7 +171,7 @@ Future<Either<StatusRequest, Map>> addRequestWithImageOne(
   }
 }
 
-_uploadImage(String title, File file) async {
+_uploadImage( title, File file) async {
   try {
     var request = http.MultipartRequest('PATCH', profileUpdateImageUri);
     request.fields["images"] = title;

@@ -27,7 +27,7 @@ class AdsController extends GetxController {
         final result = jsonDecode(response.body);
 
         if (response.statusCode == 200) {
-          print('all ads   ${result['ads']}');
+        
           var r = result['ads'] as List;
           r.map((e) {
             allAdsList.add(AdsModel.fromJson(e));
@@ -41,14 +41,14 @@ class AdsController extends GetxController {
           allAdsDataError.value = result['message'];
         }
       } catch (e) {
-        print(e.toString());
+       
         isLoading.value = false;
         allAdsDataError.value = e.toString();
       }
     } else {
       allAdsDataError.value = 'لا يوجد اتصال بالانترنت';
     }
-    print(allAdsList);
+    
   }
 
   RxString searchText = ''.obs;

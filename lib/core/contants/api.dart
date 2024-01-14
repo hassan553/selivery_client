@@ -1,5 +1,7 @@
 //'https://selivery.onrender.com/';
 //'http://192.168.1.122:8000/';
+import 'dart:core';
+
 const baseUri = 'https://www.selivery-app.com/';
 const authBaseUri = '${baseUri}auth/';
 final clientLogin = Uri.parse('${authBaseUri}login/client');
@@ -9,9 +11,7 @@ final verifyClientResendEmailCodeUrl =
     Uri.parse('${authBaseUri}resend_verification_code');
 final completeCarInfoUrl = Uri.parse('${baseUri}request');
 final getAllAdsUri = Uri.parse('${baseUri}advertisement');
-
 final sendNewPasswordUrl = Uri.parse('${baseUri}user/setPassword');
-
 final sendForgetPasswordCodeUrl = Uri.parse('${authBaseUri}forget_password');
 final reSendForgetPasswordCodeUrl =
     Uri.parse('${authBaseUri}resend_password_code');
@@ -28,7 +28,6 @@ final profileUpdateInfoUri = Uri.parse('${baseUri}user/updateInfo');
 const profileUpdateInfoUriHZ = '${baseUri}user/updateInfo';
 final profileClientUpdatePassword = Uri.parse('${baseUri}user/changePassword');
 //categories
-
 const String categoriesUrL = '${baseUri}category';
 String categoriesList(id) => "${baseUri}vehicles/sale/category/$id";
 String starttrip(id) => "${baseUri}trip/$id/start_trip";
@@ -57,6 +56,7 @@ const String getMyTrips = "${baseUri}user/client/trips";
 //driver
 String getdriverProfile(id) => "${baseUri}user/driver/$id";
 /////////
+
 final authHeaders = {
   'Keep-Alive': 'timeout=5',
   'Connection': 'keep-alive',
@@ -89,7 +89,7 @@ authHeadersWithTokenIm(String token) => {
       'Access-Control-Allow-Origin': '*',
       'Authorization': 'Bearer $token',
     };
-//<calculated when request is sent>
+
 
 
 //car for sale

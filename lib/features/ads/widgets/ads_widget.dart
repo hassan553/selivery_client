@@ -1,6 +1,4 @@
-
-  import 'package:flutter/material.dart';
-
+import 'package:flutter/material.dart';
 import '../../../core/functions/global_function.dart';
 import '../../../core/rescourcs/app_colors.dart';
 import '../../../core/widgets/custom_image.dart';
