@@ -41,151 +41,10 @@ class _SaleCarFormViewState extends State<SaleCarFormView> {
 
   _SaleCarFormViewState(this.catId);
 
-  // File? file;
-  //
-  // String? filename;
-  //
-  // Future uploadimage() async {
-  //   // final myfile =await ImagePicker().
-  //   // pickImage(source: ImageSource.gallery,imageQuality: 50);
-  //   // if(myfile != null){
-  //   //   return File(myfile.path);
-  //   // }else{
-  //   //   print("no image");
-  //   // }
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
-  //       allowMultiple: false
-  //   );
-  //   //print(result!.files.single.path);
-  //   if (result == null) {
-  //     print("nnnnnnnnnnnnnn");
-  //   } else {
-  //     print("nooooo");
-  //     //Uint8List? file = result.files.first.bytes;
-  //     filename = result.files.first.name;
-  //     print(filename);
-  //     print(file);
-  //     return File(result.files.single.path!);
-  //
-  //     // }
-  //   }
-  // }
-  //
-  //   uploadfile() async {
-  //     file = await uploadimage();
-  //     setState(() {
-  //
-  //     });
-  //   }
-  //   Dio dio = new Dio();
-  //
-  //   addd(name, phone, face, tel, price, carname, desc) async {
-  //     FormData formData = FormData.fromMap({
-  //       "images":
-  //       await MultipartFile.fromFile(file!.path,
-  //           filename: filename),
-  //       "name": name,
-  //       "phone": phone,
-  //       "facebook": face,
-  //       "telegram": tel,
-  //       "price": price,
-  //       "carName": carname,
-  //       "description": desc,
-  //       "category": catId,
-  //     });
-  //     dio.options.headers['Authorization'] = 'Bearer $getDriverToken';
-  //     dio.options.headers['Content-Type'] = 'multipart/form-data';
-  //     //var filee = File(file!.path);
-  //     formData.files.add(MapEntry('images',
-  //         MultipartFile.fromFileSync(file!.path)));
-  //
-  //     var response = await dio.post(addCarForSale,
-  //         data: formData);
-  //
-  //     if (response.statusCode == 200|| response.statusCode==201) {
-  //       print("success");
-  //       print(response.data);
-  //       print(response.statusCode);
-  //     } else {
-  //       // Error!
-  //       print(response.data);
-  //       print(response.statusCode);
-  //       print("errrrroororoor");
-  //     }
-  //   }
 
-  // Future pickImage()async{
-  //   final myfile = await ImagePicker().
-  //   pickImage(source: ImageSource.gallery);
-  //   if(myfile != null){
-  //     setState(() {
-  //       _file = File(myfile.path);
-  //     });
-  //   }else{
-  //     print("no image");
-  //   }
-  //   // if(_file== null) {
-  //   //   print("null");
-  //   // }
-  //   // String base64 = base64Encode(_file!.readAsBytesSync());
-  //   setState(() {
-  //     imagename=_file!.path.split("/").last;
-  //   });
-  //     print(imagename);
-  //    // print(base64);
-  // }
-
-  // Future upload()async{
-  //   if(_file==null) return ;
-  //   String base64 = base64Encode(_file!.readAsBytesSync());
-  //   String imagename=_file!.path.split("/").last;
-  //
-  // }
-
-  // Future  sendData(name,phone,face,tel,price,type,
-  //       des,cat,File image)async{
-  //    try {
-  //     // var headers = authHeadersWithTokenIm(getDriverToken!);
-  //     //  var headers = {
-  //     //    "Authorization":"Bearer $getDriverToken",
-  //     //  };
-  //      var headers = {
-  //        'Authorization': 'Bearer $getDriverToken'
-  //      };
-  //      var request = http.MultipartRequest('POST',
-  //          Uri.parse('http://192.168.1.10:8000/vehicles/sale'));
-  //      request.fields.addAll({
-  //        'name': name,
-  //        'phone': phone,
-  //        'facebook': face,
-  //        'telegram': tel,
-  //        'price': price,
-  //        'carName': type,
-  //        'description': des,
-  //        'category': cat
-  //      });
-  //      request.files.add(await http.MultipartFile.
-  //      fromPath('images', image.path));
-  //      request.headers.addAll(headers);
-  //      http.StreamedResponse response = await request.send();
-  //      print("responde${response.statusCode}");
-  //      print("responde${response}");
-  //      if (response.statusCode == 200 || response.statusCode == 201) {
-  //        print(await response.stream.bytesToString());
-  //      }
-  //      else {
-  //        print("no");
-  //        print(response);
-  //        print(response.reasonPhrase);
-  //      }
-  //    }catch(e){
-  //      print(e.toString());
-  //    }
-  //   }
   @override
   Widget build(BuildContext context) {
     AddCarForSaleController controller = Get.put(AddCarForSaleController());
-    print("id$catId");
     return Scaffold(
       appBar: customAppBarForSearch(context),
       body: Container(
@@ -286,21 +145,7 @@ class _SaleCarFormViewState extends State<SaleCarFormView> {
                   ],
                 ),
                 SizedBox(height: 10),
-                // GetBuilder<AddCarForSaleController>(builder:
-                //     (controller)=>Container(
-                //   child: MaterialButton(
-                //     onPressed: () {
-                //    controller.
-                //    addCarData(nameController.text, phoneController.text,
-                //        faceLinkController.text, telController.text,
-                //        priceController.text,
-                //        CarNameController.text, descController.text,
-                //        catId, imagename!);
-                //   // print(imagename);
-                //     },
-                //     child: Text("Add"),
-                //   ),
-                // )),
+
                 MaterialButton(
                   onPressed: () {
                     controller.addCarData(
@@ -312,24 +157,9 @@ class _SaleCarFormViewState extends State<SaleCarFormView> {
                         CarNameController.text,
                         descController.text,
                         catId);
-                    print("file${controller.file}");
-                    print("id   ${catId}");
-                    //   sendData(nameController.text,
-                    //       phoneController.text,
-                    //       faceLinkController.text,
-                    //       telController.text,
-                    //       priceController.text,
-                    //       typeController.text,
-                    //       descController.text, catId, _file!);
-                    // addd(nameController.text,
-                    //     phoneController.text,
-                    //     faceLinkController.text,
-                    //     telController.text,
-                    //     priceController.text,
-                    //     CarNameController.text,
-                    //     descController.text);
+
                   },
-                  child: Text("Add"),
+                  child: Text("أضافة"),
                 ),
               ],
             ),

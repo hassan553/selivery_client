@@ -61,7 +61,7 @@ class _OrderCarViewState extends State<OrderCarView> {
                         BlendMode.srcATop,
                       ),
                       child: Image.network(
-                        "http://192.168.1.5:8000/${controller.categories[index]['image']}",
+                        "https://www.selivery-app.com/images/${controller.categories[index]['image']}",
                         fit: BoxFit.fill,
                         height: screenSize(context).height * .2,
                         width: screenSize(context).width,

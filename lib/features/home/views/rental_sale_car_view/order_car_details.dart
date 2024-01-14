@@ -54,7 +54,7 @@ class OrderCarDetailsView extends StatelessWidget {
                           children: [
                             Container(
                               child: Image.network(
-                                'http://192.168.1.5:8000/${controller.categories[index]['car']['images'][0]}',
+                                'https://www.selivery-app.com/images/${controller.categories[index]['car']['images'][0]}',
                                 width: p1.maxWidth * .8,
                                 height: p1.maxHeight * .6,
                                 fit: BoxFit.fill,
@@ -107,6 +107,8 @@ class OrderCarDetailsView extends StatelessWidget {
                                       CarOwnerView(
                                         ownerId: controller.categories[index]
                                             ['userId'],
+                                        face:controller.categories[index]['facebookLink'] ,
+                                        tel: controller.categories[index]['telegramLink'],
                                         phone: controller.categories[index]
                                             ['phone'],
                                         cartype: controller.categories[index]

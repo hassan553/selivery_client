@@ -15,6 +15,8 @@ class CarOwnerView extends StatelessWidget {
   final String ownerId;
   final String phone;
   final String cartype;
+  final String face;
+  final String tel;
   final int price;
   final String date;
   final String image;
@@ -27,7 +29,7 @@ class CarOwnerView extends StatelessWidget {
       required this.price,
       required this.date,
       required this.image,
-      required this.desc});
+      required this.desc, required this.face, required this.tel});
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +55,9 @@ class CarOwnerView extends StatelessWidget {
                                   CircleAvatar(
                                     radius: screenSize(context).width * .15,
                                     child: Image.network(
-                                      'http://192.168.1.5:8000/${controller.ownerModel.image}',
-                                      width: 50,
-                                      height: 60,
-                                      fit: BoxFit.fill,
+                                      'https://www.selivery-app.com/images/${controller.ownerModel.image}',
+                                      height: 110,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                   const CustomSizedBox(value: .01),
@@ -105,10 +106,10 @@ class CarOwnerView extends StatelessWidget {
                             FittedBox(
                               child: Row(
                                 children: [
-                                  const ResponsiveText(
+                                   ResponsiveText(
                                     scaleFactor: .05,
                                     text:
-                                        "للينك الفيس بوك : http:/forexample.com ",
+                                        "للينك الفيس بوك : $face ",
                                     color: AppColors.black,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -125,10 +126,10 @@ class CarOwnerView extends StatelessWidget {
                             FittedBox(
                               child: Row(
                                 children: [
-                                  const ResponsiveText(
+                                   ResponsiveText(
                                     scaleFactor: .05,
                                     text:
-                                        "للينك  التليجرام  : http:/forexample.com ",
+                                        "للينك  التليجرام  : $tel ",
                                     color: AppColors.black,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -203,7 +204,7 @@ class CarOwnerView extends StatelessWidget {
                                     padding:
                                         const EdgeInsets.only(left: 4, top: 4),
                                     child: Image.network(
-                                      "http://192.168.1.5:8000/$image",
+                                      "https://www.selivery-app.com/images/$image",
                                       width: screenSize(context).width * .5,
                                       height: screenSize(context).height * .2,
                                       fit: BoxFit.fill,
@@ -247,7 +248,7 @@ class CarOwnerView extends StatelessWidget {
                               ),
                               children: [
                                 Image.network(
-                                  'http://192.168.1.5:8000/$image',
+                                  'https://www.selivery-app.com/images/$image',
                                   width: 50,
                                   height: 60,
                                   fit: BoxFit.fill,

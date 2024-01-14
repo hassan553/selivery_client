@@ -33,13 +33,13 @@ const String categoriesUrL = '${baseUri}category';
 String categoriesList(id) => "${baseUri}vehicles/sale/category/$id";
 String starttrip(id) => "${baseUri}trip/$id/start_trip";
 //getdata for owner sale car
-String ownerData(id) => "${baseUri}user/driver/$id";
+String ownerData(id) => "${baseUri}user/owner/$id";
 
 // add rent car
 const String rentcar = '${baseUri}vehicles/rent';
 
 String carsWithDriver(id) =>
-    "{${baseUri}vehicles/rent/with_driver/category/$id";
+    "${baseUri}vehicles/rent/with_driver/category/$id";
 String carsWithoutDriver(id) =>
     "${baseUri}vehicles/rent/without_driver/category/$id";
 
@@ -50,7 +50,7 @@ String rating(tripid) => "${baseUri}trip/$tripid/rate";
 
 //getdrivers
 String getdrivers(lat, long) =>
-    "http://192.168.1.122:8000/trip/nearest_drivers?latitude=$lat&longitude=$long";
+    "${baseUri}trip/nearest_drivers?latitude=$lat&longitude=$long";
 const String requestDriver = "${baseUri}trip/request";
 const String getMyTrips = "${baseUri}user/client/trips";
 
@@ -90,3 +90,11 @@ authHeadersWithTokenIm(String token) => {
       'Authorization': 'Bearer $token',
     };
 //<calculated when request is sent>
+
+
+//car for sale
+ String getcar(id) => "${baseUri}vehicles/sale/$id";
+
+ //car for rent
+String getcarwithdriver(id)=>"${baseUri}vehicles/rent/with_driver/category/$id";
+String getcarwithoutdriver(id)=>"${baseUri}vehicles/rent/without_driver/category/$id";

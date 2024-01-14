@@ -68,9 +68,19 @@ class AddCarForSaleController extends GetxController {
         name, phone, face, tel, price, carname, des, category, file);
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
+      Get.defaultDialog(title: "Success",
+          middleText: "تم اضافة السيارة بنجاح",onConfirm: (){
+            // navigateOff(MainView());
+            Get.back();
+          });
       //navigateff(MainView());
       //Get.offAll(MaterialPageRoute(builder: (BuildContext context) => MainView()));
     } else {
+      Get.defaultDialog(title: "تنبية",
+          middleText: "تاكد من البيانات بشكل صحيح",onConfirm: (){
+            // navigateOff(MainView());
+            Get.back();
+          });
       print("someerror");
       // print(response.statuscode);
       statusRequest = StatusRequest.failure;

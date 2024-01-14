@@ -16,6 +16,7 @@ List carswithdriver = [];
     update();
     var response = await carWithDriverData.getData(id);
     statusRequest = handlingData(response);
+    print(response);
     if(StatusRequest.success == statusRequest){
    carswithdriver.addAll(response['vehicles']);
       print("categories rent $carswithdriver");

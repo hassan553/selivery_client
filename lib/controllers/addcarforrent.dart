@@ -58,6 +58,11 @@ class AddCarForRentController extends GetxController{
           });
       //Get.offAll(MaterialPageRoute(builder: (BuildContext context) => MainView()));
     }else{
+      Get.defaultDialog(title: "تنبية",
+          middleText: "تاكد من البيانات بشكل صحيح",onConfirm: (){
+            // navigateOff(MainView());
+            Get.back();
+          });
       print("someerror");
       // print(response.statuscode);
       statusRequest = StatusRequest.failure;
