@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/show_awesomeDialog.dart';
@@ -7,10 +6,9 @@ import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_image.dart';
 import '../../../../core/widgets/custom_loading_widget.dart';
 import '../../../../core/widgets/custom_sized_box.dart';
-import '../../../../core/widgets/snack_bar_widget.dart';
-
 import '../../../../core/functions/global_function.dart';
 import '../../../../core/widgets/responsive_text.dart';
+import '../../../../core/widgets/snack_bar_widget.dart';
 import '../../cubit/otp_cubit/otp_cubit.dart';
 import '../../data/data_source/verify_email_repo.dart';
 
@@ -27,7 +25,7 @@ class VerifyEmailOTPView extends StatefulWidget {
 
 class _VerifyEmailOTPViewState extends State<VerifyEmailOTPView> {
   bool _isResendEnabled = false;
-  int _resendCooldown = 6 * 60; // 6 minutes in seconds
+  int _resendCooldown = 2 * 60; // 6 minutes in seconds
   Timer? _resendCooldownTimer;
 
   @override
@@ -42,18 +40,18 @@ class _VerifyEmailOTPViewState extends State<VerifyEmailOTPView> {
         if (_resendCooldown > 0) {
           _resendCooldown--;
         } else {
-          _isResendEnabled = false;
+          _isResendEnabled = true;
           _resendCooldownTimer?.cancel();
         }
       });
     });
   }
 
-  void _handleResendCode(String email) {
+  void _handleResendCode(String email, context) {
     BlocProvider.of<OtpCubit>(context).resendEmailVerifyCode(email);
     setState(() {
-      _isResendEnabled = true;
-      _resendCooldown = 6 * 60; // Reset the cooldown
+      _isResendEnabled = false;
+      _resendCooldown = 2 * 60; // Reset the cooldown
       _startResendCooldownTimer();
     });
   }
@@ -99,18 +97,38 @@ class _VerifyEmailOTPViewState extends State<VerifyEmailOTPView> {
                       path: 'assets/orderCar.png',
                       width: screenSize(context).width * .8,
                     ),
-                    TextButton(
-                      onPressed: _isResendEnabled
-                          ? () => _handleResendCode(widget.email)
-                          : null,
-                      child: Text(
-                        _isResendEnabled
-                            ? 'Resend Verification Code'
-                            : 'Resend in $_resendCooldown seconds',
-                        style: TextStyle(
-                          color: _isResendEnabled ? Colors.blue : Colors.grey,
-                        ),
-                      ),
+                    BlocConsumer<OtpCubit, OtpState>(
+                      listener: (context, state) {
+                        if (state is ResendOtpErrorState) {
+                          showErrorAwesomeDialog(
+                              context, 'تنبيه', state.message);
+                        } else if (state is ResendOtpSuccessState) {
+                          showSnackBarWidget(
+                              context: context,
+                              message: state.message,
+                              requestStates: RequestStates.success);
+                        }
+                      },
+                      builder: (contex, state) {
+                        return state is ResendOtpLoadingState
+                            ? CustomLoadingWidget()
+                            : TextButton(
+                                onPressed: _isResendEnabled
+                                    ? () =>
+                                        _handleResendCode(widget.email, contex)
+                                    : null,
+                                child: Text(
+                                  _isResendEnabled
+                                      ? 'إعادة إرسال رمز التحقق'
+                                      : 'إعادة الإرسال خلال $_resendCooldown ثواني',
+                                  style: TextStyle(
+                                    color: _isResendEnabled
+                                        ? Colors.blue
+                                        : Colors.grey,
+                                  ),
+                                ),
+                              );
+                      },
                     ),
                     NumericKeyboardScreen(
                         screen: widget.screen, email: widget.email),

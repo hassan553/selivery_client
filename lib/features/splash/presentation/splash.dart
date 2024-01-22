@@ -14,7 +14,8 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   void splashNavTimer() {
-    Future.delayed(const Duration(seconds: 2), () => checkAuth());
+    Future.delayed(
+        const Duration(seconds: 2), () => navigateOff(ClientLoginView()));
   }
 
   checkAuth() {
@@ -40,12 +41,12 @@ class _SplashViewState extends State<SplashView> {
     );
   }
 
-  Center splashBody() {
-    return Center(
-      child: Image.asset(
-        'assets/logo.png',
-        fit: BoxFit.cover,
-      ),
+  Widget splashBody() {
+    return Image.asset(
+      'assets/splash.jpg',
+      width: screenSize(context).width,
+      height: screenSize(context).height,
+      fit: BoxFit.cover,
     );
   }
 }

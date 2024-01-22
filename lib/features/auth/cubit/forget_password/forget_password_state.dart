@@ -19,7 +19,20 @@ class ForgetPasswordErrorState extends ForgetPasswordState {
 }
 
 class ReSendForgetPasswordVerificationCodeToEmailState
+    extends ForgetPasswordState {
+  final String message;
+  ReSendForgetPasswordVerificationCodeToEmailState({required this.message});
+}
+
+class ReSendForgetPasswordVerificationCodeToEmailLoadingState
     extends ForgetPasswordState {}
+
+class ReSendForgetPasswordVerificationCodeToEmailErrorState
+    extends ForgetPasswordState {
+  final String message;
+  ReSendForgetPasswordVerificationCodeToEmailErrorState(
+      {required this.message});
+}
 
 class ForgetPasswordOTPCodeLoadingState extends ForgetPasswordState {}
 
@@ -27,7 +40,7 @@ class ForgetPasswordOTPSuccessState extends ForgetPasswordState {}
 
 class ForgetPasswordOTPErrorState extends ForgetPasswordState {
   final String message;
-  const ForgetPasswordOTPErrorState({required this.message}); 
+  const ForgetPasswordOTPErrorState({required this.message});
 }
 
 class NewForgetPasswordLoadingState extends ForgetPasswordState {}

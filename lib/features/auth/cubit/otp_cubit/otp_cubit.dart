@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/functions/checkinternet.dart';
 import '../../data/data_source/verify_email_repo.dart';
 
-
 part 'otp_state.dart';
 
 class OtpCubit extends Cubit<OtpState> {
@@ -27,7 +26,9 @@ class OtpCubit extends Cubit<OtpState> {
   }
 
   void resendEmailVerifyCode(String email) async {
-    await _verifyEmailAddressRepo.clientResendEmailCode(email);
-    emit(ResendOtpState());
+    emit(ResendOtpLoadingState());
+    final result = await _verifyEmailAddressRepo.clientResendEmailCode(email);
+    result.fold((l) => emit(ResendOtpErrorState(message: l)),
+        (r) => emit(ResendOtpSuccessState(message: r)));
   }
 }

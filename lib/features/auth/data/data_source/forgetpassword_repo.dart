@@ -4,8 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../../../core/contants/api.dart';
-import '../../../../../../core/contants/strings.dart';
-import '../../../../../../main.dart';
+
 import '../../../../core/services/cache_storage_services.dart';
 
 class ForgetPasswordRepo {
@@ -19,7 +18,7 @@ class ForgetPasswordRepo {
       );
       final result = jsonDecode(response.body);
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         print(result['message']);
         return Right(result['message']);
       } else {
@@ -42,7 +41,7 @@ class ForgetPasswordRepo {
       );
 
       final result = jsonDecode(response.body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return Right(result['message']);
       } else {
         return Left(result['message']);
@@ -62,7 +61,7 @@ class ForgetPasswordRepo {
       );
       final result = jsonDecode(response.body);
       print(result['message']);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         CacheStorageServices().setToken(result['token']);
         return Right(result['message']);
       } else {
@@ -82,9 +81,9 @@ class ForgetPasswordRepo {
       );
       final result = jsonDecode(response.body);
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         print(result['message']);
-       
+
         return Right(result['message']);
       } else {
         return Left(result['message']);

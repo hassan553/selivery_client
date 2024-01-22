@@ -38,7 +38,7 @@ class VerifyEmailAddressRepo {
         headers: authHeaders,
       );
       final result = jsonDecode(response.body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200||response.statusCode == 201) {
         return Right(result['message']);
       } else {
         return Left(result['message']);
