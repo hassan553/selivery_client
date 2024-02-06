@@ -6,10 +6,17 @@ import '../../../../controllers/setlocationgoto.dart';
 import '../../../../controllers/setlocationwithdriver.dart';
 import '../../../../core/widgets/custom_appBar.dart';
 
-class MapScreen extends StatelessWidget {
+class MapScreen extends StatefulWidget {
+
 
   const MapScreen({super.key});
 
+  @override
+  State<MapScreen> createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  final String id="";
   @override
   Widget build(BuildContext context) {
     SetLocationWithDriverController controllerDriver =
@@ -31,9 +38,9 @@ class MapScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       GoogleMap(
-                        markers: controllerDriver.markers.toSet(),
+                        markers: controllerDriver.newMarker.toSet(),
                         onTap: (latlong){
-                          controllerDriver.addMarkers(latlong);
+                         // controllerDriver.addMarkers(latlong);
                         },
                         mapType: MapType.normal,
                         initialCameraPosition: controllerDriver.kGooglePlex!,
@@ -63,8 +70,13 @@ class MapScreen extends StatelessWidget {
                   color: Colors.orange,
                   child: MaterialButton(
                     onPressed: (){
-                       controller.requestTripDriver();
-                      print("gggg");
+                      if(controller.id.isNotEmpty) {
+                        controller.requestTripDriver(controller.id);
+                      }else{
+                         Get.defaultDialog(
+                            title: 'تنيه',
+                            middleText: 'من فضلك قم باختيار سائق');
+                      }
                     },
                     child: Text("طلب"),
                   ),),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:selivery_client/core/helper/notifictions_helper.dart';
 
 import '../../../controllers/chatcontroller.dart';
 import '../../../core/services/cache_storage_services.dart';
@@ -7,7 +8,8 @@ import '../../../dataforcrud/models/chatmodel.dart';
 
 class ChatScreen extends StatelessWidget {
   final String driverid;
-  const ChatScreen({super.key, required this.driverid});
+  final String devicetoken;
+  const ChatScreen({super.key, required this.driverid, required this.devicetoken});
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +128,10 @@ class ChatScreen extends StatelessWidget {
                     senderId: CacheStorageServices().id,//client
                     dateTime: DateTime.now().toString(),
                     message: controller.chatController!.text));
-                    
+                    FirebaseMessagingService.sendNotification(
+                        title: "رسالة جديدة",
+                        body: controller.chatController!.text,
+                        userToken: devicetoken);
                 controller.chatController!.clear();
               },
                   icon: Icon(Icons.send,color: Colors.green,size: 30,)),

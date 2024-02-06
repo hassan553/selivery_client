@@ -41,6 +41,9 @@ dependencies:
   rating_dialog: ^2.0.4
   firebase_core: ^2.23.0
   url_launcher: ^6.2.1
+  flutter_image_compress: ^2.1.0
+  flutter_polyline_points: ^1.0.0
+  geocoding: ^2.1.1
 
 dev_dependencies:
   flutter_test:

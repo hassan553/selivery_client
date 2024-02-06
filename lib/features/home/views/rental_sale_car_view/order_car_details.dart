@@ -107,8 +107,6 @@ class OrderCarDetailsView extends StatelessWidget {
                                       CarOwnerView(
                                         ownerId: controller.categories[index]
                                             ['userId'],
-                                        face:controller.categories[index]['facebookLink'] ,
-                                        tel: controller.categories[index]['telegramLink'],
                                         phone: controller.categories[index]
                                             ['phone'],
                                         cartype: controller.categories[index]

@@ -1,9 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../dataforcrud/models/drivers.dart';
 import 'setlocation.dart';
 import 'setlocationgoto.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +17,8 @@ import '../core/class/statusrequst.dart';
 import '../core/functions/global_function.dart';
 import '../core/functions/handlingdata.dart';
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import '../dataforcrud/models/drivermodel.dart';
 import '../dataforcrud/nearestdrivers.dart';
@@ -35,33 +42,40 @@ class SetLocationWithDriverController extends GetxController {
   Position? position;
   Completer<GoogleMapController>? completercontroller;
   CameraPosition? kGooglePlex;
- 
-  List<Marker> markers = [];
 
-  addMarkers(LatLng latLng) {
-    markers.clear();
-    markers.add(Marker(
+ // List<Marker> markers = [];
+ Set<Marker> newMarker = {};
+ String id ="";
+  addMarkers(LatLng latLng, Uint8List markerIcon) {
+    newMarker.clear();
+    newMarker.add(
+      Marker(
         markerId: const MarkerId("1"),
         position: latLng,
-        infoWindow: InfoWindow(
-            title: 'driver Name',
-            snippet: drivername,
-            onTap: () {
-              navigateTo(DriverProfile(
-                name: drivername!,
-                image: driverimage!,
-              ));
-            })));
+        icon: BitmapDescriptor.fromBytes(markerIcon),
+        onTap: () {
+          id=driverid!;
+          navigateTo(DriverProfile(
+            name: drivername!,
+            image: driverimage!,
+            imagecar: driverimagecar!,
+            cartype: cartype!,
+          ));
+        },
+      ),
+    );
   }
 
   Map<String, dynamic>? locations;
   Map<String, dynamic>? locations2;
+  List drivers=[];
   String? drivername;
   String? driverid;
-  String? driverimage;
-  String? driverimagecar;
+  String?  driverimage;
+  String? driverimagecar; // Change the type to Uint8List?
   String? drivercarmodel;
-  List drivers = [];
+  String? cartype;
+  Uint8List? driverImageBytes;
   getdrivers() async {
     statusRequest = StatusRequest.loading;
     update();
@@ -71,24 +85,54 @@ class SetLocationWithDriverController extends GetxController {
     );
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
+      print(response['drivers']);
       drivers = response['drivers'] ?? [];
-      
+      response['drivers'].map((e){
+        newMarker.add(Marker(
+          markerId:  MarkerId("1"),
+          position: LatLng(response['drivers'][0]['location']['latitude'],
+              response['drivers'][0]['location']['longitude']),
+          icon: BitmapDescriptor.fromBytes(driverImageBytes!),
+          onTap: () {
+            navigateTo(DriverProfile(
+              name: drivername!,
+              image: driverimage!,
+              imagecar: driverimagecar!,
+              cartype: cartype!,
+            ));
+          },
+        ));
+      });
+     // drivers.add(DriversModel.fromJson(response['drivers']));
       if (drivers.isEmpty) {
         return Get.defaultDialog(
             title: 'تنيه', middleText: 'لا يوجد سائق متاحين الان');
       }
-      
+
       drivername = response['drivers'][0]['driver']['name'];
       driverid = response['drivers'][0]['driver']['_id'];
       driverimage = response['drivers'][0]['driver']['image'];
-    
+      driverimagecar = response['drivers'][0]['driver']['vehicle']['images'][0];
+      cartype = response['drivers'][0]['driver']['vehicle']['model'];
+      print(driverimagecar);
+
+      // Load the driver image as Uint8List
+       driverImageBytes = await loadImage("https://www.selivery-app.com/images/$driverimagecar");
+      if (driverImageBytes != null) {
+        // Add marker with custom icon
+        addMarkers(
+          LatLng(response['drivers'][0]['location']['latitude'],
+              response['drivers'][0]['location']['longitude']),
+          driverImageBytes!,
+        );
+      }
+
     } else {
       statusRequest = StatusRequest.failure;
     }
-    addMarkers(LatLng(response['drivers'][0]['location']['latitude'],
-        response['drivers'][0]['location']['longitude']));
     update();
   }
+
 
   getCurrentLocation() async {
     position = await Geolocator.getCurrentPosition();
@@ -101,11 +145,11 @@ class SetLocationWithDriverController extends GetxController {
     update();
   }
 
-  requestTripDriver() async {
+  requestTripDriver(id) async {
     statusRequest = StatusRequest.loading;
     update();
     var response = await requestTripData.postData(
-        driverid,
+        id,
         setLocationController.lat,
         setLocationController.long,
         setLocationGoToController.lat2,
@@ -116,21 +160,22 @@ class SetLocationWithDriverController extends GetxController {
         setLocationGoToController.lat2 == null ||
         setLocationGoToController.long2 == null) {
       return Get.defaultDialog(
-          title: 'تنيه', middleText: 'من فضلك حدد مكان الذهاب ومكان الاقلاع');
+          title: 'تنيه',
+          middleText: 'من فضلك حدد مكان الذهاب ومكان الاقلاع');
     }
 
     if (StatusRequest.success == statusRequest) {
-     
-      
+
+
       if (drivers.isEmpty) {
         return Get.defaultDialog(
             title: 'تنيه', middleText: "لا يمكنك طلب رحله . لا يوجد سائقين");
       }
-return Get.defaultDialog(
+      return Get.defaultDialog(
           title: 'تنيه', middleText: "تم الطلب بنجاح");
-      
+
     } else {
-     
+
       statusRequest = StatusRequest.failure;
     }
     update();
@@ -141,7 +186,7 @@ return Get.defaultDialog(
     getCurrentLocation();
     completercontroller = Completer<GoogleMapController>();
     sharedPreferences = await SharedPreferences.getInstance();
-      getdrivers();
+    getdrivers();
     if (setLocationController.lat == null ||
         setLocationController.long == null ||
         setLocationGoToController.lat2 == null ||
@@ -150,5 +195,29 @@ return Get.defaultDialog(
           title: 'تنيه', middleText: 'من فضلك حدد مكان الذهاب ومكان الاقلاع');
     }
     super.onInit();
+  }
+
+  // Function to load the driver image as Uint8List
+  // Function to load the driver image as Uint8List and resize it
+  Future<Uint8List?> loadImage(String imageUrl) async {
+    try {
+      http.Response response = await http.get(Uri.parse(imageUrl));
+      if (response.statusCode == 200) {
+        // Resize the image to height 50 and width 50
+        List<int> compressedImage = await FlutterImageCompress
+            .compressWithList(
+          response.bodyBytes,
+          minHeight: 100,
+          minWidth: 100,
+        );
+        return Uint8List.fromList(compressedImage);
+      } else {
+        print('Failed to load image: ${response.statusCode}');
+        return null;
+      }
+    } catch (error) {
+      print('Error loading image: $error');
+      return null;
+    }
   }
 }

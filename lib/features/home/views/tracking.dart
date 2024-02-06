@@ -1,4 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'chats.dart';
@@ -6,15 +11,27 @@ import 'chats.dart';
 import '../../../controllers/tracking.dart';
 import '../../../core/functions/global_function.dart';
 
-class Tracking extends StatelessWidget {
+class Tracking extends StatefulWidget {
   final String id;
-  const Tracking({super.key, required this.id});
+  final String devicetoken;
+  final double pick1;
+  final double pick2;
+  final double des1;
+  final double des2;
+  const Tracking({super.key, required this.id, required this.devicetoken, required this.pick1, required this.pick2, required this.des1, required this.des2});
+
+  @override
+  State<Tracking> createState() => _TrackingState();
+}
+
+class _TrackingState extends State<Tracking> {
+
 
   @override
   Widget build(BuildContext context) {
-    print("idddd $id");
+    print("id ${widget.id}");
     TrackingController trackingController=
-    Get.put(TrackingController()..initalSocket(id));
+    Get.put(TrackingController()..initalSocket(widget.id,widget.pick1,widget.pick2));
     return Scaffold(
       appBar: AppBar(
         title: Text("تتبع مسار السائق",style: TextStyle(color: Colors.black,
@@ -24,7 +41,9 @@ class Tracking extends StatelessWidget {
           Row(
             children: [
               IconButton(onPressed: (){
-                navigateTo(ChatScreen(driverid:trackingController.driverId!));
+                navigateTo(ChatScreen(
+                  devicetoken: widget.devicetoken,
+                    driverid:widget.id));
               },
                   icon: Icon(Icons.chat_bubble,
                     color: Colors.amberAccent,)),
@@ -44,14 +63,23 @@ class Tracking extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       GetBuilder<TrackingController>(builder:
-                          (controller)=>GoogleMap(
-                        markers: controller.markers.toSet(),
-                        mapType: MapType.normal,
-                        initialCameraPosition: controller.kGooglePlex!,
-                        onMapCreated: (GoogleMapController mapcontroller) {
-                          controller.completercontroller!.complete(mapcontroller);
-                        },
-                      ),),
+                          (controller)=>
+                              GoogleMap(
+                                initialCameraPosition: CameraPosition(
+                                  target: LatLng(widget.pick1,
+                                      widget.pick2),
+                                  zoom: 15,
+                                ),
+                                myLocationEnabled: true,
+                                tiltGesturesEnabled: true,
+                                compassEnabled: true,
+                                scrollGesturesEnabled: true,
+                                zoomGesturesEnabled: true,
+                                mapType: MapType.normal,
+                                onMapCreated:controller.onMapCreated,
+                                markers: Set<Marker>.of(controller.markers.values),
+                                polylines: Set<Polyline>.of(controller.polylines.values),
+                              ),),
 
                     ],
                   ) ),

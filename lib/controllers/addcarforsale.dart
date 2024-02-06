@@ -61,11 +61,11 @@ class AddCarForSaleController extends GetxController {
 //     // Error!
 //   }
 // }
-  addCarData(name, phone, face, tel, price, carname, des, category) async {
+  addCarData(name, phone, price, carname, des, category) async {
     statusRequest = StatusRequest.loading;
     update();
     var response = await addCarForSaleData.postData(
-        name, phone, face, tel, price, carname, des, category, file);
+        name, phone, price, carname, des, category, file);
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
       Get.defaultDialog(title: "Success",

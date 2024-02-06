@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -15,7 +17,15 @@ class TrackingController extends GetxController{
   Completer<GoogleMapController>? completercontroller ;
   CameraPosition? kGooglePlex ;
 
-  List<Marker> markers = [];
+  //List<Marker> markers = [];
+  late GoogleMapController mapController;
+  Map<MarkerId, Marker> markers = {};
+  Map<PolylineId, Polyline> polylines = {};
+  List<LatLng> polylineCoordinates = [];
+  PolylinePoints polylinePoints = PolylinePoints();
+  String googleAPiKey = "AIzaSyAS3BGUrmQusXe0pctVL6VALzlJHlIBD1o";
+
+
   IO.Socket ? socket;
   Map<String,dynamic> options ={
     "transports":['websocket'],
@@ -24,8 +34,8 @@ class TrackingController extends GetxController{
 double ? lat;
 double ? lon;
 String ? driverId;
-  initalSocket(id){
-    socket =IO.io("http://192.168.1.5:8000",options);
+  initalSocket(id,pick1,pick2){
+    socket =IO.io("https://www.selivery-app.com/",options);
     socket!.connect();
     socket!.onConnect((_) => print("connect with server"));
     //with room
@@ -43,7 +53,14 @@ String ? driverId;
         lat = data['location']['latitude'];
         lon = data['location']['longitude'];
         if (lat != null && lon != null) {
-          addMarkers(LatLng(lat!, lon!));
+          //addMarkers(LatLng(lat!, lon!));
+          _addMarker(LatLng(pick1, pick2), "origin",
+              BitmapDescriptor.defaultMarker);
+
+          /// destination marker
+          _addMarker(LatLng(lat!,lon!), "destination",
+              BitmapDescriptor.defaultMarkerWithHue(80));
+          _getPolyline(pick1,pick2);
           //update();
         }
         // Update the UI or perform any other actions based on the received data
@@ -54,8 +71,40 @@ String ? driverId;
 
 
   }
+  _addMarker(LatLng position, String id, BitmapDescriptor descriptor) {
+    MarkerId markerId = MarkerId(id);
+    Marker marker =
+    Marker(markerId: markerId, icon: descriptor, position: position);
+    markers[markerId] = marker;
+  }
+  _addPolyLine() {
+    PolylineId id = PolylineId("poly");
+    Polyline polyline = Polyline(
+        polylineId: id, color: Colors.red,
+        width:5,points: polylineCoordinates);
+    polylines[id] = polyline;
+    update();
+  }
 
+  _getPolyline(pick1,pick2) async {
+    PolylineResult result = await polylinePoints.
+    getRouteBetweenCoordinates(
+      googleAPiKey,
+      PointLatLng(pick1, pick2),
+      PointLatLng(lat!,lon!),
+      travelMode: TravelMode.driving,
+    );
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+    }
 
+    _addPolyLine();
+  }
+  void onMapCreated(GoogleMapController controller) async {
+    mapController = controller;
+  }
   getCurrentLocation()async{
     position = await Geolocator.getCurrentPosition();
     kGooglePlex =  CameraPosition(
@@ -73,12 +122,12 @@ String ? driverId;
     update();
   }
 
-  addMarkers(LatLng latLng){
-    print('Adding markers: $latLng');
-    markers.clear();
-    markers.add(Marker(markerId: MarkerId("1"),position:latLng));
-    update();
-  }
+  // addMarkers(LatLng latLng){
+  //   print('Adding markers: $latLng');
+  //   markers.clear();
+  //   markers.add(Marker(markerId: MarkerId("1"),position:latLng));
+  //   update();
+  // }
 
   @override
   void onInit() {

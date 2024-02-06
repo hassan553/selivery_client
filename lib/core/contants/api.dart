@@ -53,6 +53,11 @@ String getdrivers(lat, long) =>
 const String requestDriver = "${baseUri}trip/request";
 const String getMyTrips = "${baseUri}user/client/trips";
 
+//mytrip one
+ String getMyTrip(id) => "${baseUri}trip/$id";
+
+
+
 //driver
 String getdriverProfile(id) => "${baseUri}user/driver/$id";
 /////////

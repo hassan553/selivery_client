@@ -29,7 +29,7 @@ class _AdvisesScreenState extends State<AdvisesScreen> {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
-        title: Text("أرشادات",style: TextStyle(
+        title: Text("إرشادات",style: TextStyle(
           color: Colors.white,
           fontSize: 30,
           fontWeight: FontWeight.bold
@@ -43,7 +43,7 @@ class _AdvisesScreenState extends State<AdvisesScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("1: تعرف علي السائق من خلال صفحتة الشخصية",
+            Text("1: تعرف على السائق من خلال صفحتة الشخصية",
             style: TextStyle(
               fontSize: 18,
               color: Colors.white,
@@ -57,14 +57,14 @@ class _AdvisesScreenState extends State<AdvisesScreen> {
               fontWeight: FontWeight.bold
             ),),
             Divider(),
-            Text("3: لا تنسي تقييم السائق ورأيك به ",
+            Text("3: لا تنسى تقييم السائق ورأيك به ",
             style: TextStyle(
               fontSize: 18,
               color: Colors.white,
               fontWeight: FontWeight.bold
             ),),
             Divider(),
-            Text("4: في حالة وجود اي مشكلة يمكنك التواصل معنا",
+            Text("4: في حالة وجود اى مشكلة يمكنك التواصل معنا",
             style: TextStyle(
               fontSize: 18,
               color: Colors.white,

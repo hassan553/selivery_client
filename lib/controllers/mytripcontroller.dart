@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../dataforcrud/models/mytipsmodels.dart';
+import '../dataforcrud/mytrip.dart';
 import '../dataforcrud/mytrips.dart';
 
 import '../core/class/statusrequst.dart';
@@ -8,23 +8,23 @@ import '../dataforcrud/models/mytrips.dart';
 import '../dataforcrud/rating.dart';
 import '../dataforcrud/starttrip.dart';
 
-class MyTripsController extends GetxController{
+class MyTripController extends GetxController{
   StatusRequest  statusRequest = StatusRequest.none;
-  MyTripsData myTripsData =MyTripsData(Get.find());
+  MyTripData myTripData =MyTripData(Get.find());
   StartTripData startTripData =StartTripData(Get.find());
   RatingData ratingData = RatingData(Get.find());
 
-  List<MyTripsModels> trips = [];
+ late MyTripsModel myTripsModel;
 
-  myTrips()async{
+  myTrip(id)async{
     statusRequest = StatusRequest.loading;
     update();
-    var response = await myTripsData.getData();
+    var response = await myTripData.getData(id);
     statusRequest = handlingData(response);
     if(StatusRequest.success == statusRequest){
-      print(response['trips']);
-      List x =response['trips'];
-      trips.addAll(x.map((e) => MyTripsModels.fromJson(e)));
+      print(response['trip']);
+      myTripsModel= MyTripsModel.fromJson(response['trip']);
+      update();
     }else{
       print("someerror for grt trips");
     }
@@ -61,7 +61,6 @@ class MyTripsController extends GetxController{
 
   @override
   void onInit() {
-    myTrips();
     super.onInit();
   }
 }

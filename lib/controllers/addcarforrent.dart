@@ -41,13 +41,13 @@ class AddCarForRentController extends GetxController{
     update();
   }
 
-  addCarData(name,phone,face,tel,price,requirment,carname,
+  addCarData(name,phone,price,carname,
       des,driver,category)
   async{
     statusRequest = StatusRequest.loading;
     update();
     var response = await addCarForRentData.
-    postData(name, phone, face, tel, price,requirment,
+    postData(name, phone, price,
         carname, des,driver,category,file);
     statusRequest = handlingData(response);
     if(StatusRequest.success == statusRequest){

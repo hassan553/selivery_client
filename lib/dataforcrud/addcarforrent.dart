@@ -10,17 +10,17 @@ class AddCarForRentData{
   Crud crud;
   AddCarForRentData(this.crud);
 
-  postData(name,phone,face,tel,price,requirments,
+  postData(name,phone,price,
       carname,des,driver,category,File? image)
   async{
     var response = await crud.postDataWithFile(rentcar,
         {
           "name":name,
           "phone":phone,
-          "facebook":face,
-          "telegram":tel,
+          "facebook":"f",
+          "telegram":"t",
           "price":price,
-          "rentRequirements":requirments,
+          "rentRequirements":"re",
           "carName":carname,
           "description":des,
           "withDriver":driver,

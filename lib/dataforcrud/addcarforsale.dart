@@ -10,14 +10,14 @@ class AddCarForSaleData{
   Crud crud;
   AddCarForSaleData(this.crud);
 
-  postData(name,phone,face,tel,price,carname,des,category,File? image)
+  postData(name,phone,price,carname,des,category,File? image)
   async{
     var response = await crud.postDataWithFile(addCarForSale,
        {
          "name":name,
          "phone":phone,
-         "facebook":face,
-         "telegram":tel,
+         "facebook":"f",
+         "telegram":"t",
          "price":price,
          "carName":carname,
          "description":des,

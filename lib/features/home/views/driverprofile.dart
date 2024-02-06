@@ -13,7 +13,12 @@ import '../../profile/presentation/widgets/top_title.dart';
 class DriverProfile extends StatelessWidget {
   final String name;
   final String image;
-  const DriverProfile({super.key, required this.name, required this.image});
+  final String imagecar;
+  final String cartype;
+  const DriverProfile({super.key,
+    required this.name,
+    required this.image,
+    required this.imagecar, required this.cartype});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,7 @@ class DriverProfile extends StatelessWidget {
             children: [
              TopTitleWidget(title1: 'سا',
                 title2: 'ئق',
-                image: "http://192.168.1.10:8000/$image}",
+                image: "$image",
                 name:name??'',
               ),
               const CustomDivider(),
@@ -64,7 +69,7 @@ class DriverProfile extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
             CustomText(
-              title: 'Kia cerato',
+              title: '$cartype',
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
@@ -76,8 +81,8 @@ class DriverProfile extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: AppColors.primaryColor)),
-            child: CustomAssetsImage(
-              path: 'assets/buyCar.png',
+            child: CustomNetworkImage(
+               imagePath: '$imagecar',
               height: 60,
               boxFit: BoxFit.fill,
             ),

@@ -63,47 +63,47 @@ class ToSetLocation extends StatelessWidget {
                   child: const Text("حدد موقع الذهاب")),
             ),
             const CustomSizedBox(value: .02),
-            Container(
-              width: screenSize(context).width,
-              padding: const EdgeInsets.symmetric(horizontal: 3),
-              decoration: BoxDecoration(
-                color: const Color(0xffD9D9D9),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Checkbox(value: false, onChanged: (value) {}),
-                  const ResponsiveText(
-                    text: 'تحديد السعر',
-                    scaleFactor: .03,
-                  ),
-                  const SizedBox(width: 2),
-                  Container(
-                    width: screenSize(context).width * .1,
-                    padding: const EdgeInsets.all(1),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: const Color(0xffD9D9D9),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: AppColors.black)),
-                    child: const Text('.......'),
-                  ),
-                  Container(
-                    color: Colors.red,
-                    child: const VerticalDivider(
-                      thickness: 10,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Checkbox(value: true, onChanged: (value) {}),
-                  const ResponsiveText(
-                    text: 'بدون تحديد سوف اتفق مع السائق',
-                    scaleFactor: .03,
-                  ),
-                ],
-              ),
-            ),
+            // Container(
+            //   width: screenSize(context).width,
+            //   padding: const EdgeInsets.symmetric(horizontal: 3),
+            //   decoration: BoxDecoration(
+            //     color: const Color(0xffD9D9D9),
+            //     borderRadius: BorderRadius.circular(10),
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: [
+            //       Checkbox(value: false, onChanged: (value) {}),
+            //       const ResponsiveText(
+            //         text: 'تحديد السعر',
+            //         scaleFactor: .03,
+            //       ),
+            //       const SizedBox(width: 2),
+            //       Container(
+            //         width: screenSize(context).width * .1,
+            //         padding: const EdgeInsets.all(1),
+            //         alignment: Alignment.center,
+            //         decoration: BoxDecoration(
+            //             color: const Color(0xffD9D9D9),
+            //             borderRadius: BorderRadius.circular(8),
+            //             border: Border.all(color: AppColors.black)),
+            //         child: const Text('.......'),
+            //       ),
+            //       Container(
+            //         color: Colors.red,
+            //         child: const VerticalDivider(
+            //           thickness: 10,
+            //           color: Colors.black,
+            //         ),
+            //       ),
+            //       Checkbox(value: true, onChanged: (value) {}),
+            //       const ResponsiveText(
+            //         text: 'بدون تحديد سوف اتفق مع السائق',
+            //         scaleFactor: .03,
+            //       ),
+            //     ],
+            //   ),
+            // ),
             const CustomSizedBox(value: .03),
             InkWell(
               onTap: () => navigateTo(const MapScreen()),

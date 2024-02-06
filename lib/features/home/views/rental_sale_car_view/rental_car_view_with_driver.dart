@@ -165,8 +165,6 @@ class RentalCarViewWithDriver extends StatelessWidget {
                                     InkWell(
                                       onTap: () => navigateTo(
                                           RentalCarOwnerView(
-                                            fac:controller.carswithdriver[index]['facebookLink'] ,
-                                            tel: controller.carswithdriver[index]['telegramLink'],
                                         ownerId:controller.carswithdriver[index]['userId'],
                                         price:controller.carswithdriver[index]['price'],
                                         phone:controller.carswithdriver[index]['phone'] ,
