@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../../core/services/cache_storage_services.dart';
 import '../../auth/presentation/view/login_view.dart';
 import '../../../core/functions/global_function.dart';
 import '../../../core/rescourcs/app_colors.dart';
+import '../../home/views/main_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -12,9 +14,17 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   void splashNavTimer() {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(
+        const Duration(seconds: 2), () => navigateOff(ClientLoginView()));
+  }
+
+  checkAuth() {
+    final token = CacheStorageServices().token;
+    if (token.isEmpty) {
       navigateOff(const ClientLoginView());
-    });
+    } else {
+      navigateOff(const MainView());
+    }
   }
 
   @override
@@ -31,12 +41,12 @@ class _SplashViewState extends State<SplashView> {
     );
   }
 
-  Center splashBody() {
-    return Center(
-      child: Image.asset(
-        'assets/logo.png',
-        fit: BoxFit.cover,
-      ),
+  Widget splashBody() {
+    return Image.asset(
+      'assets/splash.jpg',
+      width: screenSize(context).width,
+      height: screenSize(context).height,
+      fit: BoxFit.cover,
     );
   }
 }

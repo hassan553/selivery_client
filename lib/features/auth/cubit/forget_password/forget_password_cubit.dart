@@ -27,23 +27,27 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   }
 
   void reSendForgetPasswordVerificationCodeToEmail(String email) async {
-    await _forgetPasswordRepo
+    emit(ReSendForgetPasswordVerificationCodeToEmailLoadingState());
+    final result = await _forgetPasswordRepo
         .reSendForgetPasswordVerificationCodeToEmail(email);
-    emit(ReSendForgetPasswordVerificationCodeToEmailState());
+    result.fold(
+      (l) => emit(
+          ReSendForgetPasswordVerificationCodeToEmailErrorState(message: l)),
+      (r) => emit(ReSendForgetPasswordVerificationCodeToEmailState(message: r)),
+    );
   }
 
   void verifyEmailWithCode(String email, int code) async {
-    if(await checkInternet()){
-    emit(ForgetPasswordOTPCodeLoadingState());
-    final result =
-        await _forgetPasswordRepo.verifyClientForgetPasswordCode(email, code);
-    result.fold((l) => emit(ForgetPasswordOTPErrorState(message: l)),
-        (r) => emit(ForgetPasswordOTPSuccessState()));
-         } else {
+    if (await checkInternet()) {
+      emit(ForgetPasswordOTPCodeLoadingState());
+      final result =
+          await _forgetPasswordRepo.verifyClientForgetPasswordCode(email, code);
+      result.fold((l) => emit(ForgetPasswordOTPErrorState(message: l)),
+          (r) => emit(ForgetPasswordOTPSuccessState()));
+    } else {
       emit(const ForgetPasswordOTPErrorState(
           message: "لا يوجد اتصال بالانترنت"));
     }
-
   }
 
   void newPassword(String password) async {

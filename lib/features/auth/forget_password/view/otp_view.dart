@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubit/forget_password/forget_password_cubit.dart';
 import '../../../../../../core/rescourcs/app_colors.dart';
@@ -25,7 +24,7 @@ class OTPView extends StatefulWidget {
 
 class _OTPViewState extends State<OTPView> {
   bool _isResendEnabled = false;
-  int _resendCooldown = 6 * 60; // 6 minutes in seconds
+  int _resendCooldown = 2 * 60; // 3 minutes in seconds
   Timer? _resendCooldownTimer;
 
   @override
@@ -40,19 +39,19 @@ class _OTPViewState extends State<OTPView> {
         if (_resendCooldown > 0) {
           _resendCooldown--;
         } else {
-          _isResendEnabled = false;
+          _isResendEnabled = true;
           _resendCooldownTimer?.cancel();
         }
       });
     });
   }
 
-  void _handleResendCode(String email) {
+  void _handleResendCode(String email, context) {
     BlocProvider.of<ForgetPasswordCubit>(context)
         .reSendForgetPasswordVerificationCodeToEmail(email);
     setState(() {
-      _isResendEnabled = true;
-      _resendCooldown = 6 * 60; // Reset the cooldown
+      _isResendEnabled = false;
+      _resendCooldown = 2 * 60;
       _startResendCooldownTimer();
     });
   }
@@ -98,18 +97,41 @@ class _OTPViewState extends State<OTPView> {
                       path: 'assets/orderCar.png',
                       width: screenSize(context).width * .8,
                     ),
-                    TextButton(
-                      onPressed: _isResendEnabled
-                          ? () => _handleResendCode(widget.email)
-                          : null,
-                      child: Text(
-                        _isResendEnabled
-                            ? 'Resend Verification Code'
-                            : 'Resend in $_resendCooldown seconds',
-                        style: TextStyle(
-                          color: _isResendEnabled ? Colors.blue : Colors.grey,
-                        ),
-                      ),
+                    BlocConsumer<ForgetPasswordCubit, ForgetPasswordState>(
+                      listener: (context, state) {
+                        if (state
+                            is ReSendForgetPasswordVerificationCodeToEmailErrorState) {
+                          showErrorAwesomeDialog(
+                              context, 'تنبيه', state.message);
+                        } else if (state
+                            is ReSendForgetPasswordVerificationCodeToEmailState) {
+                          showSnackBarWidget(
+                              context: context,
+                              message: state.message,
+                              requestStates: RequestStates.success);
+                        }
+                      },
+                      builder: (contex, state) {
+                        return state
+                                is ReSendForgetPasswordVerificationCodeToEmailLoadingState
+                            ? CustomLoadingWidget()
+                            : TextButton(
+                                onPressed: _isResendEnabled
+                                    ? () =>
+                                        _handleResendCode(widget.email, contex)
+                                    : null,
+                                child: Text(
+                                  _isResendEnabled
+                                      ? 'إعادة إرسال رمز التحقق'
+                                      : 'إعادة الإرسال خلال $_resendCooldown ثواني',
+                                  style: TextStyle(
+                                    color: _isResendEnabled
+                                        ? Colors.blue
+                                        : Colors.grey,
+                                  ),
+                                ),
+                              );
+                      },
                     ),
                     NumericKeyboardScreen(
                         screen: widget.screen, email: widget.email),
@@ -171,8 +193,7 @@ class _NumericKeyboardScreenState extends State<NumericKeyboardScreen> {
               listener: (context, state) {
                 if (state is ForgetPasswordOTPSuccessState) {
                   navigateOff(widget.screen);
-                }
-                if (state is ForgetPasswordOTPErrorState) {
+                } else if (state is ForgetPasswordOTPErrorState) {
                   showErrorAwesomeDialog(context, 'تنبيه', state.message);
                 }
               },
@@ -184,18 +205,18 @@ class _NumericKeyboardScreenState extends State<NumericKeyboardScreen> {
                       keyboardType: TextInputType.none,
                       autofocus: true,
                       onFieldSubmitted: (value) {
-                       if (formKey.currentState!.validate()) {
-                    if (controller.text.length == 6) {
-                      int intValue = int.parse(controller.text);
-                      ForgetPasswordCubit.get(context)
-                          .verifyEmailWithCode(widget.email, intValue);
-                    } else {
-                      showSnackBarWidget(
-                          context: context,
-                          message: "كود الدخال يجب ان لا يقل عن 6 احرف",
-                          requestStates: RequestStates.error);
-                    }
-                  }
+                        if (formKey.currentState!.validate()) {
+                          if (controller.text.length == 6) {
+                            int intValue = int.parse(controller.text);
+                            ForgetPasswordCubit.get(context)
+                                .verifyEmailWithCode(widget.email, intValue);
+                          } else {
+                            showSnackBarWidget(
+                                context: context,
+                                message: "كود الدخال يجب ان لا يقل عن 6 احرف",
+                                requestStates: RequestStates.error);
+                          }
+                        }
                       },
                       focusNode: FocusScopeNode(canRequestFocus: false),
                       cursorColor: AppColors.white,

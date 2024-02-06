@@ -7,13 +7,7 @@ import 'core/functions/location.dart';
 import 'core/helper/notifictions_helper.dart';
 import 'core/services/cache_storage_services.dart';
 import 'dart:io';
-class MyHttpOverrides extends HttpOverrides{
-  @override
-  HttpClient createHttpClient(SecurityContext? context){
-    return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
-  }
-}
+import '../core/class/http_override.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
