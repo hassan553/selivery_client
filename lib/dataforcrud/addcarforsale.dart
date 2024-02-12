@@ -1,7 +1,6 @@
 
 import 'dart:io';
 
-import 'package:get/get.dart';
 
 import '../core/class/crud.dart';
 import '../core/contants/api.dart';

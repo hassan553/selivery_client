@@ -35,7 +35,7 @@ class CarOwnerView extends StatelessWidget {
     print(ownerId);
     return GetBuilder<OwnerCarForSaleController>(
         builder: (controller) => Scaffold(
-              appBar: customAppBarForSearch(context),
+              appBar: customAppBar(context),
               body: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SingleChildScrollView(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:selivery_client/core/contants/api.dart';
+import '../../../../core/contants/api.dart';
 
 import '../../../../controllers/categoriescontroller.dart';
 import '../../../../core/functions/global_function.dart';
@@ -22,23 +22,11 @@ class OrderCarView extends StatefulWidget {
 }
 
 class _OrderCarViewState extends State<OrderCarView> {
-  List images = [
-    'assets/buyCar.png',
-    'assets/Rectangle 158 (3).png',
-    'assets/Rectangle 158 (2).png',
-    'assets/Rectangle 159 (1).png',
-  ];
-  List titles = [
-    'سيارات',
-    'دراجات بخارية',
-    'ميكروباص',
-    'دراجة',
-  ];
   @override
   Widget build(BuildContext context) {
     Get.put(CategoriesController());
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
       body: GetBuilder<CategoriesController>(
         builder: (controller) => Center(
           child: ListView.builder(

@@ -4,7 +4,6 @@ import 'rental_sale_car_view/order_car_view.dart';
 import '../../../core/rescourcs/app_colors.dart';
 import '../../../core/widgets/custom_appBar.dart';
 import '../widgets/category_items.dart';
-import 'order_car_view/category_get_location_from_user_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -32,7 +31,7 @@ class _HomeViewState extends State<HomeView> {
             imagePath: 'assets/orderCar.png',
             title: 'طلب مركبة',
             isRental: false,
-            screen:AdvisesScreen(),
+            screen: AdvisesScreen(),
           ),
           CategoryItem(
             imagePath: 'assets/rentalCar.png',
@@ -46,9 +45,7 @@ class _HomeViewState extends State<HomeView> {
             imagePath: 'assets/buyCar.png',
             title: 'شراء مركبة',
             isRental: false,
-            screen: OrderCarView(
-              isRental: false,
-            ),
+            screen: OrderCarView(isRental: false),
           ),
         ],
       ),

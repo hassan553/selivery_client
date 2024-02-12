@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import '../../../../core/functions/global_function.dart';
 import '../../../../core/widgets/custom_sized_box.dart';
 import '../../../../core/widgets/responsive_text.dart';
-import 'connect_with_driver.dart';
 
 class GetLocationFromUserView extends StatefulWidget {
   const GetLocationFromUserView({super.key});
@@ -27,7 +26,7 @@ class _GetLocationFromUserViewState extends State<GetLocationFromUserView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -65,30 +64,7 @@ class _GetLocationFromUserViewState extends State<GetLocationFromUserView> {
             ),
           ),
           const CustomSizedBox(value: .02),
-          // InkWell(
-          //   onTap: () => navigateTo(const ConnectWithDriverView()),
-          //   child: Container(
-          //     width: screenSize(context).width,
-          //     padding: const EdgeInsets.symmetric(vertical: 30),
-          //     margin: const EdgeInsets.symmetric(horizontal: 10),
-          //     decoration: BoxDecoration(
-          //       color: const Color(0xff0F534D),
-          //       borderRadius: BorderRadius.circular(10),
-          //     ),
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         CustomAssetsImage(path: 'assets/Here.png'),
-          //         const SizedBox(width: 4),
-          //         const ResponsiveText(
-          //           text: 'التواصل مع السائق مباشرة',
-          //           scaleFactor: .05,
-          //           color: AppColors.white,
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          
         ],
       ),
     );

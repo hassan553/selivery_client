@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'orders_details_view.dart';
-
 import '../../../../core/functions/global_function.dart';
 import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_appBar.dart';
@@ -15,7 +14,7 @@ class OrdersView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff1E2B3C),
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
       body: Container(
         width: screenSize(context).width,
         height: screenSize(context).height,

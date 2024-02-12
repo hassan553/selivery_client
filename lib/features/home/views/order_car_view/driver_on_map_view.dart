@@ -13,7 +13,7 @@ class DriverOnMapView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
       body: InkWell(
         onTap: () => navigateTo(const TrackingDriverView()),
         child: Column(

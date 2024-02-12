@@ -4,9 +4,6 @@ import '../../../controllers/mytripcontroller.dart';
 import '../../../core/class/statusrequst.dart';
 import '../../../core/functions/global_function.dart';
 import 'tracking.dart';
-
-import '../../../controllers/mytrips.dart';
-import '../../../core/functions/ratingdailog.dart';
 import '../../../core/functions/ratingdriver.dart';
 import '../../../core/rescourcs/app_colors.dart';
 

@@ -20,7 +20,6 @@ Future<Either<String, Unit>> handleSignInWithGoogle() async {
     }
     return right(unit);
   } catch (error) {
-    print('errror ${error}');
     return left(error.toString());
   }
 }
@@ -35,10 +34,8 @@ Future _loginWithGoogle(String idToken) async {
           'deviceToken': await FirebaseMessagingService.getDeviceToken()
         }));
     final result = json.decode(request.body);
-    print('error ${result['message']}');
     message = result['message'];
     if (request.statusCode == 200) {
-      print('error ${result['message']}');
       await CacheStorageServices().setToken(result['token']);
     } else {
       throw (result['message'].toString());

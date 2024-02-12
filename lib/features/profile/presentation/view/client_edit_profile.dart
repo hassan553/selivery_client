@@ -8,7 +8,6 @@ import '../../../../core/widgets/custom_image.dart';
 import '../../../../core/widgets/custom_loading_widget.dart';
 import '../../../../core/widgets/custom_sized_box.dart';
 import '../../controller/client_profile_controller.dart';
-import '../../data/repository/client_profile_repo.dart';
 import '../widgets/change_password_widget.dart';
 import '../widgets/custom_textfield.dart';
 

@@ -4,34 +4,20 @@ import '../dataforcrud/categoriesdata.dart';
 import '../core/class/statusrequst.dart';
 import '../core/functions/handlingdata.dart';
 
-class CategoriesController extends GetxController{
-
-  StatusRequest  statusRequest = StatusRequest.none;
+class CategoriesController extends GetxController {
+  StatusRequest statusRequest = StatusRequest.none;
 
   CategoriesData categoriesData = CategoriesData(Get.find());
   List categories = [];
 
-  getCategories()async{
+  getCategories() async {
     statusRequest = StatusRequest.loading;
     update();
     var response = await categoriesData.getData();
-     statusRequest = handlingData(response);
-    if(StatusRequest.success == statusRequest){
-      // if(response.Statuscode == 200){
-      //   print("okkk");
-      //  print(response);
-      // }else{
-      //   // Get.defaultDialog(title: "33".tr,
-      //   //     middleText: "37".tr);
-      //   print("error get categories");
-      //   statusRequest = StatusRequest.failure;
-      // }
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
       categories.addAll(response['categories']);
-      print("categories $categories");
-      print("okkkkkkk");
-    }else{
-      print("someerror");
-    }
+    } else {}
     update();
   }
 
@@ -40,5 +26,4 @@ class CategoriesController extends GetxController{
     getCategories();
     super.onInit();
   }
-
 }

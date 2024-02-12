@@ -17,7 +17,6 @@ getDriver(id)async{
   if(StatusRequest.success == statusRequest){
 
   }else{
-    print("someerror for get profile");
   }
   update();
 }

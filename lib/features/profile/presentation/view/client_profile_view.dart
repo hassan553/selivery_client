@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../core/contants/api.dart';
 import '../widgets/update_profile.dart';
 import '../../../../../core/widgets/custom_loading_widget.dart';
 import '../../../../core/widgets/error_componant.dart';

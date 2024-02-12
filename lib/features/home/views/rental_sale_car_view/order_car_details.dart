@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/categorieslistforsales.dart';
-import '../../../../core/widgets/custom_image.dart';
 import '../../../../core/widgets/custom_sized_box.dart';
 import '../../../../core/functions/global_function.dart';
 import '../../../../core/widgets/custom_appBar.dart';
@@ -27,7 +26,7 @@ class OrderCarDetailsView extends StatelessWidget {
       'assets/pngwing 9.png',
     ];
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
       body: GetBuilder<CategoriesListForSalesController>(
         builder: (controller) => Column(
           mainAxisAlignment: MainAxisAlignment.start,

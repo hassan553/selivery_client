@@ -25,9 +25,12 @@ class RentalCarViewWithoutDriver extends StatelessWidget {
       'assets/pngwing 3.png',
       'assets/pngwing 9.png',
     ];
-    Get.put(CarWithOutDriverController()..getcarswithoutdriver(id));
+
+    Get.put( CarWithOutDriverController()..getcarswithoutdriver(id));
+   
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
+     
       body: GetBuilder<CarWithOutDriverController>(builder:
           (controller){
         if(controller.statusRequest==StatusRequest.loading){
