@@ -25,7 +25,7 @@ class VerifyEmailOTPView extends StatefulWidget {
 
 class _VerifyEmailOTPViewState extends State<VerifyEmailOTPView> {
   bool _isResendEnabled = false;
-  int _resendCooldown = 2 * 60; // 6 minutes in seconds
+  int _resendCooldown = 2 * 60; 
   Timer? _resendCooldownTimer;
 
   @override

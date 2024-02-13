@@ -19,14 +19,11 @@ class ForgetPasswordRepo {
       final result = jsonDecode(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print(result['message']);
         return Right(result['message']);
       } else {
-        print(result['message']);
         return Left(result['message']);
       }
     } on Exception catch (e) {
-      print(e.toString());
       return Left(e.toString());
     }
   }
@@ -60,7 +57,6 @@ class ForgetPasswordRepo {
         headers: authHeaders,
       );
       final result = jsonDecode(response.body);
-      print(result['message']);
       if (response.statusCode == 200 || response.statusCode == 201) {
         CacheStorageServices().setToken(result['token']);
         return Right(result['message']);
@@ -82,7 +78,6 @@ class ForgetPasswordRepo {
       final result = jsonDecode(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print(result['message']);
 
         return Right(result['message']);
       } else {

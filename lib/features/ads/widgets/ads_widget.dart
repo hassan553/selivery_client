@@ -76,76 +76,7 @@ Column customAdsWidget(BuildContext context, int index, AdsModel model) {
             ],
           ),
         ),
-        // const CustomSizedBox(value: .02),
-        // Row(
-        //   children: [
-        //     Expanded(
-        //       child: Container(
-        //         height: 50,
-        //         decoration: BoxDecoration(
-        //           borderRadius: BorderRadius.circular(10),
-        //           color: AppColors.primaryColor,
-        //         ),
-        //         padding:
-        //             const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        //         child: FittedBox(
-        //           child: Row(
-        //             crossAxisAlignment: CrossAxisAlignment.center,
-        //             children: [
-        //                CustomAssetsImage(
-        //                   width: 20,
-        //                   path: 'assets/Natural User Interface 5.png'),
-        //               ResponsiveText(
-        //                 text: 'عدد النقرات :${model.views} ',
-        //                 scaleFactor: .03,
-        //                 color: AppColors.white,
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //     const SizedBox(width: 3),
-        //     Container(
-        //       height: 50,
-        //       width: 1,
-        //       color: Colors.black,
-        //     ),
-        //     const SizedBox(width: 3),
-        //     Expanded(
-        //       child: InkWell(
-        //         onTap: () {
-        //         },
-        //         child: Container(
-        //           height: 50,
-        //           decoration: BoxDecoration(
-        //             borderRadius: BorderRadius.circular(10),
-        //             color: Colors.red,
-        //           ),
-        //           padding:
-        //               const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        //           child: const FittedBox(
-        //             child: Row(
-        //               children: [
-        //                 ResponsiveText(
-        //                   text: 'حذف الإعلان ',
-        //                   scaleFactor: .03,
-        //                   color: AppColors.white,
-        //                 ),
-        //                 Icon(
-        //                   Icons.delete,
-        //                   color: AppColors.white,
-        //                   size: 20,
-        //                 )
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // ),
-        // const SizedBox(height: 20),
+       
       ],
     );
   }

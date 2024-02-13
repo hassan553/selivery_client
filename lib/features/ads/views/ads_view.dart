@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'search_ads_view.dart';
-import '../../../core/functions/global_function.dart';
 import '../../../core/widgets/custom_appBar.dart';
 import '../../../core/widgets/custom_loading_widget.dart';
 import '../../../core/widgets/error_componant.dart';
@@ -26,13 +24,14 @@ class _AllAdsViewState extends State<AllAdsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(150),
-        child: InkWell(
-          onTap: () => navigateTo(const SearchAdsView()),
-          child: customAppBarForSearch(context),
-        ),
-      ),
+      appBar: customAppBar(context),
+      // appBar: PreferredSize(
+      //   preferredSize: const Size.fromHeight(150),
+      //   child: InkWell(
+      //     onTap: () => navigateTo(const SearchAdsView()),
+      //     child: customAppBarForSearch(context),
+      //   ),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Obx(

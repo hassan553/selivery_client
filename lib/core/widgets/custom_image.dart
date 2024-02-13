@@ -48,23 +48,19 @@ class CustomNetworkImage extends StatelessWidget {
         return '';
       }
       String i = '${baseUri}images\\$image';
-      print(i);
       if (i == baseUri) {
         return '';
       }
       return i;
-    } on PlatformException catch (e) {
-      print('e${e.toString()}');
+    } on PlatformException catch (_) {
       return '';
     } catch (error) {
-      print(error.toString());
       return '';
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    print('image$imagePath');
     return Image.network(
       checkImage(imagePath),
       fit: boxFit,

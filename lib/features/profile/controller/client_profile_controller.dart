@@ -108,22 +108,13 @@ class ClientProfileController extends GetxController {
         await clientProfileRepo.pickClientImage();
         getClientProfile();
         changeImageLoading = false;
-        // showSnackBarWidget(
-        //     context: context,
-        //     message: 'تم التغير بنجاح',
-        //     requestStates: RequestStates.success);
+       
       } catch (error) {
         changeImageLoading = false;
-        // showSnackBarWidget(
-        //     context: context,
-        //     message: "لقد حدث خطا",
-        //     requestStates: RequestStates.error);
+        
       }
     } else {
-      // showSnackBarWidget(
-      //     context: context,
-      //     message: 'لا يوجد اتصال بالانترنت',
-      //     requestStates: RequestStates.error);
+      
     }
     update();
   }

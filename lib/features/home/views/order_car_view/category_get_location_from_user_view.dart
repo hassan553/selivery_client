@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import '../../../../core/functions/global_function.dart';
 import '../../../../core/widgets/custom_sized_box.dart';
 import '../../../../core/widgets/responsive_text.dart';
-import 'connect_with_driver.dart';
 
 class GetLocationFromUserView extends StatefulWidget {
   const GetLocationFromUserView({super.key});
@@ -28,7 +27,7 @@ class _GetLocationFromUserViewState extends State<GetLocationFromUserView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -90,6 +89,7 @@ class _GetLocationFromUserViewState extends State<GetLocationFromUserView> {
               ),
             ),
           ),
+
         ],
       ),
     );

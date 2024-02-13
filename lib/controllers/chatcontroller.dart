@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../dataforcrud/models/chatmodel.dart';
-import '../../../core/services/cache_storage_services.dart';
 
 class ChatController extends GetxController {
 
@@ -44,7 +43,7 @@ class ChatController extends GetxController {
         .doc(id)
         .collection('messages')
         .add(model.toJson());
-    print('done send message');
+
   }
 
   @override

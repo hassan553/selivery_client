@@ -1,15 +1,12 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../core/class/statusrequst.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-import '../core/services/cache_storage_services.dart';
 
 class TrackingController extends GetxController{
   StatusRequest statusRequest = StatusRequest.loading;
@@ -64,7 +61,6 @@ String ? driverId;
           //update();
         }
         // Update the UI or perform any other actions based on the received data
-        print("Received driver location update: $id - $location");
       }
     });
 

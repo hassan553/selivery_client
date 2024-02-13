@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
+
 import '../functions/global_function.dart';
 
 showAwesomeDialog(

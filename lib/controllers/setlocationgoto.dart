@@ -23,15 +23,9 @@ class SetLocationGoToController extends GetxController{
     lat2=latLng.latitude;
     long2=latLng.longitude;
     update();
-    print("late2 $lat2");
-    print("long2 $long2");
+   
   }
-  // goAddressPartTwo(){
-  //   Get.toNamed("",arguments: {
-  //     "lat":lat.toString() ,
-  //     "long":long.toString(),
-  //   });
-  // }
+  
 
   getCurrentLocation()async{
     position = await Geolocator.getCurrentPosition();

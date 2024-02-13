@@ -15,7 +15,7 @@ class DriverArriveToUserView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xff1E2B3C),
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
       body: InkWell(
         onTap: () => navigateTo(const DuringTripMapView()),
         child: Container(

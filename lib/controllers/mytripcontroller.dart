@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import '../dataforcrud/mytrip.dart';
-import '../dataforcrud/mytrips.dart';
 
 import '../core/class/statusrequst.dart';
 import '../core/functions/handlingdata.dart';
@@ -22,11 +21,9 @@ class MyTripController extends GetxController{
     var response = await myTripData.getData(id);
     statusRequest = handlingData(response);
     if(StatusRequest.success == statusRequest){
-      print(response['trip']);
       myTripsModel= MyTripsModel.fromJson(response['trip']);
       update();
     }else{
-      print("someerror for grt trips");
     }
     update();
   }
@@ -39,9 +36,7 @@ class MyTripController extends GetxController{
     if(StatusRequest.success == statusRequest){
       Get.defaultDialog(title: "هلا",
           middleText: "تم بدا الرحلة بنجاح");
-      print("start");
     }else{
-      print("someerror for start trips");
     }
     update();
   }
@@ -55,7 +50,6 @@ class MyTripController extends GetxController{
       Get.defaultDialog(title: "هلا",
           middleText: "تم تقييم السائق بنجاح");
     }else{
-      print("someerror for rate trips");
     }
     update();
   }

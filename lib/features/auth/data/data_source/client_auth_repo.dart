@@ -21,14 +21,12 @@ class ClientAuthRepo {
         if (result['message'] == 'LoggedIn successfully') {
           CacheStorageServices().setToken(result['token']);
           CacheStorageServices().setId(result['user']['_id']);
-          print(CacheStorageServices().token);
         }
         return Right(result['message']);
       } else {
         return Left(result['message']);
       }
     } catch (e) {
-      print("error ${e.toString()}");
       return Left(e.toString());
     }
   }
@@ -53,7 +51,6 @@ class ClientAuthRepo {
         return Left(result['message']);
       }
     } catch (e) {
-      print("error ${e.toString()}");
       return Left(e.toString());
     }
   }

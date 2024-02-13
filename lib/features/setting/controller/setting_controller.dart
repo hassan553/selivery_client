@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import '../../../core/functions/checkinternet.dart';
 import '../../../core/functions/global_function.dart';
 import '../../../core/services/cache_storage_services.dart';
-import '../../../core/widgets/show_awesomeDialog.dart';
 import '../../auth/data/data_source/google_sigin.dart';
 import '../../auth/presentation/view/login_view.dart';
 import '../../profile/controller/client_profile_controller.dart';

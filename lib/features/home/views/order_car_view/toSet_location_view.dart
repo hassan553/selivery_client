@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'googlemapforlaunch.dart';
 import 'googlemapgoto.dart';
 import '../../../../core/functions/global_function.dart';
-import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_appBar.dart';
 import '../../../../core/widgets/custom_divider.dart';
 import '../../../../core/widgets/custom_sized_box.dart';
@@ -17,7 +16,7 @@ class ToSetLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+     appBar: customAppBar(context),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(

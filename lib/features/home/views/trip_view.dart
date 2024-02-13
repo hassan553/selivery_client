@@ -9,7 +9,7 @@ class TripView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+       appBar: customAppBar(context),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [

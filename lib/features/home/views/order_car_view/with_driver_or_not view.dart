@@ -16,9 +16,8 @@ class WithDriverOrNotView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("catid for rent $catId");
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
       body: ListView(
         children: [
           const CustomSizedBox(value: .02),

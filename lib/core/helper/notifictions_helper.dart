@@ -1,11 +1,19 @@
+import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
 class FirebaseMessagingService {
   static final FirebaseMessaging _firebaseMessaging =
       FirebaseMessaging.instance;
+
+  static StreamController<int> streamController= StreamController<int>();
+
+  static int counter = 0 ;
+  static Stream<int> get not=> streamController.stream;
+
 
   // Initialize Firebase Messaging and request permission
   static Future<void> initialize() async {
@@ -18,7 +26,6 @@ class FirebaseMessagingService {
   // Get the device token for push notifications
   static Future<String?> getDeviceToken() async {
     try {
-      print(await _firebaseMessaging.getToken());
       return await _firebaseMessaging.getToken();
     } catch (error) {
       return null;
@@ -29,26 +36,19 @@ class FirebaseMessagingService {
   static void configureForegroundMessaging() {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (message.notification != null) {
-        // Handle notification message
         final notification = message.notification!;
-        // Extract notification details
         final title = notification.title ?? '';
         final body = notification.body ?? '';
-        Get.snackbar("$title","$body");
-        print(title);
-        print(body);
+        counter++;
+        streamController.add(counter);
+        Get.snackbar(title, body);
       }
     });
   }
 
   static Future<void> backgroundHandler(RemoteMessage message) async {
-    // Handle notification message
-    final notification = message.notification!;
-    // Extract notification details
-    final title = notification.title ?? '';
-    final body = notification.body ?? '';
-    print(title);
-    print(body);
+    counter++;
+    streamController.add(counter);
   }
 
   // Subscribe to a topic
@@ -71,21 +71,20 @@ class FirebaseMessagingService {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) {
       if (message != null) {
         _handleNotification(message);
-
       }
     });
   }
 
   static void _handleNotification(RemoteMessage message) {
-    final notification = message.notification;
-    final data = message.data;
-    print(' i click on message');
+    // final notification = message.notification;
+    // final data = message.data;
+    // //navigateTo(const MainView());
   }
-  
+
   static Future sendNotification(
       {required String title,
-      required String body,
-      required String userToken}) async {
+        required String body,
+        required String userToken}) async {
     const String serverKey =
         'AAAAc_PLxMg:APA91bEDAc_I4jG2wzGgRCq6drkNzO-JlvyA91MzGABJrRx6Kix_uKreTGAF34AaLAxvQ8Nz1XGeWTwgNutQpccQzYcelYpRyqply0PITDPjIMugIuaqk_-uK4Ar0Q_TvSjNQoEW_7fA'; // Replace with your server key
     const String fcmEndpoint = 'https://fcm.googleapis.com/fcm/send';
@@ -107,11 +106,8 @@ class FirebaseMessagingService {
       body: jsonEncode(notificationData),
     );
 
-    if (response.statusCode == 200) {
-      print('Notification sent successfully');
-    } else {
-      print('Failed to send notification. Status code: ${response.statusCode}');
-      print('Response body: ${response.body}');
+    if (response.statusCode != 200) {
+      Get.snackbar('تنبيه', "فشل في الارسال");
     }
   }
 }

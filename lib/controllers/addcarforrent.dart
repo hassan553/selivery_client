@@ -20,7 +20,6 @@ class AddCarForRentController extends GetxController{
     if(myfile != null){
       return File(myfile.path);
     }else{
-      print("no image");
     }
 
   }
@@ -53,18 +52,15 @@ class AddCarForRentController extends GetxController{
     if(StatusRequest.success == statusRequest){
       Get.defaultDialog(title: "Success",
           middleText: "تم اضافة السيارة بنجاح",onConfirm: (){
-            // navigateOff(MainView());
             Get.back();
           });
-      //Get.offAll(MaterialPageRoute(builder: (BuildContext context) => MainView()));
     }else{
       Get.defaultDialog(title: "تنبية",
           middleText: "تاكد من البيانات بشكل صحيح",onConfirm: (){
             // navigateOff(MainView());
             Get.back();
           });
-      print("someerror");
-      // print(response.statuscode);
+     
       statusRequest = StatusRequest.failure;
 
     }

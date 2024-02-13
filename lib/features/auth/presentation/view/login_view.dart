@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/functions/google_sign.dart';
 import '../../../../../core/widgets/show_awesomeDialog.dart';
 import '../../../../../core/widgets/custom_loading_widget.dart';
-import '../../../../../core/widgets/visibility_icon.dart';
 import '../../../home/views/main_view.dart';
 import '../../data/data_source/client_auth_repo.dart';
 import '../../../../../core/functions/global_function.dart';

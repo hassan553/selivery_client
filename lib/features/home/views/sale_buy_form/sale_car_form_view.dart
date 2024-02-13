@@ -4,12 +4,9 @@ import '../../../../core/functions/global_function.dart';
 import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_appBar.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/widgets/custom_image.dart';
 import '../../../../core/widgets/responsive_text.dart';
-import '../../widgets/rental_buy_car_add_image.dart';
 import '../../widgets/rental_buy_car_form_widget.dart';
-import 'package:http/http.dart' as http;
 
 class SaleCarFormView extends StatefulWidget {
   final String catId;
@@ -36,17 +33,29 @@ class _SaleCarFormViewState extends State<SaleCarFormView> {
   TextEditingController priceController = TextEditingController();
 
   TextEditingController descController = TextEditingController();
-  TextEditingController CarNameController = TextEditingController();
+  TextEditingController carNameController = TextEditingController();
   final String catId;
 
   _SaleCarFormViewState(this.catId);
 
-
+ @override
+ void dispose() {
+   nameController.dispose();
+   ageController.dispose();
+   phoneController.dispose();
+   faceLinkController.dispose();
+   telController.dispose();
+   typeController.dispose();
+   priceController.dispose();
+   descController.dispose();
+   carNameController.dispose();
+   super.dispose();
+ }
   @override
   Widget build(BuildContext context) {
     AddCarForSaleController controller = Get.put(AddCarForSaleController());
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+       appBar: customAppBar(context),
       body: Container(
           width: screenSize(context).width,
           height: screenSize(context).height,
@@ -104,7 +113,7 @@ class _SaleCarFormViewState extends State<SaleCarFormView> {
                 SizedBox(height: 10),
                 BuyRentalCarFormWidget(
                   title: 'اسم السيارة',
-                  controller: CarNameController,
+                  controller: carNameController,
                 ),
                 SizedBox(height: 10),
                 BuyRentalCarFormWidget(
@@ -152,7 +161,7 @@ class _SaleCarFormViewState extends State<SaleCarFormView> {
                         nameController.text,
                         phoneController.text,
                         priceController.text,
-                        CarNameController.text,
+                        carNameController.text,
                         descController.text,
                         catId);
 

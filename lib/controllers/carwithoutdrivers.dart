@@ -18,10 +18,8 @@ class CarWithOutDriverController extends GetxController{
     statusRequest = handlingData(response);
     if(StatusRequest.success == statusRequest){
       carswithoutdriver.addAll(response['vehicles']);
-      print("categories rent $carswithoutdriver");
-      print("okkkkkkk");
+      
     }else{
-      print("someerror");
     }
     update();
   }

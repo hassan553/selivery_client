@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../../core/widgets/custom_loading_widget.dart';
 
 import '../../../../core/rescourcs/app_colors.dart';
-import '../../../../core/widgets/custom_sized_box.dart';
 import '../../../../core/widgets/responsive_text.dart';
 import '../../controller/client_profile_controller.dart';
 import 'package:get/get.dart';

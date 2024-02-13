@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:selivery_client/features/home/views/mytrip.dart';
+import 'mytrip.dart';
 import '../../../core/class/statusrequst.dart';
 import '../../../core/functions/global_function.dart';
-import 'tracking.dart';
-
 import '../../../controllers/mytrips.dart';
-import '../../../core/functions/ratingdailog.dart';
-import '../../../core/functions/ratingdriver.dart';
 import '../../../core/rescourcs/app_colors.dart';
 
 class MyTrips extends StatelessWidget {
