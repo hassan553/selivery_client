@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../controllers/mytripcontroller.dart';
 import '../../controllers/mytrips.dart';
 import 'package:get/get.dart';
 
@@ -71,8 +72,9 @@ class _RatingScreenState extends State<RatingScreen> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
+                print("ok");
                 // Call your API here with the selected text
-                MyTripsController controller = Get.find();
+                MyTripController controller = Get.find();
                 controller.rateTrip(widget.id,_selectedText);
                 print("Submitting rating with text jj: $_selectedText");
                 // Add your API call logic here

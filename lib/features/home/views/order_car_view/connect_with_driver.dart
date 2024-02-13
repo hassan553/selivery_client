@@ -9,6 +9,7 @@ import '../../../../core/widgets/responsive_text.dart';
 import 'map_view.dart';
 
 class ConnectWithDriverView extends StatelessWidget {
+
   const ConnectWithDriverView({super.key});
 
   @override

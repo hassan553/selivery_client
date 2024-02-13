@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:selivery_client/features/home/views/trackingwithoutdestionation.dart';
 import '../../../controllers/mytripcontroller.dart';
 import '../../../core/class/statusrequst.dart';
 import '../../../core/functions/global_function.dart';
@@ -33,8 +34,7 @@ class MyTrip extends StatelessWidget {
               color: Colors.green,
             ),
           );
-        }
-        if(controller.myTripsModel.status=="requested"){
+        } else if(controller.myTripsModel.status=="requested"){
           return Center(
             child: const Text("رحلتك في انتظار موافقة السائق",style: TextStyle(
                 color: Colors.white,
@@ -45,15 +45,31 @@ class MyTrip extends StatelessWidget {
         }else if(controller.myTripsModel.status=="accepted"){
           return InkWell(
               onTap: (){
-                //go to tracking
-                navigateTo( Tracking(
-                  pick1:controller.myTripsModel.pickupLocation!.coordinates!.first ,
-                  pick2:controller.myTripsModel.pickupLocation!.coordinates!.last ,
-                  des1: controller.myTripsModel.destinationLocation!.coordinates!.first,
-                  des2: controller.myTripsModel.destinationLocation!.coordinates!.first,
-                  devicetoken:controller.myTripsModel.driver!.deviceToken!,
-                  id: controller.myTripsModel.driver!.sId!,
-                ));
+                if(controller.myTripsModel.destinationLocation==null){
+                  //go to tracking withoutdestionation
+                  navigateTo(TrackingWithoutDestinatnation(
+                    pick1: controller.myTripsModel.pickupLocation!.coordinates!
+                        .first,
+                    pick2: controller.myTripsModel.pickupLocation!.coordinates!
+                        .last,
+                    devicetoken: controller.myTripsModel.driver!.deviceToken!,
+                    id: controller.myTripsModel.driver!.sId!,
+                  ));
+                }else {
+                  //go to tracking
+                  navigateTo(Tracking(
+                    pick1: controller.myTripsModel.pickupLocation!.coordinates!
+                        .first,
+                    pick2: controller.myTripsModel.pickupLocation!.coordinates!
+                        .last,
+                    des1: controller.myTripsModel.destinationLocation!
+                        .coordinates!.first,
+                    des2: controller.myTripsModel.destinationLocation!
+                        .coordinates!.first,
+                    devicetoken: controller.myTripsModel.driver!.deviceToken!,
+                    id: controller.myTripsModel.driver!.sId!,
+                  ));
+                }
               },
               child: Text("تم الموافقة علي الرحلة والسائق في الطريق اليك ",style: TextStyle(
                   fontSize: 20,
@@ -109,8 +125,8 @@ class MyTrip extends StatelessWidget {
 
                 ),
                 onPressed: (){
-                  RatingScreen(id:controller.myTripsModel
-                      .sId.toString());
+                  navigateTo(RatingScreen(id:controller.myTripsModel.
+                  sId!.toString()));
                   // controller.acceptTrip(id);
                 },child: const Text("تقييم السائق",
                 style: TextStyle(

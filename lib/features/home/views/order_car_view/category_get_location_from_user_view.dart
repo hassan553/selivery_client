@@ -4,6 +4,7 @@ import '../../../../controllers/setlocationgoto.dart';
 import '../../../../core/rescourcs/app_colors.dart';
 import '../../../../core/widgets/custom_appBar.dart';
 import '../../../../core/widgets/custom_image.dart';
+import '../../setlocationwithoutdestionation.dart';
 import 'toSet_location_view.dart';
 import 'package:get/get.dart';
 import '../../../../core/functions/global_function.dart';
@@ -65,30 +66,30 @@ class _GetLocationFromUserViewState extends State<GetLocationFromUserView> {
             ),
           ),
           const CustomSizedBox(value: .02),
-          // InkWell(
-          //   onTap: () => navigateTo(const ConnectWithDriverView()),
-          //   child: Container(
-          //     width: screenSize(context).width,
-          //     padding: const EdgeInsets.symmetric(vertical: 30),
-          //     margin: const EdgeInsets.symmetric(horizontal: 10),
-          //     decoration: BoxDecoration(
-          //       color: const Color(0xff0F534D),
-          //       borderRadius: BorderRadius.circular(10),
-          //     ),
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         CustomAssetsImage(path: 'assets/Here.png'),
-          //         const SizedBox(width: 4),
-          //         const ResponsiveText(
-          //           text: 'التواصل مع السائق مباشرة',
-          //           scaleFactor: .05,
-          //           color: AppColors.white,
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          InkWell(
+            onTap: () => navigateTo(const ToSetLocationWithoutDestination()),
+            child: Container(
+              width: screenSize(context).width,
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                color: const Color(0xff0F534D),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomAssetsImage(path: 'assets/Here.png'),
+                  const SizedBox(width: 4),
+                  const ResponsiveText(
+                    text: 'التواصل مع السائق مباشرة',
+                    scaleFactor: .05,
+                    color: AppColors.white,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

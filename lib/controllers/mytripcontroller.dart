@@ -52,7 +52,8 @@ class MyTripController extends GetxController{
     var response = await ratingData.postData(tripid,rate);
     statusRequest = handlingData(response);
     if(StatusRequest.success == statusRequest){
-      print("ok");
+      Get.defaultDialog(title: "هلا",
+          middleText: "تم تقييم السائق بنجاح");
     }else{
       print("someerror for rate trips");
     }

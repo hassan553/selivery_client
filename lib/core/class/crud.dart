@@ -6,6 +6,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
+import '../../features/auth/presentation/view/login_view.dart';
+import '../functions/global_function.dart';
 import '../services/cache_storage_services.dart';
 import 'statusrequst.dart';
 
@@ -48,8 +50,24 @@ class Crud {
       if (await checkInternet()) {
         var response = await http.get(Uri.parse(linkurl),
             headers: authHeadersWithToken(CacheStorageServices().token));
-        print(response.statusCode);
-        print(response.body);
+        if(response.statusCode==401){
+          final response = await http.get(
+            Uri.parse('${authBaseUri}refresh-token'),
+            headers: authHeadersWithToken(CacheStorageServices().token),
+          );
+          final result = jsonDecode(response.body);
+          print('message ${result['token']}');
+          if (response.statusCode == 200) {
+            print(response.body);
+            CacheStorageServices().setToken(result['token']);
+            getData(linkurl);
+          } else {
+            if (result['message'] == "Token is not valid" ||
+                result['message'] == 'Your are not authorized.') {
+              navigateOff(ClientLoginView());
+            }
+          }
+        }
         if (response.statusCode == 200 || response.statusCode == 201) {
           // Map reponseBody = jsonDecode(response.body);
           print("responsennnn ${response.body}");
