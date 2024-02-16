@@ -28,7 +28,8 @@ class _TrackingState extends State<Tracking> {
   Widget build(BuildContext context) {
     print("id ${widget.id}");
     TrackingController trackingController=
-    Get.put(TrackingController()..initalSocket(widget.id,widget.pick1,widget.pick2));
+    Get.put(TrackingController()..initalSocket(widget.id,
+        widget.pick1,widget.pick2));
     return Scaffold(
       appBar: AppBar(
         title: Text("تتبع مسار السائق",style: TextStyle(color: Colors.black,

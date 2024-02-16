@@ -18,7 +18,7 @@ class ToSetLocationWithoutDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(

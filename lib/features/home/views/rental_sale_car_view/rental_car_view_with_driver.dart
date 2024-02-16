@@ -27,7 +27,7 @@ class RentalCarViewWithDriver extends StatelessWidget {
     ];
     Get.put(CarWithDriverController()..getcarswithdriver(id));
     return Scaffold(
-      appBar: customAppBarForSearch(context),
+      appBar: customAppBar(context),
       body: GetBuilder<CarWithDriverController>(builder:
           (controller){
         if(controller.statusRequest==StatusRequest.loading){
